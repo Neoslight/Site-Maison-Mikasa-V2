@@ -1,8 +1,13 @@
 import React from 'react';
 import Section from '../components/ui/Section';
 import { Heart, Ruler, Sparkles, MapPin } from 'lucide-react';
+import { usePageMeta } from '../lib/usePageMeta';
 
 const About: React.FC = () => {
+  usePageMeta(
+    'À propos',
+    "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden (56), Golfe du Morbihan."
+  );
   return (
     <div className="bg-white">
       {/* Hero Section */}

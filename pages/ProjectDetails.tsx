@@ -16,10 +16,16 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
+import { usePageMeta } from '../lib/usePageMeta';
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = projectsData.find((p) => p.id === projectId);
+
+  usePageMeta(
+    project?.title ?? 'Réalisation',
+    project?.description?.slice(0, 155)
+  );
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);

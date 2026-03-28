@@ -49,3 +49,19 @@ html {
 .lightbox-open {
   overflow: hidden;
 }
+
+/* Hero text reveal animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-item {
+  animation: fadeInUp 0.8s ease-out both;
+}

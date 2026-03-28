@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
+import { usePageMeta } from '../lib/usePageMeta';
 import {
   Sparkles,
   Home,
@@ -16,6 +17,11 @@ import {
 } from 'lucide-react';
 
 const Services: React.FC = () => {
+  usePageMeta(
+    'Prestations',
+    "Conseil, conception et suivi de chantier pour vos projets d'aménagement intérieur dans le Golfe du Morbihan."
+  );
+
   return (
     <div className="bg-white">
       {/* Hero Header */}

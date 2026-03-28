@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
+import StaggerReveal from '../components/ui/StaggerReveal';
 import { projectsData } from '../data/projects';
 import { ArrowRight } from 'lucide-react';
 import { ProjectType } from '../types';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
+import { usePageMeta } from '../lib/usePageMeta';
 
 interface ProjectsPageProps {
   initialType?: ProjectType | 'Tous';
@@ -48,6 +50,11 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
     }
   };
 
+  usePageMeta(
+    getTitle(),
+    "Découvrez les réalisations d'architecture et décoration d'intérieur de Maison Mikasa."
+  );
+
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
@@ -81,7 +88,6 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                   }
                 `}
               >
-                {/* Display plural in filter buttons too for consistency */}
                 {cat === 'Tous' ? 'Tous' : cat === 'Professionnel' ? 'Professionnels' : cat + 's'}
               </Link>
             ))}
@@ -91,9 +97,9 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
 
       {/* Gallery */}
       <Section className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {filteredProjects.length > 0 ? (
-            filteredProjects.map((project) => (
+        {filteredProjects.length > 0 ? (
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            {filteredProjects.map((project) => (
               <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
                 <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
                   <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
@@ -121,13 +127,13 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                   </p>
                 </div>
               </Link>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-20 text-stone-500 font-light italic">
-              Aucun projet pour le moment dans cette catégorie.
-            </div>
-          )}
-        </div>
+            ))}
+          </StaggerReveal>
+        ) : (
+          <div className="text-center py-20 text-stone-500 font-light italic">
+            Aucun projet pour le moment dans cette catégorie.
+          </div>
+        )}
       </Section>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin, Facebook, Clock } from 'lucide-react';
+import { usePageMeta } from '../lib/usePageMeta';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -24,6 +25,7 @@ const getServiceFromSearch = (search: string): string => {
 };
 
 const Contact: React.FC = () => {
+  usePageMeta('Contact', 'Contactez Maison Mikasa pour votre projet d\'architecture d\'intérieur.');
   const location = useLocation();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 

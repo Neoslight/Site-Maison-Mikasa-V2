@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import MentionsLegales from './pages/MentionsLegales';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/common/ScrollToTop';
 
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           />
           <Route path="/realisations/:projectId" element={<ProjectDetails />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

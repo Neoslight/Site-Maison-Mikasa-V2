@@ -301,10 +301,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             aria-label="Navigation secondaire"
             className="grid grid-cols-1 md:grid-cols-4 gap-8 text-xs text-stone-600 uppercase tracking-widest border-t border-gray-100 pt-8"
           >
-            {/* TODO: Créer la page /mentions-legales et remplacer ce lien */}
-            <a href="#" className="hover:text-stone-800">
+            <Link to="/mentions-legales" className="hover:text-stone-800">
               Mentions légales
-            </a>
+            </Link>
             <a href="tel:0689408566" className="hover:text-stone-800">
               06 89 40 85 66
             </a>

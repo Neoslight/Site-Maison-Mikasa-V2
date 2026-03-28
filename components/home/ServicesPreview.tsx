@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
+import StaggerReveal from '../ui/StaggerReveal';
 import Promises from './Promises';
 import { ArrowRight, Check, Sparkles, Home, Ship, FileText } from 'lucide-react';
 
@@ -17,7 +18,7 @@ const ServicesPreview: React.FC = () => {
           Découvrez comment je peux vous accompagner :
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link
             to="/prestations"
             className="group p-8 border border-gray-100 hover:border-sage-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-sm bg-white flex flex-col items-center"
@@ -61,7 +62,7 @@ const ServicesPreview: React.FC = () => {
             </span>
             <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-sage-500 group-hover:translate-x-1 transition-all duration-300 mt-auto" />
           </Link>
-        </div>
+        </StaggerReveal>
       </Section>
 
       {/* 3. Why Us Section */}

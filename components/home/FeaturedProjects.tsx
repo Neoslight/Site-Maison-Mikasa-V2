@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
+import StaggerReveal from '../ui/StaggerReveal';
 import { ArrowRight } from 'lucide-react';
 import { projectsData } from '../../data/projects';
 import { resolveAssetPath } from '../../lib/resolveAssetPath';
@@ -16,7 +17,7 @@ const FeaturedProjects: React.FC = () => {
         <div className="w-12 h-0.5 bg-sage-400 mx-auto"></div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {featured.map((project) => (
           <Link
             to={`/realisations/${project.id}`}
@@ -52,7 +53,7 @@ const FeaturedProjects: React.FC = () => {
             </div>
           </Link>
         ))}
-      </div>
+      </StaggerReveal>
 
       <div className="mt-12 text-center">
         <Link
