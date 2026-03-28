@@ -12,7 +12,6 @@ const Introduction: React.FC = () => {
             src={resolveAssetPath('/homepage-photo-accueil.webp')}
             alt="Maison Mikasa - Architecture d'intérieur"
             className="absolute inset-0 w-full h-full object-cover object-center blur-[2px] scale-105"
-            referrerPolicy="no-referrer"
           />
           {/* Dark overlay for text readability */}
           <div className="absolute inset-0 bg-stone-900/40"></div>

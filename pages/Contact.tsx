@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin, Facebook, Clock } from 'lucide-react';
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const getServiceFromSearch = (search: string): string => {
   const searchParams = new URLSearchParams(search);
@@ -23,24 +25,19 @@ const getServiceFromSearch = (search: string): string => {
 
 const Contact: React.FC = () => {
   const location = useLocation();
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 
-  const [formData, setFormData] = useState(() => {
-    const selectedService = getServiceFromSearch(location.search);
-
-    return {
-      name: '',
-      email: '',
-      phone: '',
-      projectType: selectedService,
-      message: '',
-    };
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    message: '',
   });
 
-  // Remove the useEffect that was causing set-state-in-effect
-  React.useEffect(() => {
+  // Sync the pre-selected service when the URL param changes
+  useEffect(() => {
     const selectedService = getServiceFromSearch(location.search);
-
-    // Keep user inputs and only sync prefilled service.
     setFormData((prev) => ({ ...prev, projectType: selectedService }));
   }, [location.search]);
 
@@ -51,13 +48,35 @@ const Contact: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulation d'envoi
-    alert(
-      `Merci ${formData.name}, votre message pour le projet "${formData.projectType}" a bien été envoyé ! (Simulation)`
-    );
-    setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+    setFormStatus('submitting');
+
+    const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
+    if (!formspreeId || formspreeId === 'your_formspree_id_here') {
+      // Dev fallback — log to console when Formspree is not configured
+      console.info('[Contact] Formspree not configured. Form data:', formData);
+      setFormStatus('success');
+      setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+      } else {
+        setFormStatus('error');
+      }
+    } catch {
+      setFormStatus('error');
+    }
   };
 
   return (
@@ -154,23 +173,24 @@ const Contact: React.FC = () => {
             <div>
               <h2 className="font-serif text-2xl text-stone-800 mb-6">Réseaux Sociaux</h2>
               <div className="flex space-x-4">
+                {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
                 <a
                   href="#"
-                  onClick={(e) => e.preventDefault()}
+                  aria-label="Visiter la page Instagram de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
                 <a
                   href="#"
-                  onClick={(e) => e.preventDefault()}
+                  aria-label="Visiter la page Facebook de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
                 <a
                   href="#"
-                  onClick={(e) => e.preventDefault()}
+                  aria-label="Visiter la page LinkedIn de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -182,140 +202,168 @@ const Contact: React.FC = () => {
           {/* Formulaire (Droite) */}
           <div className="lg:col-span-7 bg-stone-50 p-8 md:p-12 rounded-sm shadow-sm">
             <h2 className="font-serif text-2xl text-stone-800 mb-8">Envoyez-nous un message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {formStatus === 'success' ? (
+              <div className="flex flex-col items-center justify-center text-center py-16 space-y-4">
+                <div className="w-16 h-16 rounded-full bg-sage-100 flex items-center justify-center mb-2">
+                  <svg className="w-8 h-8 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-2xl text-stone-800">Message envoyé !</h3>
+                <p className="text-stone-600 font-light max-w-sm">
+                  Merci pour votre message. Je vous répondrai dans les plus brefs délais.
+                </p>
+                <button
+                  onClick={() => setFormStatus('idle')}
+                  className="mt-4 text-xs uppercase tracking-widest text-sage-600 hover:text-sage-700 border-b border-sage-300 pb-0.5 transition-colors"
+                >
+                  Envoyer un autre message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="name"
+                      className="text-xs uppercase tracking-widest text-stone-600 font-bold"
+                    >
+                      Nom & Prénom
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
+                      placeholder="Votre nom"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="phone"
+                      className="text-xs uppercase tracking-widest text-stone-600 font-bold"
+                    >
+                      Téléphone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
+                      placeholder="Votre numéro"
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <label
-                    htmlFor="name"
+                    htmlFor="email"
                     className="text-xs uppercase tracking-widest text-stone-600 font-bold"
                   >
-                    Nom & Prénom
+                    Email
                   </label>
                   <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                     className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                    placeholder="Votre nom"
+                    placeholder="votre@email.com"
                   />
                 </div>
+
                 <div className="space-y-2">
                   <label
-                    htmlFor="phone"
+                    htmlFor="projectType"
                     className="text-xs uppercase tracking-widest text-stone-600 font-bold"
                   >
-                    Téléphone
+                    Type de projet
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                    placeholder="Votre numéro"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                  placeholder="votre@email.com"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="projectType"
-                  className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                >
-                  Type de projet
-                </label>
-                <div className="relative">
-                  <select
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm appearance-none shadow-sm"
-                  >
-                    <option value="" disabled>
-                      Sélectionnez une option
-                    </option>
-                    <option value="Le Rendez-vous Conseil">Le Rendez-vous Conseil</option>
-                    <option value="Rénovation Résidence Principale">
-                      Rénovation Résidence Principale
-                    </option>
-                    <option value="Rénovation Résidence Secondaire">
-                      Rénovation Résidence Secondaire
-                    </option>
-                    <option value="Dossier Mairie - Déclaration">
-                      Dossier Mairie - Déclaration
-                    </option>
-                    <option value="Autre">Autre demande</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
-                    <svg
-                      className="w-4 h-4 text-stone-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  <div className="relative">
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm appearance-none shadow-sm"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
+                      <option value="" disabled>
+                        Sélectionnez une option
+                      </option>
+                      <option value="Le Rendez-vous Conseil">Le Rendez-vous Conseil</option>
+                      <option value="Rénovation Résidence Principale">
+                        Rénovation Résidence Principale
+                      </option>
+                      <option value="Rénovation Résidence Secondaire">
+                        Rénovation Résidence Secondaire
+                      </option>
+                      <option value="Dossier Mairie - Déclaration">
+                        Dossier Mairie - Déclaration
+                      </option>
+                      <option value="Autre">Autre demande</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                      <svg
+                        className="w-4 h-4 text-stone-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm resize-none shadow-sm"
-                  placeholder="Racontez-moi votre projet..."
-                ></textarea>
-              </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="message"
+                    className="text-xs uppercase tracking-widest text-stone-600 font-bold"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm resize-none shadow-sm"
+                    placeholder="Racontez-moi votre projet..."
+                  ></textarea>
+                </div>
 
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center w-full md:w-auto bg-sage-600 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold transition-all duration-300 rounded-sm shadow-md hover:bg-sage-700 hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-sm"
-                >
-                  Envoyer ma demande <Send className="w-4 h-4 ml-2" />
-                </button>
-              </div>
-            </form>
+                {formStatus === 'error' && (
+                  <p className="text-sm text-red-600 font-light">
+                    Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.
+                  </p>
+                )}
+
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    disabled={formStatus === 'submitting'}
+                    className="inline-flex items-center justify-center w-full md:w-auto bg-sage-600 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold transition-all duration-300 rounded-sm shadow-md hover:bg-sage-700 hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                  >
+                    {formStatus === 'submitting' ? 'Envoi en cours…' : <>Envoyer ma demande <Send className="w-4 h-4 ml-2" /></>}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </Section>

@@ -36,7 +36,7 @@ const Promises: React.FC = () => {
   return (
     <Section id="promises" bgColor="bg-stone-50" className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
-        <h2 className="font-serif text-3xl text-stone-800 text-opacity-80">
+        <h2 className="font-serif text-3xl text-stone-800/80">
           Les 3 promesses de Maison Mikasa
         </h2>
       </div>

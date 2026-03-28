@@ -20,7 +20,13 @@ const Section: React.FC<SectionProps> = ({
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => setIsVisible(entry.isIntersecting));
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Unobserve once visible — the fade-in plays once and stays
+          observer.unobserve(entry.target);
+        }
+      });
     });
 
     const currentElement = domRef.current;
@@ -36,7 +42,7 @@ const Section: React.FC<SectionProps> = ({
   }, []);
 
   return (
-    <section id={id} className={`${bgColor} ${py} overflow-hidden`}>
+    <section id={id} className={`${bgColor} ${py}`}>
       <div ref={domRef} className={`fade-in-section ${isVisible ? 'is-visible' : ''} ${className}`}>
         {children}
       </div>

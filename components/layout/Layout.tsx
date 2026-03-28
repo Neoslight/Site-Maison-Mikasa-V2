@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import {
-  Menu,
-  X,
-  Phone,
-  Mail,
-  Instagram,
-  Linkedin,
-  Facebook,
-  ChevronDown,
-} from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/utils';
+
+// TODO: Remplacer par les vraies icônes de marque (lucide-react a déprécié les icônes de marques tierces)
+// Option recommandée : react-icons (ri) ou SVGs inline
+const IconInstagram = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const IconFacebook = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const IconLinkedin = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -74,29 +89,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </a>
           </div>
           <div className="flex space-x-4">
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="hover:text-sage-600"
-              aria-label="Visiter la page Facebook de Maison Mikasa"
-            >
-              <Facebook className="w-3 h-3" aria-hidden="true" />
+            {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
+            <a href="#" className="w-3 h-3 hover:text-sage-600" aria-label="Visiter la page Facebook de Maison Mikasa">
+              <IconFacebook />
             </a>
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="hover:text-sage-600"
-              aria-label="Visiter la page Instagram de Maison Mikasa"
-            >
-              <Instagram className="w-3 h-3" aria-hidden="true" />
+            <a href="#" className="w-3 h-3 hover:text-sage-600" aria-label="Visiter la page Instagram de Maison Mikasa">
+              <IconInstagram />
             </a>
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className="hover:text-sage-600"
-              aria-label="Visiter la page LinkedIn de Maison Mikasa"
-            >
-              <Linkedin className="w-3 h-3" aria-hidden="true" />
+            <a href="#" className="w-3 h-3 hover:text-sage-600" aria-label="Visiter la page LinkedIn de Maison Mikasa">
+              <IconLinkedin />
             </a>
           </div>
         </div>
@@ -272,29 +273,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             Suivez Maison Mikasa sur les réseaux !
           </p>
           <div className="flex justify-center space-x-6 mb-12">
+            {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
             <a
               href="#"
-              onClick={(e) => e.preventDefault()}
-              className="text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
+              className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page Facebook de Maison Mikasa"
             >
-              <Facebook className="w-5 h-5" aria-hidden="true" />
+              <IconFacebook />
             </a>
             <a
               href="#"
-              onClick={(e) => e.preventDefault()}
-              className="text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
+              className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page Instagram de Maison Mikasa"
             >
-              <Instagram className="w-5 h-5" aria-hidden="true" />
+              <IconInstagram />
             </a>
             <a
               href="#"
-              onClick={(e) => e.preventDefault()}
-              className="text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
+              className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page LinkedIn de Maison Mikasa"
             >
-              <Linkedin className="w-5 h-5" aria-hidden="true" />
+              <IconLinkedin />
             </a>
           </div>
 
@@ -302,7 +301,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             aria-label="Navigation secondaire"
             className="grid grid-cols-1 md:grid-cols-4 gap-8 text-xs text-stone-600 uppercase tracking-widest border-t border-gray-100 pt-8"
           >
-            <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-stone-800">
+            {/* TODO: Créer la page /mentions-legales et remplacer ce lien */}
+            <a href="#" className="hover:text-stone-800">
               Mentions légales
             </a>
             <a href="tel:0689408566" className="hover:text-stone-800">
@@ -314,7 +314,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <span>56870 Baden</span>
           </nav>
 
-          <div className="mt-8 text-[10px] text-stone-500">© 2025 • Maison Mikasa</div>
+          <div className="mt-8 text-[10px] text-stone-500">
+            © {new Date().getFullYear()} • Maison Mikasa
+          </div>
         </div>
       </footer>
     </div>

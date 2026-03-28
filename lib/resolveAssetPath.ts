@@ -39,4 +39,3 @@ export function resolveAssetPath(src: string): string {
   // Safe fallback for still-unmigrated static files in `public/`.
   return `/${normalized}`;
 }
-

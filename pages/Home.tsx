@@ -8,7 +8,6 @@ import Testimonials from '../components/home/Testimonials';
 const Home: React.FC = () => {
   return (
     <>
-      <div id="home" className="absolute top-0 w-full h-0" />
       <Introduction />
       <AboutPreview />
       <FeaturedProjects />

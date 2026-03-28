@@ -19,8 +19,7 @@ import { resolveAssetPath } from '../lib/resolveAssetPath';
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  const id = projectId;
-  const project = projectsData.find((p) => p.id === id);
+  const project = projectsData.find((p) => p.id === projectId);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -29,15 +28,14 @@ const ProjectDetails: React.FC = () => {
   const lightboxRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Navigation Logic
-  const currentIndex = projectsData.findIndex((p) => p.id === id);
+  // Navigation between projects (circular)
+  const currentIndex = projectsData.findIndex((p) => p.id === projectId);
   const nextProject = projectsData[(currentIndex + 1) % projectsData.length];
   const prevProject = projectsData[(currentIndex - 1 + projectsData.length) % projectsData.length];
 
   useEffect(() => {
-    // Reset scroll when project ID changes
     window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [id]);
+  }, [projectId]);
 
   // Lightbox Handlers
   const openLightbox = (index: number) => {
@@ -62,7 +60,7 @@ const ProjectDetails: React.FC = () => {
       // Fix Layout Shift: Compensate for scrollbar width
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -94,27 +92,30 @@ const ProjectDetails: React.FC = () => {
     [project]
   );
 
+  const applyZoomOrigin = (clientX: number, clientY: number) => {
+    if (!imageRef.current) return;
+    const { left, top, width, height } = imageRef.current.getBoundingClientRect();
+    const x = ((clientX - left) / width) * 100;
+    const y = ((clientY - top) / height) * 100;
+    imageRef.current.style.transformOrigin = `${x}% ${y}%`;
+  };
+
   const toggleZoom = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!isZoomed && imageRef.current) {
-      const { left, top, width, height } = imageRef.current.getBoundingClientRect();
-      const x = ((e.clientX - left) / width) * 100;
-      const y = ((e.clientY - top) / height) * 100;
-      imageRef.current.style.transformOrigin = `${x}% ${y}%`;
-    }
+    if (!isZoomed) applyZoomOrigin(e.clientX, e.clientY);
     setIsZoomed(!isZoomed);
   };
 
+  // Mouse pan while zoomed (desktop)
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isZoomed || !imageRef.current) return;
+    if (!isZoomed) return;
+    applyZoomOrigin(e.clientX, e.clientY);
+  };
 
-    // Calculate mouse position relative to the image container
-    const { left, top, width, height } = imageRef.current.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-
-    // DOM Node Mutation for high-frequency animation (avoids React re-renders)
-    imageRef.current.style.transformOrigin = `${x}% ${y}%`;
+  // Touch pan while zoomed (mobile) — DOM mutation to avoid re-renders
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isZoomed || !e.touches[0]) return;
+    applyZoomOrigin(e.touches[0].clientX, e.touches[0].clientY);
   };
 
   // Preload adjacent images
@@ -138,7 +139,6 @@ const ProjectDetails: React.FC = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeLightbox();
       if (!isZoomed) {
-        // Only navigate if not zoomed to avoid conflict
         if (e.key === 'ArrowRight') nextPhoto();
         if (e.key === 'ArrowLeft') prevPhoto();
       }
@@ -177,7 +177,7 @@ const ProjectDetails: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    // Focus the first element when opened
+    // Focus close button when lightbox opens
     if (lightboxRef.current) {
       const closeBtn = lightboxRef.current.querySelector('button');
       if (closeBtn) closeBtn.focus();
@@ -196,10 +196,11 @@ const ProjectDetails: React.FC = () => {
       {lightboxOpen && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 animate-in fade-in"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center"
           onClick={closeLightbox}
           role="dialog"
           aria-modal="true"
+          aria-label="Visionneuse de photos"
         >
           {/* Top Controls */}
           <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50 pointer-events-none">
@@ -215,7 +216,7 @@ const ProjectDetails: React.FC = () => {
             </button>
           </div>
 
-          {/* Navigation Buttons (Hidden if zoomed to prevent accidental clicks) */}
+          {/* Navigation Buttons (hidden when zoomed) */}
           {!isZoomed && (
             <>
               <button
@@ -250,6 +251,7 @@ const ProjectDetails: React.FC = () => {
             )}
             onClick={toggleZoom}
             onMouseMove={handleMouseMove}
+            onTouchMove={handleTouchMove}
           >
             <img
               ref={imageRef}
@@ -258,18 +260,13 @@ const ProjectDetails: React.FC = () => {
               className="max-w-full max-h-full object-contain transition-transform duration-200 ease-out shadow-2xl"
               style={
                 isZoomed
-                  ? {
-                      transform: 'scale(2.5)',
-                    }
-                  : {
-                      transform: 'scale(1)',
-                      transformOrigin: 'center',
-                    }
+                  ? { transform: 'scale(2.5)' }
+                  : { transform: 'scale(1)', transformOrigin: 'center' }
               }
             />
           </div>
 
-          {/* Mobile Hint */}
+          {/* Mobile hint */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-[10px] uppercase tracking-widest md:hidden pointer-events-none">
             {isZoomed ? 'Glisser pour explorer' : 'Toucher pour zoomer'}
           </div>
@@ -291,11 +288,11 @@ const ProjectDetails: React.FC = () => {
         <img
           src={resolveAssetPath(project.coverImage)}
           alt={project.title}
-          className="w-full h-full object-cover animate-in fade-in duration-700"
+          className="w-full h-full object-cover fade-in-section is-visible"
         />
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4 fade-in-section is-visible">
+          <div className="text-center text-white px-4">
             <span className="uppercase tracking-[0.2em] text-sm md:text-base font-medium mb-4 block opacity-90">
               {project.category}
             </span>
@@ -416,7 +413,7 @@ const ProjectDetails: React.FC = () => {
           {project.gallery.map((img, index) => (
             <div
               key={index}
-              ref={(el) => (thumbnailRefs.current[index] = el)}
+              ref={(el) => { thumbnailRefs.current[index] = el; }}
               onClick={() => openLightbox(index)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Sage color palette (brand) */
+  --color-sage-50: #f4f7f4;
+  --color-sage-100: #e3ebe3;
+  --color-sage-200: #c5d6c5;
+  --color-sage-300: #9db89d;
+  --color-sage-400: #7a9a7a;
+  --color-sage-500: #5e7f5e;
+  --color-sage-600: #4a654a;
+  --color-sage-700: #3d523d;
+  --color-sage-800: #334233;
+  --color-sage-900: #2a362a;
+
+  /* Stone overrides (specific shades only) */
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+/* Global smooth scrolling + anchor offset for sticky header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+/* Fade-in animation for Section component */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Prevents background scrolling when lightbox is open */
+.lightbox-open {
+  overflow: hidden;
+}
