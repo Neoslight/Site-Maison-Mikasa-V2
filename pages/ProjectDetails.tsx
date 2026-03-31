@@ -352,24 +352,32 @@ const ProjectDetails: React.FC = () => {
 
       <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-16">
         {/* Le Projet */}
-        <div>
-          <h2 className="font-serif text-2xl text-stone-800 mb-6">Le Projet</h2>
-          <p className="text-stone-700 font-light leading-relaxed text-lg whitespace-pre-line">
-            {project.description}
-          </p>
-        </div>
+        {project.description && (
+          <div>
+            <h2 className="font-serif text-2xl text-stone-800 mb-6">Le Projet</h2>
+            <p className="text-stone-700 font-light leading-relaxed text-lg whitespace-pre-line">
+              {project.description}
+            </p>
+          </div>
+        )}
 
         {/* Le Défi / La Solution */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 border-t border-gray-100">
-          <div>
-            <h3 className="font-serif text-xl text-stone-800 mb-4">Le Défi</h3>
-            <p className="text-stone-600 font-light leading-relaxed">{project.challenge}</p>
+        {(project.challenge || project.solution) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 border-t border-gray-100">
+            {project.challenge && (
+              <div>
+                <h3 className="font-serif text-xl text-stone-800 mb-4">Le Défi</h3>
+                <p className="text-stone-600 font-light leading-relaxed">{project.challenge}</p>
+              </div>
+            )}
+            {project.solution && (
+              <div>
+                <h3 className="font-serif text-xl text-stone-800 mb-4">La Solution</h3>
+                <p className="text-stone-600 font-light leading-relaxed">{project.solution}</p>
+              </div>
+            )}
           </div>
-          <div>
-            <h3 className="font-serif text-xl text-stone-800 mb-4">La Solution</h3>
-            <p className="text-stone-600 font-light leading-relaxed">{project.solution}</p>
-          </div>
-        </div>
+        )}
 
         {/* Un projet similaire */}
         <div className="pt-10 border-t border-gray-100 flex flex-col items-center text-center gap-6">
@@ -388,7 +396,7 @@ const ProjectDetails: React.FC = () => {
 
       {/* Before/After Gallery */}
       {project.beforeAfterGallery && project.beforeAfterGallery.length > 0 && (
-        <Section className="max-w-7xl mx-auto px-6 pb-16">
+        <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-16">
           <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Avant / Après</h2>
           <div className="grid grid-cols-1 gap-12">
             {project.beforeAfterGallery.map((item, index) => (
@@ -401,7 +409,7 @@ const ProjectDetails: React.FC = () => {
       )}
 
       {/* Gallery Grid */}
-      <Section className="max-w-7xl mx-auto px-6 pb-24">
+      <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-24">
         <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Galerie photos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {project.gallery.map((img, index) => (

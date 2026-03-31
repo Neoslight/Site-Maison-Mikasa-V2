@@ -36,7 +36,6 @@ export const projectsData: Project[] = [
     solution:
       "Nous avons abattu la cloison entre la cuisine et le séjour pour créer une vaste pièce de vie traversante, offrant une circulation fluide et une vue dégagée sur le port. La fusion de deux chambres a permis l'aménagement d'une véritable suite parentale avec dressing et salle d'eau privative. Enfin, l'installation d'un parquet massif et d'un nouveau mobilier apporte une chaleur naturelle et une identité visuelle cohérente à l'ensemble du projet.",
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'app-2',
     title: 'Appartement de caractère',
@@ -46,12 +45,24 @@ export const projectsData: Project[] = [
     year: '2025',
     surface: '86m²',
     duration: '6 mois',
-    coverImage: 'https://picsum.photos/id/42/1920/1080',
+    coverImage: '/marchais/marchais-apres-1.webp',
     gallery: [
-      'https://picsum.photos/id/42/800/1000',
-      'https://picsum.photos/id/48/800/600',
-      'https://picsum.photos/id/56/800/1000',
-      'https://picsum.photos/id/60/800/600',
+      '/marchais/marchais-apres-1.webp',
+      '/marchais/marchais-apres-2.webp',
+      '/marchais/marchais-apres-3.webp',
+      '/marchais/marchais-apres-4.webp',
+      '/marchais/marchais-apres-5.webp',
+      '/marchais/marchais-apres-6.webp',
+      '/marchais/marchais-apres-7.webp',
+    ],
+    beforeAfterGallery: [
+      { before: '/marchais/marchais-avant-1.webp', after: '/marchais/marchais-apres-1.webp' },
+      { before: '/marchais/marchais-avant-2.webp', after: '/marchais/marchais-apres-2.webp' },
+      { before: '/marchais/marchais-avant-3.webp', after: '/marchais/marchais-apres-3.webp' },
+      { before: '/marchais/marchais-avant-4.webp', after: '/marchais/marchais-apres-4.webp' },
+      { before: '/marchais/marchais-avant-5.webp', after: '/marchais/marchais-apres-5.webp' },
+      { before: '/marchais/marchais-avant-6.webp', after: '/marchais/marchais-apres-6.webp' },
+      { before: '/marchais/marchais-avant-7.webp', after: '/marchais/marchais-apres-7.webp' },
     ],
     description:
       "Rénovation, optimisation et ameublement d'un appartement sous les toits en centre-ville pour un jeune couple. L'objectif : repenser l'accès à la mezzanine, maximiser les rangements dans ce volume atypique et créer un espace de vie lumineux et convivial.",
@@ -60,7 +71,6 @@ export const projectsData: Project[] = [
     solution:
       "Nous avons restructuré la circulation en créant un nouvel escalier avec rangements intégrés et un palier desservant désormais les chambres de manière indépendante. Le sol a été entièrement mis à niveau et unifié par un revêtement aspect bois, tandis qu'un îlot dînatoire et un bureau sur mesure ont été dessinés pour optimiser chaque angle baigné de lumière naturelle. L'ensemble a été traité dans des teintes claires et des matières naturelles pour transformer cet espace sous les toits en un cocon cosy, fonctionnel et parfaitement adapté pour recevoir.",
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'app-3',
     title: 'Cocon sur le Port',
@@ -82,34 +92,48 @@ export const projectsData: Project[] = [
     challenge:
       "Une surface très restreinte et mal agencée, rendant l'installation d'une cuisine équipée initialement complexe.",
     solution:
-      "Nous avons conçu une implantation en L, optimisée au millimètre pour intégrer tout l'électroménager et un maximum de rangements. Cet agencement sur mesure libère la circulation tout en apportant une ambiance chaleureuse, transformant ce petit espace technique en un coin pratique et agréable au quotidien.",
+      "Nous avons conçu une implantation en L, optimisée au millimètre pour intégrer tout l'électroménager et un maximum de rangements. Cet agencement sur mesure transformant ce petit espace technique en un coin pratique et agréable au quotidien tout en apportant une ambiance chaleureuse.",
   },
 
   // ─── MAISONS ───────────────────────────────────────────────────────────────
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-1',
     title: 'Maison de Famille',
     projectType: 'Maison',
     category: 'Aménagement et décoration',
     location: 'Baden',
-    coverImage: 'https://picsum.photos/id/120/1920/1080',
+    year: '2024',
+    surface: '119m²',
+    duration: '3 mois',
+    coverImage: '/tabarly/tabarly-zoom-2.webp',
     gallery: [
-      'https://picsum.photos/id/120/800/600',
-      'https://picsum.photos/id/126/800/1000',
-      'https://picsum.photos/id/129/800/600',
-      'https://picsum.photos/id/132/800/1000',
+      '/tabarly/tabarly-zoom-1.webp',
+      '/tabarly/tabarly-zoom-2.webp',
+      '/tabarly/tabarly-zoom-3.webp',
+      '/tabarly/tabarly-zoom-4.webp',
+      '/tabarly/tabarly-zoom-5.webp',
+      '/tabarly/tabarly-zoom-6.webp',
+    ],
+    beforeAfterGallery: [
+      { before: '/tabarly/tabarly-avant-1.webp', after: '/tabarly/tabarly-apres-1.webp' },
+      { before: '/tabarly/tabarly-avant-2.webp', after: '/tabarly/tabarly-apres-2.webp' },
+      { before: '/tabarly/tabarly-avant-3.webp', after: '/tabarly/tabarly-apres-3.webp' },
+      { before: '/tabarly/tabarly-avant-4.webp', after: '/tabarly/tabarly-apres-4.webp' },
+      { before: '/tabarly/tabarly-avant-5.webp', after: '/tabarly/tabarly-apres-5.webp' },
+      { before: '/tabarly/tabarly-avant-6.webp', after: '/tabarly/tabarly-apres-6.webp' },
+      { before: '/tabarly/tabarly-avant-7.webp', after: '/tabarly/tabarly-apres-7.webp' },
+      { before: '/tabarly/tabarly-avant-8.webp', after: '/tabarly/tabarly-apres-8.webp' },
     ],
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      "Repenser l'entrée et l'espace nuit d'une maison familiale pour allier esthétisme et fonctionnalité.",
+    challenge:
+      "Moderniser des pièces dont les volumes n'étaient plus adaptés au rythme et aux besoins de rangement d'une famille au quotidien.",
     solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+      "L'entrée donne le ton avec un aménagement menuisé complet, alliant rangements, assise lumineuse et vide-poche. Dans la chambre des plus jeunes, une contrainte (un conduit de cheminée) est devenue un atout pour délimiter deux coins nuits avec deux lits gigognes qui se transforment chacun en lit 2 places, un dressing et un bureau sur-mesure ont également été créés. L'adolescent profite d'un espace nuit et dressing optimisé, tandis que la chambre parentale s'est métamorphosée en un refuge apaisant grâce à une décoration soignée.",
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-2',
-    title: 'Ancienne ferme de campagne',
+    title: 'Ferme de Campagne',
     projectType: 'Maison',
     category: 'Aménagement et décoration',
     location: 'Sérent',
@@ -122,58 +146,67 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/180/800/1000',
       'https://picsum.photos/id/190/800/600',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-3',
-    title: "Maison de pêcheur sur l'Île-aux-Moines",
+    title: 'Maison de Pêcheur',
     projectType: 'Maison',
     category: 'Rénovation partielle',
     location: 'Île-aux-Moines',
     year: '2024',
     surface: '120m²',
     duration: '3 mois',
-    coverImage: 'https://picsum.photos/id/201/1920/1080',
-    gallery: [
-      'https://picsum.photos/id/201/800/600',
-      'https://picsum.photos/id/203/800/1000',
-      'https://picsum.photos/id/204/800/600',
-      'https://picsum.photos/id/206/800/1000',
+    coverImage: '/bindo/bindo-apres-1.webp',
+    gallery: ['/bindo/bindo-zoom-1.webp', '/bindo/bindo-zoom-2.webp'],
+    beforeAfterGallery: [
+      { before: '/bindo/bindo-avant-1.webp', after: '/bindo/bindo-apres-1.webp' },
+      { before: '/bindo/bindo-avant-2.webp', after: '/bindo/bindo-apres-2.webp' },
     ],
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      "Rénovation des combles d'une ancienne maison de pêcheur devenue maison de vacances.",
+    challenge:
+      "Les combles de 20m2 avaient été isolés et une fenêtre de toit était existante, il fallait en faire une suite parentale avec du rangement, une petite salle d'eau et créer une trémie pour y installer un nouvel escalier qui dessert ce nouvel étage.",
     solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+      "L'objectif était de créer un repaire marin élégant et fonctionnel. Dès l'arrivée par le nouvel escalier, la luminosité saisit l'espace grâce à l'ajout de trois fenêtres de toit dont deux tournées vers le Golfe. L'atmosphère s'articule autour d'un doux contraste : l'authenticité des poutres poncées et de la pierre apparente répond à la modernité d'un parquet et de lambris blanchis. L'agencement sur mesure exploite le moindre recoin sous pente pour le rangement. Enfin, la suite révèle tout son potentiel détente avec une baignoire intégrée à la chambre et la création d'un espace sanitaire discret.",
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-4',
-    title: "Maison bretonne sur l'Île d'Arz",
+    title: 'Maison Bretonne',
     projectType: 'Maison',
     category: 'Rénovation complète',
     location: 'Baden',
     year: '2023',
+    surface: '38m²',
     duration: '5 mois',
-    coverImage: 'https://picsum.photos/id/210/1920/1080',
+    coverImage: '/penher/penher-cover.webp',
     gallery: [
-      'https://picsum.photos/id/210/800/600',
-      'https://picsum.photos/id/211/800/1000',
-      'https://picsum.photos/id/212/800/600',
-      'https://picsum.photos/id/213/800/1000',
+      '/penher/penher-zoom-1.webp',
+      '/penher/penher-apres-1.webp',
+      '/penher/penher-apres-2.webp',
+      '/penher/penher-apres-3.webp',
+      '/penher/penher-apres-4.webp',
+      '/penher/penher-apres-5.webp',
+      '/penher/penher-apres-6.webp',
+      '/penher/penher-apres-7.webp',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    beforeAfterGallery: [
+      { before: '/penher/penher-avant-1.webp', after: '/penher/penher-apres-1.webp' },
+      { before: '/penher/penher-avant-2.webp', after: '/penher/penher-apres-2.webp' },
+      { before: '/penher/penher-avant-3.webp', after: '/penher/penher-apres-3.webp' },
+      { before: '/penher/penher-avant-4.webp', after: '/penher/penher-apres-4.webp' },
+      { before: '/penher/penher-avant-5.webp', after: '/penher/penher-apres-5.webp' },
+      { before: '/penher/penher-avant-6.webp', after: '/penher/penher-apres-6.webp' },
+      { before: '/penher/penher-avant-7.webp', after: '/penher/penher-apres-7.webp' },
+    ],
+    description: "Rénovation complète d'une petite maison bretonne sur l'Île d'Arz.",
+    challenge:
+      'Réveiller une maison sombre, restée "dans son jus" depuis de nombreuses années, pour la transformer en une maison de vacances lumineuse, respirante et accueillante.',
     solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+      "Pour faire entrer la lumière, nous avons abattu toutes les cloisons du rez-de-chaussée, libérant ainsi totalement l'espace. La nouvelle cuisine s'habille de tons bleu-gris, complétée par une entrée repensée et une salle d'eau modernisée. En ouvrant le plafond et en intégrant une fenêtre de toit, l'étage s'est totalement métamorphosé. Baigné de lumière et offrant une jolie percée sur la mer, il devient un vaste cocon de nuit paisible, doté de ses propres sanitaires pour un confort absolu.",
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-5',
     title: 'Maison du Bonheur',
@@ -190,16 +223,13 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/222/800/600',
       'https://picsum.photos/id/223/800/1000',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-6',
-    title: 'Maison de pêcheur rénovée',
+    title: 'Petite Maison de Pêcheur',
     projectType: 'Maison',
     category: 'Optimisation et aménagement',
     location: 'Saint-Armel',
@@ -213,19 +243,17 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/232/800/600',
       'https://picsum.photos/id/233/800/1000',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-7',
     title: 'Maison au Coeur du Marais',
     projectType: 'Maison',
     category: 'Rénovation complète',
     location: 'Larmor-Baden',
+    year: '2026',
     surface: '70m²',
     duration: '1 an',
     coverImage: 'https://picsum.photos/id/240/1920/1080',
@@ -235,13 +263,10 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/242/800/600',
       'https://picsum.photos/id/243/800/1000',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-8',
     title: 'Cocon dans le Golfe',
@@ -258,13 +283,10 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/252/800/600',
       'https://picsum.photos/id/253/800/1000',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
-  // TODO: Remplacer les images picsum.photos et le contenu placeholder
   {
     id: 'mai-9',
     title: 'Villa Familiale',
@@ -281,11 +303,9 @@ export const projectsData: Project[] = [
       'https://picsum.photos/id/262/800/600',
       'https://picsum.photos/id/263/800/1000',
     ],
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
-    challenge: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.',
+    description: '',
+    challenge: '',
+    solution: '',
   },
 
   // ─── PROFESSIONNEL ─────────────────────────────────────────────────────────
