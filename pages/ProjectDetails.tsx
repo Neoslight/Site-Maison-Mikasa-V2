@@ -22,10 +22,7 @@ const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = projectsData.find((p) => p.id === projectId);
 
-  usePageMeta(
-    project?.title ?? 'Réalisation',
-    project?.description?.slice(0, 155)
-  );
+  usePageMeta(project?.title ?? 'Réalisation', project?.description?.slice(0, 155));
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -316,10 +313,10 @@ const ProjectDetails: React.FC = () => {
       {/* Project Info Bar */}
       <div className="bg-stone-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex flex-wrap justify-center md:justify-start gap-8 md:gap-16 text-center md:text-left">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-center">
             {project.location && (
               <div className="space-y-1">
-                <div className="flex items-center justify-center md:justify-start text-sage-600 text-xs uppercase tracking-widest font-bold">
+                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
                   <MapPin className="w-3 h-3 mr-2" /> Lieu
                 </div>
                 <p className="text-stone-800 font-serif">{project.location}</p>
@@ -327,7 +324,7 @@ const ProjectDetails: React.FC = () => {
             )}
             {project.year && (
               <div className="space-y-1">
-                <div className="flex items-center justify-center md:justify-start text-sage-600 text-xs uppercase tracking-widest font-bold">
+                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
                   <Calendar className="w-3 h-3 mr-2" /> Année
                 </div>
                 <p className="text-stone-800 font-serif">{project.year}</p>
@@ -335,7 +332,7 @@ const ProjectDetails: React.FC = () => {
             )}
             {project.surface && (
               <div className="space-y-1">
-                <div className="flex items-center justify-center md:justify-start text-sage-600 text-xs uppercase tracking-widest font-bold">
+                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
                   <Ruler className="w-3 h-3 mr-2" /> Surface
                 </div>
                 <p className="text-stone-800 font-serif">{project.surface}</p>
@@ -343,7 +340,7 @@ const ProjectDetails: React.FC = () => {
             )}
             {project.duration && (
               <div className="space-y-1">
-                <div className="flex items-center justify-center md:justify-start text-sage-600 text-xs uppercase tracking-widest font-bold">
+                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
                   <Clock className="w-3 h-3 mr-2" /> Durée
                 </div>
                 <p className="text-stone-800 font-serif">{project.duration}</p>
@@ -353,48 +350,39 @@ const ProjectDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Main Content */}
-          <div className="lg:col-span-8 space-y-12">
-            <div>
-              <h2 className="font-serif text-2xl text-stone-800 mb-6">Le Projet</h2>
-              <p className="text-stone-700 font-light leading-relaxed text-lg whitespace-pre-line">
-                {project.description}
-              </p>
-            </div>
+      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-16">
+        {/* Le Projet */}
+        <div>
+          <h2 className="font-serif text-2xl text-stone-800 mb-6">Le Projet</h2>
+          <p className="text-stone-700 font-light leading-relaxed text-lg whitespace-pre-line">
+            {project.description}
+          </p>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100">
-              <div>
-                <h3 className="font-serif text-xl text-stone-800 mb-4">Le Défi</h3>
-                <p className="text-stone-600 font-light text-sm leading-relaxed">
-                  {project.challenge}
-                </p>
-              </div>
-              <div>
-                <h3 className="font-serif text-xl text-stone-800 mb-4">La Solution</h3>
-                <p className="text-stone-600 font-light text-sm leading-relaxed">
-                  {project.solution}
-                </p>
-              </div>
-            </div>
+        {/* Le Défi / La Solution */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 border-t border-gray-100">
+          <div>
+            <h3 className="font-serif text-xl text-stone-800 mb-4">Le Défi</h3>
+            <p className="text-stone-600 font-light leading-relaxed">{project.challenge}</p>
           </div>
+          <div>
+            <h3 className="font-serif text-xl text-stone-800 mb-4">La Solution</h3>
+            <p className="text-stone-600 font-light leading-relaxed">{project.solution}</p>
+          </div>
+        </div>
 
-          {/* Sticky Sidebar (Contact CTA) */}
-          <div className="lg:col-span-4">
-            <div className="sticky top-32 bg-stone-50 p-8 rounded-sm border border-stone-100">
-              <h3 className="font-serif text-xl text-stone-800 mb-4">Un projet similaire ?</h3>
-              <p className="text-stone-600 font-light text-sm mb-6">
-                Vous avez un projet de rénovation ou de décoration ? Discutons-en ensemble.
-              </p>
-              <Link
-                to="/contact"
-                className="block w-full text-center bg-sage-600 text-white text-xs uppercase tracking-widest py-3 px-6 hover:bg-sage-700 transition-all duration-300 rounded-sm hover:-translate-y-1 hover:shadow-lg active:translate-y-0 shadow-sm"
-              >
-                Contactez-nous
-              </Link>
-            </div>
-          </div>
+        {/* Un projet similaire */}
+        <div className="pt-10 border-t border-gray-100 flex flex-col items-center text-center gap-6">
+          <h3 className="font-serif text-2xl text-stone-800">Un projet similaire ?</h3>
+          <p className="text-stone-600 font-light max-w-md">
+            Vous avez un projet de rénovation ou de décoration ? Discutons-en ensemble.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-block bg-sage-600 text-white text-xs uppercase tracking-widest py-3 px-10 hover:bg-sage-700 transition-all duration-300 rounded-sm hover:-translate-y-1 hover:shadow-lg active:translate-y-0 shadow-sm"
+          >
+            Contactez-nous
+          </Link>
         </div>
       </div>
 
@@ -419,7 +407,9 @@ const ProjectDetails: React.FC = () => {
           {project.gallery.map((img, index) => (
             <div
               key={index}
-              ref={(el) => { thumbnailRefs.current[index] = el; }}
+              ref={(el) => {
+                thumbnailRefs.current[index] = el;
+              }}
               onClick={() => openLightbox(index)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

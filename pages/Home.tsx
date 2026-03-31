@@ -1,6 +1,5 @@
 import React from 'react';
 import Introduction from '../components/home/Introduction';
-import Statistics from '../components/home/Statistics';
 import AboutPreview from '../components/home/AboutPreview';
 import FeaturedProjects from '../components/home/FeaturedProjects';
 import ServicesPreview from '../components/home/ServicesPreview';
@@ -16,7 +15,6 @@ const Home: React.FC = () => {
   return (
     <>
       <Introduction />
-      <Statistics />
       <AboutPreview />
       <FeaturedProjects />
       <ServicesPreview />
