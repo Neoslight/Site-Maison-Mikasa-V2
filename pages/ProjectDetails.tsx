@@ -31,10 +31,14 @@ const ProjectDetails: React.FC = () => {
   const lightboxRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Navigation between projects (circular)
-  const currentIndex = projectsData.findIndex((p) => p.id === projectId);
-  const nextProject = projectsData[(currentIndex + 1) % projectsData.length];
-  const prevProject = projectsData[(currentIndex - 1 + projectsData.length) % projectsData.length];
+  // Navigation between projects (circular, visible only)
+  const visibleProjects = projectsData.filter((p) => !p.hidden);
+  const currentIndex = visibleProjects.findIndex((p) => p.id === projectId);
+  const navList = currentIndex !== -1 ? visibleProjects : projectsData;
+  const navIndex =
+    currentIndex !== -1 ? currentIndex : projectsData.findIndex((p) => p.id === projectId);
+  const nextProject = navList[(navIndex + 1) % navList.length];
+  const prevProject = navList[(navIndex - 1 + navList.length) % navList.length];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });

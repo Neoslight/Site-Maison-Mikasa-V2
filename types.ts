@@ -2,6 +2,7 @@ export type ProjectType = 'Maison' | 'Appartement' | 'Professionnel';
 
 export interface Project {
   id: string;
+  hidden?: boolean;
   title: string;
   projectType: ProjectType;
   category: string;

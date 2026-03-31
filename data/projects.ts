@@ -73,6 +73,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'app-3',
+    hidden: true,
     title: 'Cocon sur le Port',
     projectType: 'Appartement',
     category: 'Optimisation',
@@ -133,6 +134,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-2',
+    hidden: true,
     title: 'Ferme de Campagne',
     projectType: 'Maison',
     category: 'Aménagement et décoration',
@@ -209,6 +211,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-5',
+    hidden: true,
     title: 'Maison du Bonheur',
     projectType: 'Maison',
     category: 'Optimisation et aménagement',
@@ -229,6 +232,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-6',
+    hidden: true,
     title: 'Petite Maison de Pêcheur',
     projectType: 'Maison',
     category: 'Optimisation et aménagement',
@@ -249,6 +253,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-7',
+    hidden: true,
     title: 'Maison au Coeur du Marais',
     projectType: 'Maison',
     category: 'Rénovation complète',
@@ -269,6 +274,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-8',
+    hidden: true,
     title: 'Cocon dans le Golfe',
     projectType: 'Maison',
     category: 'Aménagement et décoration',
@@ -289,6 +295,7 @@ export const projectsData: Project[] = [
   },
   {
     id: 'mai-9',
+    hidden: true,
     title: 'Villa Familiale',
     projectType: 'Maison',
     category: 'Rénovation complète',

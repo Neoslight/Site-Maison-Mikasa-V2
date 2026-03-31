@@ -7,8 +7,8 @@ import { projectsData } from '../../data/projects';
 import { resolveAssetPath } from '../../lib/resolveAssetPath';
 
 const FeaturedProjects: React.FC = () => {
-  // Select first 3 projects for featured section
-  const featured = projectsData.slice(0, 3);
+  // Select first 3 visible projects for featured section
+  const featured = projectsData.filter((p) => !p.hidden).slice(0, 3);
 
   return (
     <Section id="featured-projects" className="max-w-7xl mx-auto px-6">

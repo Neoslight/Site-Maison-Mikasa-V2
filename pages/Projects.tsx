@@ -21,8 +21,9 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
 
   const categories: (ProjectType | 'Tous')[] = ['Tous', 'Maison', 'Appartement', 'Professionnel'];
 
+  const visibleProjects = projectsData.filter((p) => !p.hidden);
   const filteredProjects =
-    filter === 'Tous' ? projectsData : projectsData.filter((p) => p.projectType === filter);
+    filter === 'Tous' ? visibleProjects : visibleProjects.filter((p) => p.projectType === filter);
 
   const getTitle = () => {
     switch (filter) {
