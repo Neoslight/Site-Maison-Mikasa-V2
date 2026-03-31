@@ -40,8 +40,11 @@ const Introduction: React.FC = () => {
               className="hero-item text-stone-100 leading-relaxed font-light text-lg drop-shadow-lg"
               style={{ animationDelay: '350ms' }}
             >
+              Parce qu'un lieu de vie harmonieux améliore considérablement le quotidien.
+              <br />
               En alliant l'exigence du fonctionnel à l'élégance de l'esthétique, je conçois des
-              espaces durables, pensés pour évoluer avec vous.
+              espaces durables, pensés pour évoluer avec vous. Découvrons le potentiel de votre
+              intérieur&nbsp;!
             </p>
 
             <div className="hero-item" style={{ animationDelay: '500ms' }}>
