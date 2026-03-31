@@ -53,50 +53,23 @@ const About: React.FC = () => {
 
             <div className="pt-4 space-y-4">
               <p>
-                Badennoise depuis toujours, j’y ai fondé <strong>Maison Mikasa</strong> avec une
-                conviction simple : votre intérieur ne doit pas seulement être joli, il doit être
-                votre <strong>refuge</strong>, un lieu qui raconte votre histoire et qui améliore
-                considérablement votre quotidien.
+                Badennoise de toujours, j’ai fondé <strong>Maison Mikasa</strong> avec une
+                conviction : votre intérieur doit être un <strong>refuge</strong> qui raconte votre
+                histoire et facilite votre quotidien, où l’humain est au cœur du projet.
               </p>
               <p>
-                Cette passion pour l'architecture et la rénovation m'anime depuis toujours. Elle est
-                née très jeune, en voyant mes parents rénover leur propre maison et en levant la
-                tête en balade pour observer l'architecture magnifique qui nous entoure. Je n'ai
-                jamais cessé d'imaginer comment sublimer l'existant.
+                Passionnée d’architecture depuis l’enfance et formée auprès d’experts du domaine,
+                j’imagine des espaces où l’esthétique rencontre parfaitement la fonctionnalité. Que
+                vous souhaitiez sublimer une maison ancienne chargée de vécu ou réchauffer un
+                appartement récent, j’aime révéler le potentiel caché de chaque lieu en jouant avec
+                les volumes, les couleurs et les matériaux nobles. C’est en associant les atouts
+                naturels de l’espace à vos habitudes de vie que nous affinons ensemble votre projet.
               </p>
               <p>
-                Pour transformer cette vocation en véritable expertise, je me suis formée auprès de
-                professionnels talentueux et inspirants, touchant aussi bien au dessin qu’à
-                l'optimisation d'espace, au choix du mobilier et aux techniques de travaux.
-                Aujourd'hui, forte de ces années d'expérience et de nombreux chantiers, je mets ce
-                savoir-faire au service de votre lieu de vie.
-              </p>
-
-              <h3 className="font-serif text-2xl text-stone-800 pt-4">
-                Révéler le potentiel de chaque lieu
-              </h3>
-              <p>
-                J'ai une affection particulière pour l'ancien. J'accompagne mes clients dans la
-                rénovation complète de maisons et d'appartements qui ont du vécu. Mon rôle est aussi
-                d'intervenir sur des intérieurs parfois plus récents que vous trouvez peut-être trop
-                "froids" ou impersonnels, pour leur redonner une âme, toujours en alliant
-                l’esthétique et le fonctionnel.
-              </p>
-              <p>
-                Rien ne me fascine plus que de déceler le potentiel caché d'un espace. J'aime la
-                décoration dans sa globalité : associer les couleurs, jouer avec les textures et
-                utiliser des matériaux nobles pour créer un véritable cocon.
-              </p>
-
-              <h3 className="font-serif text-2xl text-stone-800 pt-4">
-                De la conception à la sérénité
-              </h3>
-              <p>
-                Repenser son intérieur est une belle aventure, mais la coordination des travaux
-                demande beaucoup de temps et d'énergie. Je suis là pour absorber toute cette
-                complexité. Je gère les contraintes techniques pour que vous n'ayez qu'à vous
-                concentrer sur l'essentiel : vous projeter dans votre futur chez-vous. Ensemble,
-                nous créons un environnement fluide, chaleureux et ressourçant.
+                Au-delà de la conception, je vous offre une véritable tranquillité d’esprit. Je
+                coordonne les travaux et gère toutes les contraintes techniques pour vous. Mon but ?
+                Transformer votre projet de rénovation en une belle aventure, fluide et maîtrisée,
+                pour que vous n’ayez qu’à vous projeter dans votre futur cocon.
               </p>
             </div>
 
