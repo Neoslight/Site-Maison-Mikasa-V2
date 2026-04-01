@@ -14,7 +14,7 @@ const Introduction: React.FC = () => {
             src={resolveAssetPath('/homepage-photo-accueil.webp')}
             alt="Maison Mikasa - Architecture d'intérieur"
             loading="eager"
-            fetchpriority="high"
+            {...({ fetchpriority: 'high' } as React.ImgHTMLAttributes<HTMLImageElement>)}
             className="absolute inset-0 w-full h-full object-cover object-center scale-105"
           />
 
