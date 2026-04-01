@@ -280,7 +280,7 @@ const Services: React.FC = () => {
               </div>
               <Link
                 to="/contact?service=mairie"
-                className="block w-full text-center bg-stone-300 text-stone-800 text-[10px] uppercase tracking-widest font-bold py-4 hover:bg-sage-600 hover:text-white transition-all rounded-sm shadow-sm"
+                className="block w-full text-center bg-stone-800 text-white text-[10px] uppercase tracking-widest font-bold py-4 hover:bg-sage-600 transition-colors rounded-sm shadow-sm"
               >
                 Confier mon dossier
               </Link>

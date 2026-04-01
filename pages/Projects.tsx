@@ -56,6 +56,9 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
     "Découvrez les réalisations d'architecture et décoration d'intérieur de Maison Mikasa."
   );
 
+  // Première carte large uniquement sur la vue "Tous" avec au moins 2 projets
+  const showFeaturedFirst = filter === 'Tous' && filteredProjects.length > 1;
+
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
@@ -99,37 +102,138 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
       {/* Gallery */}
       <Section className="max-w-7xl mx-auto px-6">
         {filteredProjects.length > 0 ? (
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {filteredProjects.map((project) => (
-              <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
-                <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
-                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                  <img
-                    src={resolveAssetPath(project.coverImage)}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                  />
+          <>
+            {showFeaturedFirst ? (
+              <>
+                {/* Première carte en grand format cinémascope */}
+                <div className="mb-12">
+                  <Link to={`/realisations/${filteredProjects[0].id}`} className="group block">
+                    <div className="relative overflow-hidden aspect-[21/9] mb-6 bg-stone-100 rounded-sm">
+                      <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
+                      <img
+                        src={resolveAssetPath(filteredProjects[0].coverImage)}
+                        alt={filteredProjects[0].title}
+                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                      />
 
-                  <div className="absolute bottom-6 left-6 z-20">
-                    <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
-                        Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                      </span>
+                      {/* Badge année */}
+                      {filteredProjects[0].year && (
+                        <div className="absolute top-4 left-4 z-20">
+                          <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
+                            {filteredProjects[0].year}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="absolute bottom-6 left-6 z-20">
+                        <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                          <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
+                            Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+
+                    <div className="space-y-1">
+                      <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
+                        {filteredProjects[0].title}
+                      </h3>
+                      <p className="text-xs text-stone-500 uppercase tracking-widest">
+                        {filteredProjects[0].location} • {filteredProjects[0].category}
+                      </p>
+                    </div>
+                  </Link>
                 </div>
 
-                <div className="space-y-1">
-                  <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs text-stone-500 uppercase tracking-widest">
-                    {project.location} • {project.category}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </StaggerReveal>
+                {/* Reste des projets en grille standard */}
+                <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                  {filteredProjects.slice(1).map((project) => (
+                    <Link
+                      key={project.id}
+                      to={`/realisations/${project.id}`}
+                      className="group block"
+                    >
+                      <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
+                        <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
+                        <img
+                          src={resolveAssetPath(project.coverImage)}
+                          alt={project.title}
+                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                        />
+
+                        {/* Badge année */}
+                        {project.year && (
+                          <div className="absolute top-4 left-4 z-20">
+                            <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
+                              {project.year}
+                            </span>
+                          </div>
+                        )}
+
+                        <div className="absolute bottom-6 left-6 z-20">
+                          <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                            <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
+                              Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <p className="text-xs text-stone-500 uppercase tracking-widest">
+                          {project.location} • {project.category}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </StaggerReveal>
+              </>
+            ) : (
+              /* Vue filtrée : grille standard sans mise en avant */
+              <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                {filteredProjects.map((project) => (
+                  <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
+                    <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
+                      <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
+                      <img
+                        src={resolveAssetPath(project.coverImage)}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                      />
+
+                      {project.year && (
+                        <div className="absolute top-4 left-4 z-20">
+                          <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
+                            {project.year}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="absolute bottom-6 left-6 z-20">
+                        <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                          <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
+                            Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-stone-500 uppercase tracking-widest">
+                        {project.location} • {project.category}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </StaggerReveal>
+            )}
+          </>
         ) : (
           <div className="text-center py-20 text-stone-500 font-light italic">
             Aucun projet pour le moment dans cette catégorie.

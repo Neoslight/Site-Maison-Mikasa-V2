@@ -24,9 +24,12 @@ const ServicesPreview: React.FC = () => {
             className="group p-8 border border-gray-100 hover:border-sage-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-sm bg-white flex flex-col items-center"
           >
             <Sparkles className="w-8 h-8 text-sage-400 group-hover:text-sage-600 mb-4 transition-colors" />
-            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-3 transition-colors font-bold">
+            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-2 transition-colors font-bold block">
               Rendez-vous Conseil
             </span>
+            <p className="text-xs text-stone-400 font-light leading-relaxed mb-4 group-hover:text-stone-500 transition-colors">
+              2h chez vous pour clarifier votre vision.
+            </p>
             <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-sage-500 group-hover:translate-x-1 transition-all duration-300 mt-auto" />
           </Link>
 
@@ -35,9 +38,12 @@ const ServicesPreview: React.FC = () => {
             className="group p-8 border border-gray-100 hover:border-sage-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-sm bg-white flex flex-col items-center"
           >
             <Home className="w-8 h-8 text-sage-400 group-hover:text-sage-600 mb-4 transition-colors" />
-            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-3 transition-colors font-bold">
+            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-2 transition-colors font-bold block">
               Résidence Principale
             </span>
+            <p className="text-xs text-stone-400 font-light leading-relaxed mb-4 group-hover:text-stone-500 transition-colors">
+              Conception sur-mesure de A à Z.
+            </p>
             <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-sage-500 group-hover:translate-x-1 transition-all duration-300 mt-auto" />
           </Link>
 
@@ -46,9 +52,12 @@ const ServicesPreview: React.FC = () => {
             className="group p-8 border border-gray-100 hover:border-sage-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-sm bg-white flex flex-col items-center"
           >
             <Ship className="w-8 h-8 text-sage-400 group-hover:text-sage-600 mb-4 transition-colors" />
-            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-3 transition-colors font-bold">
+            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-2 transition-colors font-bold block">
               Résidence Secondaire
             </span>
+            <p className="text-xs text-stone-400 font-light leading-relaxed mb-4 group-hover:text-stone-500 transition-colors">
+              Gestion complète à distance.
+            </p>
             <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-sage-500 group-hover:translate-x-1 transition-all duration-300 mt-auto" />
           </Link>
 
@@ -57,9 +66,12 @@ const ServicesPreview: React.FC = () => {
             className="group p-8 border border-gray-100 hover:border-sage-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-sm bg-white flex flex-col items-center"
           >
             <FileText className="w-8 h-8 text-sage-400 group-hover:text-sage-600 mb-4 transition-colors" />
-            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-3 transition-colors font-bold">
+            <span className="uppercase tracking-widest text-xs text-stone-700 group-hover:text-sage-700 mb-2 transition-colors font-bold block">
               Dossier Mairie
             </span>
+            <p className="text-xs text-stone-400 font-light leading-relaxed mb-4 group-hover:text-stone-500 transition-colors">
+              Déclaration préalable et permis de construire.
+            </p>
             <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-sage-500 group-hover:translate-x-1 transition-all duration-300 mt-auto" />
           </Link>
         </StaggerReveal>
