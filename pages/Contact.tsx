@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin, Facebook, Clock } from 'lucide-react';
@@ -25,23 +25,17 @@ const getServiceFromSearch = (search: string): string => {
 };
 
 const Contact: React.FC = () => {
-  usePageMeta('Contact', 'Contactez Maison Mikasa pour votre projet d\'architecture d\'intérieur.');
+  usePageMeta('Contact', "Contactez Maison Mikasa pour votre projet d'architecture d'intérieur.");
   const location = useLocation();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => ({
     name: '',
     email: '',
     phone: '',
-    projectType: '',
+    projectType: getServiceFromSearch(location.search),
     message: '',
-  });
-
-  // Sync the pre-selected service when the URL param changes
-  useEffect(() => {
-    const selectedService = getServiceFromSearch(location.search);
-    setFormData((prev) => ({ ...prev, projectType: selectedService }));
-  }, [location.search]);
+  }));
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -175,23 +169,28 @@ const Contact: React.FC = () => {
             <div>
               <h2 className="font-serif text-2xl text-stone-800 mb-6">Réseaux Sociaux</h2>
               <div className="flex space-x-4">
-                {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
                 <a
-                  href="#"
+                  href="https://www.instagram.com/maisonmikasa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Visiter la page Instagram de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/maisonmikasa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Visiter la page Facebook de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/laurine-fourcherot/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Visiter la page LinkedIn de Maison Mikasa"
                   className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
@@ -208,8 +207,18 @@ const Contact: React.FC = () => {
             {formStatus === 'success' ? (
               <div className="flex flex-col items-center justify-center text-center py-16 space-y-4">
                 <div className="w-16 h-16 rounded-full bg-sage-100 flex items-center justify-center mb-2">
-                  <svg className="w-8 h-8 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-8 h-8 text-sage-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
                 <h3 className="font-serif text-2xl text-stone-800">Message envoyé !</h3>
@@ -361,7 +370,13 @@ const Contact: React.FC = () => {
                     disabled={formStatus === 'submitting'}
                     className="inline-flex items-center justify-center w-full md:w-auto bg-sage-600 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold transition-all duration-300 rounded-sm shadow-md hover:bg-sage-700 hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
                   >
-                    {formStatus === 'submitting' ? 'Envoi en cours…' : <>Envoyer ma demande <Send className="w-4 h-4 ml-2" /></>}
+                    {formStatus === 'submitting' ? (
+                      'Envoi en cours…'
+                    ) : (
+                      <>
+                        Envoyer ma demande <Send className="w-4 h-4 ml-2" />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

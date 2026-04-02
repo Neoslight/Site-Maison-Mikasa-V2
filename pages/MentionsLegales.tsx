@@ -18,7 +18,6 @@ const MentionsLegales: React.FC = () => {
 
       <Section className="max-w-3xl mx-auto px-6">
         <div className="space-y-10 text-stone-700 font-light leading-relaxed">
-
           {/* Éditeur */}
           <div>
             <h2 className="font-serif text-xl text-stone-800 mb-4">Éditeur du site</h2>
@@ -27,17 +26,14 @@ const MentionsLegales: React.FC = () => {
               <br />
               Architecte d'intérieur et décoratrice
               <br />
-              SIREN : <span className="text-stone-500">[À compléter avant mise en ligne]</span>
+              SIREN : 883320194
               <br />
               Responsable de publication : Laurine Fourcherot
               <br />
               Adresse : Rue Monseigneur de Pancemont, 56000 Vannes, France
               <br />
               Email :{' '}
-              <a
-                href="mailto:maisonmikasa@gmail.com"
-                className="text-sage-600 hover:underline"
-              >
+              <a href="mailto:maisonmikasa@gmail.com" className="text-sage-600 hover:underline">
                 maisonmikasa@gmail.com
               </a>
             </p>
@@ -79,11 +75,12 @@ const MentionsLegales: React.FC = () => {
           <div>
             <h2 className="font-serif text-xl text-stone-800 mb-4">Données personnelles</h2>
             <p>
-              Ce site ne collecte aucune donnée personnelle à des fins commerciales ou publicitaires.
+              Ce site ne collecte aucune donnée personnelle à des fins commerciales ou
+              publicitaires.
             </p>
             <p className="mt-4">
-              Le formulaire de contact transmet vos informations (nom, email, message) via le service
-              tiers{' '}
+              Le formulaire de contact transmet vos informations (nom, email, message) via le
+              service tiers{' '}
               <a
                 href="https://formspree.io"
                 target="_blank"
@@ -99,10 +96,7 @@ const MentionsLegales: React.FC = () => {
               Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez
               d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce
               droit, contactez-nous à{' '}
-              <a
-                href="mailto:maisonmikasa@gmail.com"
-                className="text-sage-600 hover:underline"
-              >
+              <a href="mailto:maisonmikasa@gmail.com" className="text-sage-600 hover:underline">
                 maisonmikasa@gmail.com
               </a>
               .
@@ -130,7 +124,6 @@ const MentionsLegales: React.FC = () => {
               Numérique (LCEN).
             </p>
           </div>
-
         </div>
       </Section>
     </div>

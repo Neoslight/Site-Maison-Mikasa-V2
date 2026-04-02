@@ -127,23 +127,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </a>
           </div>
           <div className="flex space-x-4">
-            {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
             <a
-              href="#"
+              href="https://www.facebook.com/maisonmikasa/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-3 h-3 hover:text-sage-600"
               aria-label="Visiter la page Facebook de Maison Mikasa"
             >
               <IconFacebook />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/maisonmikasa/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-3 h-3 hover:text-sage-600"
               aria-label="Visiter la page Instagram de Maison Mikasa"
             >
               <IconInstagram />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/laurine-fourcherot/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-3 h-3 hover:text-sage-600"
               aria-label="Visiter la page LinkedIn de Maison Mikasa"
             >
@@ -348,23 +353,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             Suivez Maison Mikasa sur les réseaux !
           </p>
           <div className="flex justify-center space-x-6 mb-12">
-            {/* TODO: Remplacer href="#" par les URLs réelles des réseaux sociaux */}
             <a
-              href="#"
+              href="https://www.facebook.com/maisonmikasa/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page Facebook de Maison Mikasa"
             >
               <IconFacebook />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/maisonmikasa/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page Instagram de Maison Mikasa"
             >
               <IconInstagram />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/laurine-fourcherot/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-5 h-5 text-stone-600 hover:text-sage-600 transition-transform hover:-translate-y-1 duration-300"
               aria-label="Visiter la page LinkedIn de Maison Mikasa"
             >
