@@ -252,7 +252,7 @@ const ProjectDetails: React.FC = () => {
           {/* Image Container */}
           <div
             className={cn(
-              'absolute inset-0 flex items-center justify-center p-4 md:p-12 transition-all duration-300',
+              'absolute inset-0 flex items-center justify-center transition-all duration-300',
               isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
             )}
             onClick={toggleZoom}
@@ -263,12 +263,17 @@ const ProjectDetails: React.FC = () => {
               ref={imageRef}
               src={resolveAssetPath(project.gallery[photoIndex])}
               alt={`Vue ${photoIndex + 1}`}
-              className="max-w-full max-h-full object-contain transition-transform duration-200 ease-out shadow-2xl"
-              style={
-                isZoomed
+              className="block shadow-2xl transition-transform duration-200 ease-out"
+              style={{
+                maxWidth: 'calc(100vw - 4rem)',
+                maxHeight: 'calc(100vh - 6rem)',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+                ...(isZoomed
                   ? { transform: 'scale(2.5)' }
-                  : { transform: 'scale(1)', transformOrigin: 'center' }
-              }
+                  : { transform: 'scale(1)', transformOrigin: 'center' }),
+              }}
             />
           </div>
 
