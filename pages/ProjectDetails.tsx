@@ -354,36 +354,29 @@ const ProjectDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-10">
-        {/* Le Projet */}
+      <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-8">
         {project.description && (
-          <div>
-            <h2 className="font-serif text-2xl text-stone-800 mb-4">Le Projet</h2>
-            <p className="text-stone-700 font-light leading-relaxed text-base">
+          <div className="pb-8 border-b border-gray-100">
+            <h2 className="font-serif text-xl text-stone-800 mb-3">Le Projet</h2>
+            <p className="text-stone-600 font-light leading-relaxed text-base">
               {project.description}
             </p>
           </div>
         )}
-
-        {/* Le Défi / La Solution */}
-        {(project.challenge || project.solution) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100">
-            {project.challenge && (
-              <div>
-                <h3 className="font-serif text-lg text-stone-800 mb-3">Le Défi</h3>
-                <p className="text-stone-600 font-light leading-relaxed text-sm">
-                  {project.challenge}
-                </p>
-              </div>
-            )}
-            {project.solution && (
-              <div>
-                <h3 className="font-serif text-lg text-stone-800 mb-3">La Solution</h3>
-                <p className="text-stone-600 font-light leading-relaxed text-sm">
-                  {project.solution}
-                </p>
-              </div>
-            )}
+        {project.challenge && (
+          <div className="pb-8 border-b border-gray-100">
+            <h2 className="font-serif text-xl text-stone-800 mb-3">Le Défi</h2>
+            <p className="text-stone-600 font-light leading-relaxed text-base">
+              {project.challenge}
+            </p>
+          </div>
+        )}
+        {project.solution && (
+          <div className="pb-8 border-b border-gray-100">
+            <h2 className="font-serif text-xl text-stone-800 mb-3">La Solution</h2>
+            <p className="text-stone-600 font-light leading-relaxed text-base">
+              {project.solution}
+            </p>
           </div>
         )}
 
