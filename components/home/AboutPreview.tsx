@@ -15,7 +15,7 @@ const AboutPreview: React.FC = () => {
         <div className="flex justify-center md:justify-end">
           <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-sm shadow-md group">
             <img
-              src="assets\images\Photo profil.jpg"
+              src="assets\images\Photo-profil.jpg"
               alt="Laurine Fourcherot"
               loading="lazy"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
