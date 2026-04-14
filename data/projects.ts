@@ -112,7 +112,6 @@ export const projectsData: Project[] = [
       '/tabarly/tabarly-zoom-2.webp',
       '/tabarly/tabarly-zoom-3.webp',
       '/tabarly/tabarly-zoom-4.webp',
-      '/tabarly/tabarly-zoom-5.webp',
       '/tabarly/tabarly-zoom-6.webp',
     ],
     beforeAfterGallery: [
