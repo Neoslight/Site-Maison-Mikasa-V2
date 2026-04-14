@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useParams, Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import BeforeAfterSlider from '../components/ui/BeforeAfterSlider';
@@ -198,91 +199,94 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Lightbox Overlay */}
-      {lightboxOpen && (
-        <div
-          ref={lightboxRef}
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center"
-          onClick={closeLightbox}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Visionneuse de photos"
-        >
-          {/* Top Controls */}
-          <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50 pointer-events-none">
-            <div className="text-white/80 text-sm font-medium tracking-widest pointer-events-auto bg-black/20 px-4 py-2 rounded-full backdrop-blur-md">
-              {photoIndex + 1} / {project.gallery.length}
-            </div>
-            <button
-              className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all pointer-events-auto"
-              onClick={closeLightbox}
-              aria-label="Fermer la visionneuse"
-            >
-              <X className="w-8 h-8" aria-hidden="true" />
-            </button>
-          </div>
-
-          {/* Navigation Buttons (hidden when zoomed) */}
-          {!isZoomed && (
-            <>
-              <button
-                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
-                onClick={prevPhoto}
-                aria-label="Image précédente"
-              >
-                <ChevronLeft
-                  className="w-8 h-8 md:w-10 md:h-10 group-hover:-translate-x-1 transition-transform"
-                  aria-hidden="true"
-                />
-              </button>
-
-              <button
-                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
-                onClick={nextPhoto}
-                aria-label="Image suivante"
-              >
-                <ChevronRight
-                  className="w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-1 transition-transform"
-                  aria-hidden="true"
-                />
-              </button>
-            </>
-          )}
-
-          {/* Image Container */}
+      {/* Lightbox Overlay — rendu via Portal sur document.body pour éviter que
+          l'animation CSS transform de <main> ne casse le positionnement fixed */}
+      {lightboxOpen &&
+        createPortal(
           <div
-            className={cn(
-              'absolute inset-0 flex items-center justify-center transition-all duration-300',
-              isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
-            )}
-            onClick={toggleZoom}
-            onMouseMove={handleMouseMove}
-            onTouchMove={handleTouchMove}
+            ref={lightboxRef}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+            onClick={closeLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Visionneuse de photos"
           >
-            <img
-              ref={imageRef}
-              src={resolveAssetPath(project.gallery[photoIndex])}
-              alt={`Vue ${photoIndex + 1}`}
-              className="block shadow-2xl transition-transform duration-200 ease-out"
-              style={{
-                maxWidth: 'calc(100vw - 4rem)',
-                maxHeight: 'calc(100vh - 6rem)',
-                width: 'auto',
-                height: 'auto',
-                objectFit: 'contain',
-                ...(isZoomed
-                  ? { transform: 'scale(2.5)' }
-                  : { transform: 'scale(1)', transformOrigin: 'center' }),
-              }}
-            />
-          </div>
+            {/* Top Controls */}
+            <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50 pointer-events-none">
+              <div className="text-white/80 text-sm font-medium tracking-widest pointer-events-auto bg-black/20 px-4 py-2 rounded-full backdrop-blur-md">
+                {photoIndex + 1} / {project.gallery.length}
+              </div>
+              <button
+                className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all pointer-events-auto"
+                onClick={closeLightbox}
+                aria-label="Fermer la visionneuse"
+              >
+                <X className="w-8 h-8" aria-hidden="true" />
+              </button>
+            </div>
 
-          {/* Mobile hint */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-[10px] uppercase tracking-widest md:hidden pointer-events-none">
-            {isZoomed ? 'Glisser pour explorer' : 'Toucher pour zoomer'}
-          </div>
-        </div>
-      )}
+            {/* Navigation Buttons (hidden when zoomed) */}
+            {!isZoomed && (
+              <>
+                <button
+                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
+                  onClick={prevPhoto}
+                  aria-label="Image précédente"
+                >
+                  <ChevronLeft
+                    className="w-8 h-8 md:w-10 md:h-10 group-hover:-translate-x-1 transition-transform"
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <button
+                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
+                  onClick={nextPhoto}
+                  aria-label="Image suivante"
+                >
+                  <ChevronRight
+                    className="w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-1 transition-transform"
+                    aria-hidden="true"
+                  />
+                </button>
+              </>
+            )}
+
+            {/* Image Container */}
+            <div
+              className={cn(
+                'absolute inset-0 flex items-center justify-center transition-all duration-300',
+                isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
+              )}
+              onClick={toggleZoom}
+              onMouseMove={handleMouseMove}
+              onTouchMove={handleTouchMove}
+            >
+              <img
+                ref={imageRef}
+                src={resolveAssetPath(project.gallery[photoIndex])}
+                alt={`Vue ${photoIndex + 1}`}
+                className="block shadow-2xl transition-transform duration-200 ease-out"
+                style={{
+                  maxWidth: 'calc(100vw - 4rem)',
+                  maxHeight: 'calc(100vh - 6rem)',
+                  width: 'auto',
+                  height: 'auto',
+                  objectFit: 'contain',
+                  ...(isZoomed
+                    ? { transform: 'scale(2.5)' }
+                    : { transform: 'scale(1)', transformOrigin: 'center' }),
+                }}
+              />
+            </div>
+
+            {/* Mobile hint */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-[10px] uppercase tracking-widest md:hidden pointer-events-none">
+              {isZoomed ? 'Glisser pour explorer' : 'Toucher pour zoomer'}
+            </div>
+          </div>,
+          document.body
+        )}
 
       {/* Back Button */}
       <div className="fixed top-24 left-6 z-40 hidden xl:block">
