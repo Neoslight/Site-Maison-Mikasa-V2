@@ -17,25 +17,29 @@ const FeaturedProjects: React.FC = () => {
         <div className="w-12 h-0.5 bg-sage-400 mx-auto"></div>
       </div>
 
-      {/* Première carte en format large */}
-      {featured.length > 0 && (
-        <div className="mb-8">
-          <Link to={`/realisations/${featured[0].id}`} className="group block cursor-pointer">
-            <div className="relative overflow-hidden aspect-[21/9] mb-5 bg-stone-100 rounded-sm">
+      {/* Les 3 projets en grille horizontale égale */}
+      <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {featured.map((project) => (
+          <Link
+            to={`/realisations/${project.id}`}
+            key={project.id}
+            className="group block cursor-pointer"
+          >
+            <div className="relative overflow-hidden aspect-[4/5] mb-5 bg-stone-100 rounded-sm">
               <div className="absolute inset-0 bg-stone-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
               <img
-                src={resolveAssetPath(featured[0].coverImage)}
-                alt={featured[0].title}
+                src={resolveAssetPath(project.coverImage)}
+                alt={project.title}
                 loading="lazy"
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
               />
 
               {/* Badge année */}
-              {featured[0].year && (
+              {project.year && (
                 <div className="absolute top-4 left-4 z-20">
                   <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                    {featured[0].year}
+                    {project.year}
                   </span>
                 </div>
               )}
@@ -47,71 +51,19 @@ const FeaturedProjects: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-baseline justify-between">
-              <div className="space-y-1">
-                <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                  {featured[0].title}
-                </h3>
-                <div className="flex items-center text-xs text-stone-500 uppercase tracking-widest font-light">
-                  <span>{featured[0].location}</span>
-                  <span className="mx-2">•</span>
-                  <span>{featured[0].category}</span>
-                </div>
+            <div className="space-y-1">
+              <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
+                {project.title}
+              </h3>
+              <div className="flex items-center text-xs text-stone-500 uppercase tracking-widest font-light">
+                <span>{project.location}</span>
+                <span className="mx-2">•</span>
+                <span>{project.category}</span>
               </div>
             </div>
           </Link>
-        </div>
-      )}
-
-      {/* Les 2 projets suivants en grille */}
-      {featured.length > 1 && (
-        <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {featured.slice(1).map((project) => (
-            <Link
-              to={`/realisations/${project.id}`}
-              key={project.id}
-              className="group block cursor-pointer"
-            >
-              <div className="relative overflow-hidden aspect-[4/5] mb-5 bg-stone-100 rounded-sm">
-                <div className="absolute inset-0 bg-stone-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-
-                <img
-                  src={resolveAssetPath(project.coverImage)}
-                  alt={project.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* Badge année */}
-                {project.year && (
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                      {project.year}
-                    </span>
-                  </div>
-                )}
-
-                <div className="absolute bottom-6 left-6 z-20 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
-                  <span className="inline-flex items-center text-white text-xs uppercase tracking-widest border border-white/50 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-sm">
-                    Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                  </span>
-                </div>
-              </div>
-
-              <div className="text-center md:text-left space-y-1">
-                <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <div className="flex items-center justify-center md:justify-start text-xs text-stone-500 uppercase tracking-widest font-light">
-                  <span>{project.location}</span>
-                  <span className="mx-2">•</span>
-                  <span>{project.category}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </StaggerReveal>
-      )}
+        ))}
+      </StaggerReveal>
 
       <div className="mt-12 text-center">
         <Link
