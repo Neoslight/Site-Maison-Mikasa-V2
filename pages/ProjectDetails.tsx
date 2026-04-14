@@ -8,7 +8,6 @@ import {
   Calendar,
   MapPin,
   Ruler,
-  Clock,
   X,
   ZoomIn,
   ChevronLeft,
@@ -253,7 +252,7 @@ const ProjectDetails: React.FC = () => {
           {/* Image Container */}
           <div
             className={cn(
-              'relative w-full h-full flex items-center justify-center p-4 md:p-12 transition-all duration-300',
+              'absolute inset-0 flex items-center justify-center p-4 md:p-12 transition-all duration-300',
               isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
             )}
             onClick={toggleZoom}
@@ -342,24 +341,16 @@ const ProjectDetails: React.FC = () => {
                 <p className="text-stone-800 font-serif">{project.surface}</p>
               </div>
             )}
-            {project.duration && (
-              <div className="space-y-1">
-                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
-                  <Clock className="w-3 h-3 mr-2" /> Durée
-                </div>
-                <p className="text-stone-800 font-serif">{project.duration}</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-16">
+      <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-10">
         {/* Le Projet */}
         {project.description && (
           <div>
-            <h2 className="font-serif text-2xl text-stone-800 mb-6">Le Projet</h2>
-            <p className="text-stone-700 font-light leading-relaxed text-lg whitespace-pre-line">
+            <h2 className="font-serif text-2xl text-stone-800 mb-4">Le Projet</h2>
+            <p className="text-stone-700 font-light leading-relaxed text-base">
               {project.description}
             </p>
           </div>
@@ -367,17 +358,21 @@ const ProjectDetails: React.FC = () => {
 
         {/* Le Défi / La Solution */}
         {(project.challenge || project.solution) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10 border-t border-gray-100">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100">
             {project.challenge && (
               <div>
-                <h3 className="font-serif text-xl text-stone-800 mb-4">Le Défi</h3>
-                <p className="text-stone-600 font-light leading-relaxed">{project.challenge}</p>
+                <h3 className="font-serif text-lg text-stone-800 mb-3">Le Défi</h3>
+                <p className="text-stone-600 font-light leading-relaxed text-sm">
+                  {project.challenge}
+                </p>
               </div>
             )}
             {project.solution && (
               <div>
-                <h3 className="font-serif text-xl text-stone-800 mb-4">La Solution</h3>
-                <p className="text-stone-600 font-light leading-relaxed">{project.solution}</p>
+                <h3 className="font-serif text-lg text-stone-800 mb-3">La Solution</h3>
+                <p className="text-stone-600 font-light leading-relaxed text-sm">
+                  {project.solution}
+                </p>
               </div>
             )}
           </div>
@@ -397,20 +392,6 @@ const ProjectDetails: React.FC = () => {
           </Link>
         </div>
       </div>
-
-      {/* Before/After Gallery */}
-      {project.beforeAfterGallery && project.beforeAfterGallery.length > 0 && (
-        <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-16">
-          <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Avant / Après</h2>
-          <div className="grid grid-cols-1 gap-12">
-            {project.beforeAfterGallery.map((item, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <BeforeAfterSlider beforeImage={item.before} afterImage={item.after} />
-              </div>
-            ))}
-          </div>
-        </Section>
-      )}
 
       {/* Gallery Grid */}
       <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-24">
@@ -434,14 +415,14 @@ const ProjectDetails: React.FC = () => {
               aria-label={`Agrandir la vue ${index + 1}`}
               className={cn(
                 'relative overflow-hidden rounded-sm cursor-zoom-in group shadow-sm hover:shadow-xl transition-all duration-500',
-                index % 3 === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/5]'
+                index % 3 === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
               )}
             >
               <img
                 src={resolveAssetPath(img)}
                 alt={`Vue ${index + 1} - ${project.title}`}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-all duration-700"
               />
 
               {/* Hover Overlay */}
@@ -457,6 +438,22 @@ const ProjectDetails: React.FC = () => {
           ))}
         </div>
       </Section>
+
+      {/* Before/After Gallery */}
+      {project.beforeAfterGallery && project.beforeAfterGallery.length > 0 && (
+        <div className="bg-stone-50 py-16 md:py-24">
+          <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
+            <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Avant / Après</h2>
+            <div className="grid grid-cols-1 gap-12">
+              {project.beforeAfterGallery.map((item, index) => (
+                <div key={index} className="flex flex-col items-center">
+                  <BeforeAfterSlider beforeImage={item.before} afterImage={item.after} />
+                </div>
+              ))}
+            </div>
+          </Section>
+        </div>
+      )}
 
       {/* Navigation Footer */}
       <div className="border-t border-gray-100">

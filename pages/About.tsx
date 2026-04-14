@@ -2,6 +2,7 @@ import React from 'react';
 import Section from '../components/ui/Section';
 import { Heart, Ruler, Sparkles, MapPin } from 'lucide-react';
 import { usePageMeta } from '../lib/usePageMeta';
+import { resolveAssetPath } from '../lib/resolveAssetPath';
 
 const valuesData = [
   {
@@ -56,7 +57,7 @@ const About: React.FC = () => {
           <div className="relative order-1 md:order-1">
             <div className="aspect-[3/4] bg-stone-100 rounded-sm overflow-hidden shadow-xl">
               <img
-                src="assets\images\photo-profil.webp"
+                src={resolveAssetPath('photo-profil.webp')}
                 alt="Laurine Fourcherot - Architecte d'intérieur"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />

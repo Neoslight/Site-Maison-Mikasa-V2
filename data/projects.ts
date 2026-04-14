@@ -194,15 +194,6 @@ export const projectsData: Project[] = [
       '/penher/penher-apres-6.webp',
       '/penher/penher-apres-7.webp',
     ],
-    beforeAfterGallery: [
-      { before: '/penher/penher-avant-1.webp', after: '/penher/penher-apres-1.webp' },
-      { before: '/penher/penher-avant-2.webp', after: '/penher/penher-apres-2.webp' },
-      { before: '/penher/penher-avant-3.webp', after: '/penher/penher-apres-3.webp' },
-      { before: '/penher/penher-avant-4.webp', after: '/penher/penher-apres-4.webp' },
-      { before: '/penher/penher-avant-5.webp', after: '/penher/penher-apres-5.webp' },
-      { before: '/penher/penher-avant-6.webp', after: '/penher/penher-apres-6.webp' },
-      { before: '/penher/penher-avant-7.webp', after: '/penher/penher-apres-7.webp' },
-    ],
     description: "Rénovation complète d'une petite maison bretonne sur l'Île d'Arz.",
     challenge:
       'Réveiller une maison sombre, restée "dans son jus" depuis de nombreuses années, pour la transformer en une maison de vacances lumineuse, respirante et accueillante.',

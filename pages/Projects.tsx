@@ -113,7 +113,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                       <img
                         src={resolveAssetPath(filteredProjects[0].coverImage)}
                         alt={filteredProjects[0].title}
-                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />
 
                       {/* Badge année */}
@@ -158,7 +158,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                         <img
                           src={resolveAssetPath(project.coverImage)}
                           alt={project.title}
-                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                         />
 
                         {/* Badge année */}
@@ -201,7 +201,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                       <img
                         src={resolveAssetPath(project.coverImage)}
                         alt={project.title}
-                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />
 
                       {project.year && (
