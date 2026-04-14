@@ -37,8 +37,8 @@ const Services: React.FC = () => {
           <div className="flex justify-center">
             <p className="text-stone-700 font-serif italic text-lg md:text-2xl leading-relaxed max-w-3xl">
               De l’analyse de potentiel au suivi complet de vos travaux, j’imagine des espaces
-              fluides où l’esthétique se met au service de votre bien-être pour valoriser
-              durablement votre patrimoine et simplifier votre quotidien.
+              fluides où l’esthétique se met au service de votre bien-être pour simplifier votre
+              quotidien et valoriser durablement votre patrimoine.
             </p>
           </div>
           <div className="w-12 h-px bg-sage-300 mx-auto mt-12"></div>
@@ -60,29 +60,26 @@ const Services: React.FC = () => {
               </p>
 
               <p className="text-sm text-stone-600 font-light leading-relaxed mb-6">
-                Une immersion de 2 heures chez vous pour clarifier votre vision et bénéficier de
-                conseils personnalisés immédiats.
+                Profitez d'une immersion de 2 heures chez vous (ou dans votre futur bien) pour
+                clarifier votre projet. Mes recommandations et conseils sont ensuite synthétisés
+                dans un book personnalisé, envoyé sous 48h.
               </p>
 
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
                   <p className="text-xs text-stone-700 font-light">
-                    <strong>Diagnostic :</strong> Analyse des besoins et du potentiel du lieu
-                    sur-place.
+                    <strong>Diagnostic et échange :</strong> Analyse de vos besoins et du potentiel
+                    du lieu sur-place : volumes, lumière, circulation, regard technique, vos
+                    habitudes etc.
                   </p>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
                   <p className="text-xs text-stone-700 font-light">
-                    <strong>Conseils Stratégiques :</strong> Pistes d’agencement, matières, couleurs
-                    et technique.
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-stone-700 font-light">
-                    <strong>Compte-Rendu :</strong> Envoi sous 48h d’un dossier stratégique.
+                    <strong>Votre Compte-Rendu :</strong> Envoi sous 48 heures d'un book pour lancer
+                    votre projet sereinement (conseils, piste d'agencement, planche couleurs et
+                    matériaux et d'aménagement…).
                   </p>
                 </li>
               </ul>
@@ -98,59 +95,73 @@ const Services: React.FC = () => {
               <div className="flex items-start bg-sage-50/50 p-3 rounded-sm mb-6">
                 <Info className="w-3.5 h-3.5 text-sage-600 mr-2 flex-shrink-0 mt-0.5" />
                 <p className="text-[10px] text-sage-700 leading-tight">
-                  Détail : Ce montant est intégralement déduit si nous poursuivons sur une
-                  conception complète.
+                  Ce montant est intégralement déduit de la prestation si nous poursuivons ensemble
+                  sur un projet de conception complète.
                 </p>
               </div>
               <Link
                 to="/contact?service=conseil"
                 className="block w-full text-center bg-stone-800 text-white text-[10px] uppercase tracking-widest font-bold py-4 hover:bg-sage-600 transition-colors rounded-sm shadow-sm"
               >
-                Réserver mon rendez-vous
+                Réserver mon rendez-vous conseil
               </Link>
             </div>
           </div>
 
-          {/* Offer 2: Rénovation Résidence Principale */}
+          {/* Offer 2: Résidence Principale */}
           <div className="group flex flex-col bg-stone-50 border border-stone-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden">
             <div className="p-8 flex-grow">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-sage-600 mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-500 shadow-sm">
                 <Home className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-2xl text-stone-800 mb-2">
-                Rénovation Résidence Principale
-              </h3>
+              <h3 className="font-serif text-2xl text-stone-800 mb-2">Résidence Principale</h3>
               <p className="text-sage-600 text-xs uppercase tracking-widest font-bold mb-6 italic">
                 Un intérieur qui vous ressemble. 🪴
               </p>
 
               <p className="text-sm text-stone-600 font-light leading-relaxed mb-6">
-                Une conception sur-mesure axée sur l’ergonomie, la fluidité et une ambiance
-                personnalisée pour optimiser votre quotidien.
+                Transformons votre lieu de vie quotidien pour en révéler tout le potentiel. Mon
+                objectif : créer un intérieur qui vous ressemble, faciliter votre routine et
+                optimiser votre confort avec une conception axée sur l'ergonomie, la fluidité des
+                espaces, les rangements intelligents et une ambiance chaleureuse.
               </p>
 
               <div className="space-y-4 mb-8">
                 <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold block">
-                  Étapes de la mission
+                  Missions à la carte (complète ou partielle)
                 </span>
-                <div className="grid grid-cols-2 gap-2">
-                  {['Étude (APS)', 'Dossier (APD)', 'Choix Matériaux', 'Suivi Chantier'].map(
-                    (step, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center bg-white p-2 rounded-sm border border-stone-100"
-                      >
-                        <CheckCircle2 className="w-3 h-3 text-sage-500 mr-2 flex-shrink-0" />
-                        <span className="text-[10px] text-stone-700 truncate">{step}</span>
-                      </div>
-                    )
-                  )}
-                </div>
+                <ul className="space-y-3">
+                  {[
+                    {
+                      label: 'Étude & Esquisse (APS)',
+                      desc: "Relevé de l'existant, 3 propositions d'aménagement 2D/3D, planches d'ambiance et estimation budgétaire.",
+                    },
+                    {
+                      label: 'Conception (APD)',
+                      desc: 'Plan définitif, plans techniques (électricité, plomberie) et création de mobilier sur-mesure (cuisine, dressing).',
+                    },
+                    {
+                      label: 'Sourcing',
+                      desc: 'Choix définitifs des matériaux, couleurs, mobilier et décoration.',
+                    },
+                    {
+                      label: 'Suivi de chantier',
+                      desc: "Consultation des artisans, coordination et réunions hebdomadaires jusqu'à la réception.",
+                    },
+                    {
+                      label: 'Aménagement final',
+                      desc: 'Commandes, réception et installation complète (mobilier, luminaires, textiles).',
+                    },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle2 className="w-3 h-3 text-sage-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-[10px] text-stone-700 font-light leading-relaxed">
+                        <strong>{item.label} :</strong> {item.desc}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <p className="text-[11px] text-stone-500 leading-relaxed italic">
-                De l'esquisse 3D aux plans techniques et au pilotage des travaux.
-              </p>
             </div>
 
             <div className="p-8 pt-0 mt-auto">
@@ -158,9 +169,7 @@ const Services: React.FC = () => {
                 <span className="text-xs uppercase tracking-widest text-stone-400 font-bold">
                   Tarif
                 </span>
-                <span className="font-serif text-xl text-stone-800">
-                  Dès 1 600 € <span className="text-xs font-sans text-stone-500">/ pièce</span>
-                </span>
+                <span className="font-serif text-xl text-stone-800">Sur devis</span>
               </div>
               <Link
                 to="/contact?service=principale"
@@ -171,46 +180,66 @@ const Services: React.FC = () => {
             </div>
           </div>
 
-          {/* Offer 3: Rénovation Résidence Secondaire */}
+          {/* Offer 3: Résidence Secondaire & Investissement Locatif */}
           <div className="group flex flex-col bg-white border border-stone-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden">
             <div className="p-8 flex-grow">
               <div className="w-12 h-12 bg-sage-50 rounded-full flex items-center justify-center text-sage-600 mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-500">
                 <Ship className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-2xl text-stone-800 mb-2">
-                Rénovation Résidence Secondaire
+                Résidence Secondaire & Investissement Locatif
               </h3>
               <p className="text-sage-600 text-xs uppercase tracking-widest font-bold mb-6 italic">
-                Votre refuge en bord de mer. ⛵
+                Votre refuge en bord de mer, géré en toute sérénité. ⛵
               </p>
 
               <p className="text-sm text-stone-600 font-light leading-relaxed mb-6">
-                Une gestion "clés en main" de la conception à la mise en place du mobilier pour
-                transformer votre bien sans vous déplacer.
+                Rénovez et décorez votre bien à distance, sans avoir à toujours vous déplacer. Je
+                conçois pour vous un cocon ressourçant, parfaitement adapté aux exigences d'une
+                maison de vacances (durabilité, accueil, déconnexion) et à vos habitudes. Profitez
+                d'une gestion « clés en main », de la conception à l'installation finale.
               </p>
 
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-stone-700 font-light">
-                    <strong>Relais local :</strong> Gestion totale des devis et entreprises en votre
-                    absence.
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-stone-700 font-light">
-                    <strong>Ameublement :</strong> Commande, réception et installation complète.
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-stone-700 font-light">
-                    <strong>Spécificité :</strong> Durabilité et déconnexion pour maison de
-                    vacances.
-                  </p>
-                </li>
-              </ul>
+              <div className="space-y-4 mb-8">
+                <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold block">
+                  Missions à la carte (complète ou partielle)
+                </span>
+                <ul className="space-y-3">
+                  {[
+                    {
+                      label: 'Étude & Esquisse (APS)',
+                      desc: "Relevé, 3 propositions d'aménagement 2D/3D, planches d'ambiance et estimation budgétaire.",
+                    },
+                    {
+                      label: 'Conception (APD)',
+                      desc: 'Plans techniques (électricité, plomberie) et mobilier sur-mesure (cuisine, dressing, rangements).',
+                    },
+                    {
+                      label: 'Sourcing',
+                      desc: 'Sélection définitive des matériaux, couleurs, mobilier et décoration.',
+                    },
+                    {
+                      label: 'Relais local',
+                      desc: 'Gestion et pilotage des entreprises locales en votre absence.',
+                    },
+                    {
+                      label: 'Suivi de chantier',
+                      desc: "Consultation des artisans, coordination et réunions hebdomadaires jusqu'à la réception.",
+                    },
+                    {
+                      label: 'Aménagement final',
+                      desc: 'Commandes, réception et installation complète (mobilier, luminaires, textiles).',
+                    },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle2 className="w-3 h-3 text-sage-400 mr-2 mt-0.5 flex-shrink-0" />
+                      <p className="text-[10px] text-stone-700 font-light leading-relaxed">
+                        <strong>{item.label} :</strong> {item.desc}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="p-8 pt-0 mt-auto">
@@ -218,7 +247,7 @@ const Services: React.FC = () => {
                 <span className="text-xs uppercase tracking-widest text-stone-400 font-bold">
                   Tarif
                 </span>
-                <span className="font-serif text-xl text-stone-800">Sur Devis</span>
+                <span className="font-serif text-xl text-stone-800">Sur devis</span>
               </div>
               <Link
                 to="/contact?service=secondaire"
@@ -236,36 +265,38 @@ const Services: React.FC = () => {
                 <FileText className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-2xl text-stone-800 mb-2">
-                Dossier Mairie - Déclaration
+                Dossier Mairie - Déclaration Préalable de travaux
               </h3>
               <p className="text-sage-600 text-xs uppercase tracking-widest font-bold mb-6 italic">
                 Sécuriser vos démarches. 🏡
               </p>
 
               <p className="text-sm text-stone-600 font-light leading-relaxed mb-6">
-                Réalisation des dossiers administratifs pour modifications de façade, extensions ou
-                aménagements extérieurs.
+                Je réalise des dossiers administratifs de Déclaration Préalable (DP) pour vos
+                modifications de façade, extensions/vérandas de &lt;20m², aménagements extérieurs
+                etc.
               </p>
 
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
                   <p className="text-xs text-stone-700 font-light">
-                    <strong>Dossier Graphique :</strong> Plans de masse, façades et insertions
-                    paysagères.
+                    <strong>Dossier Graphique :</strong> Création des plans de masse, des façades et
+                    des insertions paysagères obligatoires pour l'administration.
                   </p>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
                   <p className="text-xs text-stone-700 font-light">
-                    <strong>Gestion Admin :</strong> Rédaction Cerfa et constitution du dossier
-                    complet.
+                    <strong>Gestion Administrative :</strong> Rédaction des formulaires Cerfa et
+                    constitution du dossier complet pour dépôt en mairie.
                   </p>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-4 h-4 text-sage-400 mr-3 mt-0.5 flex-shrink-0" />
                   <p className="text-xs text-stone-700 font-light">
-                    <strong>Suivi Mairie :</strong> Accompagnement jusqu’à l'obtention de l'accord.
+                    <strong>Suivi du Dossier :</strong> Accompagnement et échanges avec les services
+                    instructeurs jusqu'à l'obtention de l'accord.
                   </p>
                 </li>
               </ul>
@@ -274,9 +305,9 @@ const Services: React.FC = () => {
             <div className="p-8 pt-0 mt-auto">
               <div className="flex items-center justify-between py-4 border-t border-stone-200/50 mb-6">
                 <span className="text-xs uppercase tracking-widest text-stone-400 font-bold">
-                  Tarif
+                  Forfait
                 </span>
-                <span className="font-serif text-xl text-stone-800">Dès 600 €</span>
+                <span className="font-serif text-xl text-stone-800">Dès 350 €</span>
               </div>
               <Link
                 to="/contact?service=mairie"
@@ -347,9 +378,8 @@ const Services: React.FC = () => {
             Vous hésitez entre ces prestations ?
           </h2>
           <p className="text-stone-600 font-light text-lg mb-10 leading-relaxed">
-            Chaque projet est unique et mérite une approche adaptée. Contactez-nous pour discuter de
-            vos besoins, nous vous orienterons vers la solution la plus pertinente pour votre
-            habitat.
+            Chaque projet est unique et mérite une approche adaptée. Contactez-moi pour discuter de
+            vos besoins, je vous orienterais vers la solution la plus pertinente pour votre habitat.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             <Link

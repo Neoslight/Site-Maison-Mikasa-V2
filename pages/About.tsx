@@ -56,7 +56,7 @@ const About: React.FC = () => {
           <div className="relative order-1 md:order-1">
             <div className="aspect-[3/4] bg-stone-100 rounded-sm overflow-hidden shadow-xl">
               <img
-                src="https://picsum.photos/id/64/800/1066"
+                src="assets\images\Photo profil.jpg"
                 alt="Laurine Fourcherot - Architecte d'intérieur"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
