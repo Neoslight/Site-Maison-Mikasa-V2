@@ -30,7 +30,7 @@ const MentionsLegales: React.FC = () => {
               <br />
               Responsable de publication : Laurine Fourcherot
               <br />
-              Adresse : Rue Monseigneur de Pancemont, 56000 Vannes, France
+              Adresse : 56870 Baden, Morbihan, France
               <br />
               Email :{' '}
               <a href="mailto:maisonmikasa@gmail.com" className="text-sage-600 hover:underline">

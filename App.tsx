@@ -11,10 +11,11 @@ import RendezVous from './pages/RendezVous';
 import MentionsLegales from './pages/MentionsLegales';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/common/ScrollToTop';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 const App: React.FC = () => {
   return (
-    <>
+    <ErrorBoundary>
       <ScrollToTop />
       <Layout>
         <Routes>
@@ -38,7 +39,7 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
-    </>
+    </ErrorBoundary>
   );
 };
 

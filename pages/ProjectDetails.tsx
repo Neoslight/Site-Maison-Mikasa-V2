@@ -256,10 +256,8 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {creativeWorkSchema && (
-        <JsonLd id={`creative-work-${projectId}`} schema={creativeWorkSchema} />
-      )}
-      {breadcrumbSchema && <JsonLd id={`breadcrumb-${projectId}`} schema={breadcrumbSchema} />}
+      {creativeWorkSchema && <JsonLd schema={creativeWorkSchema} />}
+      {breadcrumbSchema && <JsonLd schema={breadcrumbSchema} />}
 
       {/* Lightbox Overlay — rendu via Portal sur document.body pour éviter que
           l'animation CSS transform de <main> ne casse le positionnement fixed */}

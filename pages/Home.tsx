@@ -63,7 +63,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <JsonLd id="local-business" schema={LOCAL_BUSINESS_SCHEMA} />
+      <JsonLd schema={LOCAL_BUSINESS_SCHEMA} />
       <Introduction />
       <AboutPreview />
       <FeaturedProjects />

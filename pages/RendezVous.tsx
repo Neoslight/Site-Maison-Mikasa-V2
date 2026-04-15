@@ -1,12 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Cal, { getCalApi } from '@calcom/embed-react';
 import Section from '../components/ui/Section';
 import { CalendarDays, Phone, ArrowLeft } from 'lucide-react';
 import { usePageMeta } from '../lib/usePageMeta';
 
+const Cal = React.lazy(() => import('@calcom/embed-react'));
+
 const CAL_LINK = import.meta.env.VITE_CALCOM_LINK;
 const CAL_NAMESPACE = 'rdv-mikasa';
+const CAL_CONFIGURED = Boolean(CAL_LINK) && CAL_LINK !== 'your_calcom_username/your_event_slug';
+
+const CalSkeleton: React.FC = () => (
+  <div
+    className="w-full bg-stone-50 border border-gray-200 rounded-sm animate-pulse flex items-center justify-center"
+    style={{ height: '700px' }}
+  >
+    <div className="text-stone-400 text-xs uppercase tracking-widest">
+      Chargement du calendrier…
+    </div>
+  </div>
+);
 
 const RendezVous: React.FC = () => {
   usePageMeta(
@@ -15,8 +28,9 @@ const RendezVous: React.FC = () => {
   );
 
   useEffect(() => {
-    if (!CAL_LINK || CAL_LINK === 'your_calcom_username/your_event_slug') return;
+    if (!CAL_CONFIGURED) return;
     (async () => {
+      const { getCalApi } = await import('@calcom/embed-react');
       const cal = await getCalApi({ namespace: CAL_NAMESPACE });
       cal('ui', {
         hideEventTypeDetails: false,
@@ -45,13 +59,15 @@ const RendezVous: React.FC = () => {
 
       {/* Cal.com embed ou fallback */}
       <Section className="max-w-5xl mx-auto px-6" py="py-16">
-        {CAL_LINK && CAL_LINK !== 'your_calcom_username/your_event_slug' ? (
-          <Cal
-            namespace={CAL_NAMESPACE}
-            calLink={CAL_LINK}
-            style={{ width: '100%', height: '700px', overflow: 'scroll' }}
-            config={{ layout: 'month_view' }}
-          />
+        {CAL_CONFIGURED ? (
+          <Suspense fallback={<CalSkeleton />}>
+            <Cal
+              namespace={CAL_NAMESPACE}
+              calLink={CAL_LINK}
+              style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+              config={{ layout: 'month_view' }}
+            />
+          </Suspense>
         ) : (
           /* Fallback si VITE_CALCOM_LINK non configuré */
           <div className="bg-stone-50 rounded-sm border border-gray-200 p-12 text-center shadow-sm">

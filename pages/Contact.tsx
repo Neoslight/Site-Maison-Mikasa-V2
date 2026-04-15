@@ -45,6 +45,7 @@ const Contact: React.FC = () => {
     phone: '',
     projectType: getServiceFromSearch(location.search),
     message: '',
+    _gotcha: '',
   }));
 
   const handleChange = (
@@ -60,10 +61,20 @@ const Contact: React.FC = () => {
 
     const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
     if (!formspreeId || formspreeId === 'your_formspree_id_here') {
-      // Dev fallback — log to console when Formspree is not configured
-      console.info('[Contact] Formspree not configured. Form data:', formData);
-      setFormStatus('success');
-      setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+      if (import.meta.env.DEV) {
+        console.info('[Contact] Formspree not configured. Form data:', formData);
+        setFormStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          message: '',
+          _gotcha: '',
+        });
+      } else {
+        setFormStatus('error');
+      }
       return;
     }
 
@@ -76,7 +87,14 @@ const Contact: React.FC = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          message: '',
+          _gotcha: '',
+        });
       } else {
         setFormStatus('error');
       }
@@ -265,6 +283,22 @@ const Contact: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                <input
+                  type="text"
+                  name="_gotcha"
+                  value={formData._gotcha}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    left: '-9999px',
+                    width: '1px',
+                    height: '1px',
+                    opacity: 0,
+                  }}
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label
@@ -383,6 +417,7 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    minLength={10}
                     rows={5}
                     className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm resize-none shadow-sm"
                     placeholder="Racontez-moi votre projet..."
