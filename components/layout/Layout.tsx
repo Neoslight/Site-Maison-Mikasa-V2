@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { Menu, X, Phone, Mail, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown, ArrowRight, CalendarDays } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 // TODO: Remplacer par les vraies icônes de marque (lucide-react a déprécié les icônes de marques tierces)
@@ -243,6 +243,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
 
               <NavLink to="/contact">Contact</NavLink>
+              <Link
+                to="/rendez-vous"
+                className={cn(
+                  'inline-flex items-center bg-sage-600 text-white px-4 py-2 uppercase tracking-widest text-[10px] font-bold hover:bg-sage-700 transition-colors rounded-sm shadow-sm',
+                  'whitespace-nowrap'
+                )}
+              >
+                <CalendarDays className="w-3 h-3 mr-1.5" />
+                Rendez-vous
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -320,6 +330,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink to="/contact" mobile onClick={() => setIsMenuOpen(false)}>
               Contact
             </NavLink>
+
+            <Link
+              to="/rendez-vous"
+              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center py-3 border-b border-gray-100 uppercase tracking-wider text-sm text-sage-600 font-medium"
+            >
+              <CalendarDays className="w-4 h-4 mr-2" />
+              Rendez-vous
+            </Link>
 
             {/* Infos contact dans le menu mobile */}
             <div className="pt-4 mt-2 border-t border-gray-100 space-y-3">

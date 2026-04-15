@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
-import { Mail, Phone, MapPin, Send, Instagram, Linkedin, Facebook, Clock } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Instagram,
+  Linkedin,
+  Facebook,
+  Clock,
+  CalendarDays,
+} from 'lucide-react';
 import { usePageMeta } from '../lib/usePageMeta';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -164,6 +174,27 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* CTA Rendez-vous */}
+            <div className="bg-sage-50 border border-sage-100 rounded-sm p-6 space-y-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600 flex-shrink-0">
+                  <CalendarDays className="w-4 h-4" />
+                </div>
+                <h3 className="font-serif text-lg text-stone-800">Prendre rendez-vous</h3>
+              </div>
+              <p className="text-stone-500 font-light text-sm leading-relaxed">
+                Vous préférez choisir directement un créneau ? Réservez en ligne, c'est gratuit et
+                sans engagement.
+              </p>
+              <Link
+                to="/rendez-vous"
+                className="inline-flex items-center bg-sage-600 text-white px-6 py-3 uppercase tracking-widest text-[10px] font-bold hover:bg-sage-700 transition-colors rounded-sm shadow-sm"
+              >
+                <CalendarDays className="w-3 h-3 mr-2" />
+                Voir les créneaux disponibles
+              </Link>
             </div>
 
             <div>
