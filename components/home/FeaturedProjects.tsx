@@ -30,7 +30,7 @@ const FeaturedProjects: React.FC = () => {
 
               <img
                 src={resolveAssetPath(project.coverImage)}
-                alt={project.title}
+                alt={project.coverImageAlt ?? project.title}
                 loading="lazy"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
               />

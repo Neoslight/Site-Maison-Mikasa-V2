@@ -112,7 +112,8 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                       <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
                       <img
                         src={resolveAssetPath(filteredProjects[0].coverImage)}
-                        alt={filteredProjects[0].title}
+                        alt={filteredProjects[0].coverImageAlt ?? filteredProjects[0].title}
+                        loading="lazy"
                         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />
 
@@ -157,7 +158,8 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                         <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
                         <img
                           src={resolveAssetPath(project.coverImage)}
-                          alt={project.title}
+                          alt={project.coverImageAlt ?? project.title}
+                          loading="lazy"
                           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                         />
 
@@ -200,7 +202,8 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                       <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
                       <img
                         src={resolveAssetPath(project.coverImage)}
-                        alt={project.title}
+                        alt={project.coverImageAlt ?? project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />
 

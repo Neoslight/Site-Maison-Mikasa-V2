@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:ssg": "vite build && vite build --ssr entry-server.tsx --outDir dist/server && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -46,6 +47,7 @@
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "typescript-eslint": "^8.57.2",
     "vite": "^6.2.0"

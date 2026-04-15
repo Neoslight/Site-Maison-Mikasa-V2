@@ -14,8 +14,7 @@ const Introduction: React.FC = () => {
             src={resolveAssetPath('/homepage-photo-accueil.webp')}
             alt="Maison Mikasa - Architecture d'intérieur"
             loading="eager"
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            {...({ fetchpriority: 'high' } as any)}
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover object-center scale-105"
           />
 
@@ -24,7 +23,9 @@ const Introduction: React.FC = () => {
 
           {/* Text content — staggered reveal via hero-item CSS animation */}
           <div className="relative z-10 max-w-3xl mx-auto text-center px-6 drop-shadow-2xl space-y-8">
-            <h1 className="sr-only">Maison Mikasa - Architecture d'intérieur</h1>
+            <h1 className="sr-only">
+              Maison Mikasa - Architecte d'intérieur à Baden, Golfe du Morbihan
+            </h1>
 
             <h2
               className="hero-item font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight drop-shadow-xl"

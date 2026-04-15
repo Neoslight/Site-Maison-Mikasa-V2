@@ -11,7 +11,9 @@ export interface Project {
   surface?: string;
   duration?: string;
   coverImage: string;
+  coverImageAlt?: string;
   gallery: string[];
+  galleryAlts?: string[];
   beforeAfterGallery?: { before: string; after: string }[];
   description: string;
   challenge: string;

@@ -58,7 +58,8 @@ const About: React.FC = () => {
             <div className="aspect-[3/4] bg-stone-100 rounded-sm overflow-hidden shadow-xl">
               <img
                 src={resolveAssetPath('photo-profil.webp')}
-                alt="Laurine Fourcherot - Architecte d'intérieur"
+                alt="Laurine Fourcherot - Architecte d'intérieur à Baden, Morbihan"
+                loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>

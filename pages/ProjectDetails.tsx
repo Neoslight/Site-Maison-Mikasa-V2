@@ -17,12 +17,69 @@ import {
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
 import { usePageMeta } from '../lib/usePageMeta';
+import JsonLd from '../components/seo/JsonLd';
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = projectsData.find((p) => p.id === projectId);
 
-  usePageMeta(project?.title ?? 'Réalisation', project?.description?.slice(0, 155));
+  const BASE_URL = 'https://www.maisonmikasa.fr';
+  const projectUrl = `${BASE_URL}/realisations/${projectId}`;
+  const ogImage = project?.coverImage?.startsWith('/')
+    ? `${BASE_URL}${project.coverImage}`
+    : project?.coverImage;
+
+  usePageMeta(
+    project?.title ?? 'Réalisation',
+    project?.description?.slice(0, 155),
+    project ? { ogImage, ogUrl: projectUrl, canonical: projectUrl } : undefined
+  );
+
+  const creativeWorkSchema = project
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: project.title,
+        description: project.description,
+        locationCreated: {
+          '@type': 'Place',
+          name: project.location,
+          address: {
+            '@type': 'PostalAddress',
+            addressRegion: 'Morbihan',
+            addressCountry: 'FR',
+          },
+        },
+        ...(project.year ? { dateCreated: project.year } : {}),
+        ...(project.surface ? { spatialCoverage: project.surface } : {}),
+        ...(project.duration ? { temporal: project.duration } : {}),
+        image: ogImage,
+        author: {
+          '@type': 'Person',
+          name: 'Laurine Fourcherot',
+          jobTitle: "Architecte d'intérieur",
+          url: BASE_URL,
+        },
+        url: projectUrl,
+      }
+    : null;
+
+  const breadcrumbSchema = project
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: BASE_URL },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Réalisations',
+            item: `${BASE_URL}/realisations`,
+          },
+          { '@type': 'ListItem', position: 3, name: project.title, item: projectUrl },
+        ],
+      }
+    : null;
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -199,6 +256,11 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
+      {creativeWorkSchema && (
+        <JsonLd id={`creative-work-${projectId}`} schema={creativeWorkSchema} />
+      )}
+      {breadcrumbSchema && <JsonLd id={`breadcrumb-${projectId}`} schema={breadcrumbSchema} />}
+
       {/* Lightbox Overlay — rendu via Portal sur document.body pour éviter que
           l'animation CSS transform de <main> ne casse le positionnement fixed */}
       {lightboxOpen &&
@@ -302,7 +364,7 @@ const ProjectDetails: React.FC = () => {
       <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
         <img
           src={resolveAssetPath(project.coverImage)}
-          alt={project.title}
+          alt={project.coverImageAlt ?? project.title}
           className="w-full h-full object-cover fade-in-section is-visible"
         />
         <div className="absolute inset-0 bg-black/20"></div>
@@ -422,7 +484,7 @@ const ProjectDetails: React.FC = () => {
             >
               <img
                 src={resolveAssetPath(img)}
-                alt={`Vue ${index + 1} - ${project.title}`}
+                alt={project.galleryAlts?.[index] ?? `Vue ${index + 1} - ${project.title}`}
                 loading="lazy"
                 className="w-full h-full object-cover transition-all duration-700"
               />

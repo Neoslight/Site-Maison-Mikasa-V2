@@ -12,6 +12,18 @@ export const projectsData: Project[] = [
     surface: '72m²',
     duration: '4 mois',
     coverImage: '/tassigny/tassigny-cover.webp',
+    coverImageAlt:
+      'Rénovation complète T4 sur le port de Vannes - Pièce de vie traversante avec vue sur le port',
+    galleryAlts: [
+      'Rénovation T4 port de Vannes - Salon lumineux traversant après travaux',
+      "Appartement Vannes le Port - Planche d'inspiration décoration intérieure",
+      'Rénovation Vannes - Panorama pièce de vie ouverte parquet massif',
+      'Appartement port de Vannes - Zoom cuisine ouverte moderne',
+      'Rénovation intérieure Vannes - Détail décoration salon parquet',
+      'Appartement Vannes - Chambre parentale suite avec dressing',
+      "Rénovation T4 Vannes - Salle d'eau privative suite parentale",
+      "Architecture intérieure Vannes - Vue d'ensemble séjour rénové",
+    ],
     gallery: [
       '/tassigny/tassigny-cover.webp',
       '/tassigny/tassigny-planche-d-inspiration.webp',
@@ -46,6 +58,17 @@ export const projectsData: Project[] = [
     surface: '86m²',
     duration: '6 mois',
     coverImage: '/marchais/marchais-apres-1.webp',
+    coverImageAlt:
+      'Rénovation appartement sous les toits centre-ville Vannes - Pièce de vie lumineuse îlot dînatoire',
+    galleryAlts: [
+      'Appartement de caractère Vannes centre - Cuisine ouverte îlot sur mesure',
+      'Rénovation sous les toits Vannes - Séjour unifié revêtement aspect bois',
+      'Architecture intérieure Vannes - Escalier avec rangements intégrés mezzanine',
+      'Appartement Vannes - Bureau sur mesure angle baigné de lumière',
+      'Rénovation Vannes centre-ville - Chambre teintes claires matières naturelles',
+      "Architecture d'intérieur Vannes - Vue d'ensemble espace cosy lumineux",
+      'Appartement sous les toits Vannes - Espace nuit cocon fonctionnel',
+    ],
     gallery: [
       '/marchais/marchais-apres-1.webp',
       '/marchais/marchais-apres-2.webp',
@@ -107,6 +130,15 @@ export const projectsData: Project[] = [
     surface: '119m²',
     duration: '3 mois',
     coverImage: '/tabarly/tabarly-zoom-2.webp',
+    coverImageAlt:
+      'Aménagement maison de famille à Baden (56) - Chambre enfants avec lits gigognes et dressing sur mesure',
+    galleryAlts: [
+      'Maison familiale Baden Morbihan - Entrée avec aménagement menuisé rangements intégrés',
+      'Décoration intérieure Baden - Chambre enfants lits gigognes optimisés',
+      'Architecture intérieure Baden - Dressing bureau sur mesure chambre adolescent',
+      'Maison de famille Baden 56 - Chambre parentale refuge apaisant',
+      "Aménagement sur mesure Baden Morbihan - Vue d'ensemble espace nuit",
+    ],
     gallery: [
       '/tabarly/tabarly-zoom-1.webp',
       '/tabarly/tabarly-zoom-2.webp',
@@ -161,6 +193,12 @@ export const projectsData: Project[] = [
     surface: '120m²',
     duration: '3 mois',
     coverImage: '/bindo/bindo-apres-1.webp',
+    coverImageAlt:
+      'Rénovation maison de pêcheur Île-aux-Moines - Suite parentale combles avec baignoire vue Golfe du Morbihan',
+    galleryAlts: [
+      'Maison de pêcheur Île-aux-Moines - Combles rénovés poutres poncées pierre apparente',
+      'Rénovation Île-aux-Moines Morbihan - Suite parentale avec fenêtres de toit vue Golfe',
+    ],
     gallery: ['/bindo/bindo-zoom-1.webp', '/bindo/bindo-zoom-2.webp'],
     beforeAfterGallery: [
       { before: '/bindo/bindo-avant-1.webp', after: '/bindo/bindo-apres-1.webp' },
@@ -183,6 +221,18 @@ export const projectsData: Project[] = [
     surface: '38m²',
     duration: '5 mois',
     coverImage: '/penher/penher-cover.webp',
+    coverImageAlt:
+      "Rénovation complète petite maison bretonne Baden Île d'Arz - Rez-de-chaussée ouvert cuisine bleu-gris lumineuse",
+    galleryAlts: [
+      'Maison bretonne rénovée Baden - Espace ouvert rez-de-chaussée avant après travaux',
+      'Rénovation maison vacances Baden Morbihan - Cuisine bleue grise moderne',
+      "Architecture intérieure Baden - Entrée et salle d'eau rénovées maison bretonne",
+      "Maison de vacances Île d'Arz - Combles ouverts fenêtre de toit vue mer",
+      'Rénovation complète Baden - Espace nuit lumineux cocon vue percée sur mer',
+      'Décoration intérieure maison bretonne Baden - Détail cuisine ouverte',
+      'Maison de vacances Morbihan - Vue ensemble après rénovation totale',
+      'Architecture intérieure Baden 56 - Chambre combles transformée espace nuit paisible',
+    ],
     gallery: [
       '/penher/penher-zoom-1.webp',
       '/penher/penher-apres-1.webp',
@@ -316,6 +366,19 @@ export const projectsData: Project[] = [
     surface: '60m²',
     duration: '3 mois',
     coverImage: '/petard/petard-zoom-2.webp',
+    coverImageAlt:
+      'Rénovation bar à vin Plumelec Morbihan - Espace dégustation feutré mobilier brocante teintes ambrées',
+    galleryAlts: [
+      "Cave bar à vin Plumelec - Bar d'origine poncé patine naturelle révélée",
+      'Rénovation espace professionnel Morbihan - Espace dégustation chaleureux matériaux nobles',
+      'Architecture commerciale Plumelec - Vue ensemble cave bar teintes ambrées',
+      'Bar à vin Morbihan - Détail mobilier brocante ambiance feutrée conviviale',
+      'Rénovation professionnelle Plumelec - Comptoir bar bois naturel éclairage tamisé',
+      'Cave à vin Morbihan Bretagne - Rayonnages bouteilles mur pierre apparente',
+      "Architecture intérieure commerciale - Vue d'ensemble espace dégustation après rénovation",
+      'Bar à vin Plumelec - Détail décoration cosy et chaleureuse',
+      'Espace professionnel Morbihan - Angle de dégustation intime après transformation',
+    ],
     gallery: [
       '/petard/petard-zoom-1.webp',
       '/petard/petard-zoom-2.webp',
