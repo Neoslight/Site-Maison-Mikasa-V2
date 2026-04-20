@@ -76,23 +76,36 @@ const About: React.FC = () => {
 
             <div className="pt-4 space-y-4">
               <p>
-                Badennoise de toujours, j'ai fondé <strong>Maison Mikasa</strong> avec une
-                conviction : votre intérieur doit être un <strong>refuge</strong> qui raconte votre
-                histoire et facilite votre quotidien, où l'humain est au cœur du projet.
+                Badennoise, j'ai fondé <strong>Maison Mikasa</strong> avec une conviction : votre
+                intérieur doit être un <strong>refuge</strong> qui raconte votre histoire et
+                facilite votre quotidien.
               </p>
               <p>
-                Passionnée d'architecture depuis l'enfance et formée auprès d'experts du domaine,
-                j'imagine des espaces où l'esthétique rencontre parfaitement la fonctionnalité. Que
-                vous souhaitiez sublimer une maison ancienne chargée de vécu ou réchauffer un
-                appartement récent, j'aime révéler le potentiel caché de chaque lieu en jouant avec
-                les volumes, les couleurs et les matériaux nobles. C'est en associant les atouts
-                naturels de l'espace à vos habitudes de vie que nous affinons ensemble votre projet.
+                J'ai toujours aimé étudier les espaces, j'aime révéler leur potentiel et repenser
+                leur agencement pour y créer un véritable cocon. Je vous accompagne aujourd'hui dans
+                la rénovation de votre intérieur, afin de valoriser au mieux votre patrimoine.
               </p>
               <p>
-                Au-delà de la conception, je vous offre une véritable tranquillité d'esprit. Je
-                coordonne les travaux et gère toutes les contraintes techniques pour vous. Mon but ?
-                Transformer votre projet de rénovation en une belle aventure, fluide et maîtrisée,
-                pour que vous n'ayez qu'à vous projeter dans votre futur cocon.
+                Formée auprès d'expertes reconnues : Maïlys Dorn, fondatrice de l'École HOME dont je
+                suis issue, et Catherine Grave, enseignante à l'École Boulle, j'ai acquis les
+                compétences techniques et artistiques nécessaires pour vous accompagner de
+                l'esquisse au chantier.
+              </p>
+              <p>
+                Mon univers mêle matériaux nobles, textiles enveloppants, formes organiques et
+                teintes chaleureuses, avec une sensibilité particulière pour le charme de l'ancien.
+                J'aime créer des espaces équilibrés : un juste milieu entre douceur et caractère, où
+                le contemporain rencontre l'authentique, et où le confort préserve l'âme des lieux.
+              </p>
+              <p>
+                C'est en comprenant vos habitudes de vie, vos envies et votre manière d'habiter
+                l'espace que nous construisons ensemble un projet cohérent et durable. Un intérieur
+                qui vous ressemble vraiment.
+              </p>
+              <p>
+                Au-delà de la conception, je coordonne les travaux et gère les contraintes
+                techniques. Mon but ? Transformer votre rénovation en une aventure fluide et
+                maîtrisée, pour que vous n'ayez qu'à vous projeter dans votre futur chez vous.
               </p>
             </div>
 

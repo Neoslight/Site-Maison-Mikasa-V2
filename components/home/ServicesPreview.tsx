@@ -4,6 +4,7 @@ import Section from '../ui/Section';
 import StaggerReveal from '../ui/StaggerReveal';
 import Promises from './Promises';
 import { ArrowRight, Check, Sparkles, Home, Ship, FileText } from 'lucide-react';
+import { resolveAssetPath } from '../../lib/resolveAssetPath';
 
 const ServicesPreview: React.FC = () => {
   return (
@@ -120,8 +121,8 @@ const ServicesPreview: React.FC = () => {
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-xl group">
               <div className="absolute inset-0 border-[12px] border-white/30 z-10 pointer-events-none"></div>
               <img
-                src="https://picsum.photos/id/366/800/1000"
-                alt="Intérieur Mikasa"
+                src={resolveAssetPath('pourquoi.webp')}
+                alt="Rénovation intérieure par Maison Mikasa, architecte d'intérieur dans le Morbihan"
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
