@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -18,6 +19,7 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <Analytics />
+      <SpeedInsights />
       <ScrollToTop />
       <Layout>
         <Routes>
