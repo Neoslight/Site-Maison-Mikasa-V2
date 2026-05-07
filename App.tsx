@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -16,6 +17,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
+      <Analytics />
       <ScrollToTop />
       <Layout>
         <Routes>
