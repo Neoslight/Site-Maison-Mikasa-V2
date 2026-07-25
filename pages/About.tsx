@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from '../components/ui/Section';
 import { Heart, Ruler, Sparkles, MapPin } from 'lucide-react';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
 
 const valuesData = [
@@ -26,10 +26,7 @@ const valuesData = [
 ];
 
 const About: React.FC = () => {
-  usePageMeta(
-    'À propos',
-    "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden (56), Golfe du Morbihan."
-  );
+  useRouteMeta();
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -42,6 +39,9 @@ const About: React.FC = () => {
           À propos
         </span>
         <h1 className="font-serif text-4xl md:text-6xl text-stone-800 mb-8 leading-tight">
+          <span className="block text-lg md:text-xl text-sage-600 font-sans uppercase tracking-widest mb-4">
+            Architecte d'intérieur &amp; décoratrice à Baden — Golfe du Morbihan
+          </span>
           L'art de vivre, <span className="italic text-stone-600">simplement.</span>
         </h1>
         <p className="text-stone-700 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">

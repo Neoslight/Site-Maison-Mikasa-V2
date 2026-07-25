@@ -1,9 +1,9 @@
 import React from 'react';
 import Section from '../components/ui/Section';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 
 const MentionsLegales: React.FC = () => {
-  usePageMeta('Mentions légales');
+  useRouteMeta();
 
   return (
     <div className="bg-white">
@@ -45,17 +45,17 @@ const MentionsLegales: React.FC = () => {
             <p>
               Ce site est hébergé par :
               <br />
-              <strong className="font-normal text-stone-900">OVH SAS</strong>
+              <strong className="font-normal text-stone-900">Vercel Inc.</strong>
               <br />
-              2 rue Kellermann — 59100 Roubaix, France
+              340 S Lemon Ave #4133 — Walnut, CA 91789, États-Unis
               <br />
               <a
-                href="https://www.ovh.com"
+                href="https://vercel.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sage-600 hover:underline"
               >
-                www.ovh.com
+                vercel.com
               </a>
             </p>
           </div>
@@ -107,8 +107,10 @@ const MentionsLegales: React.FC = () => {
           <div>
             <h2 className="font-serif text-xl text-stone-800 mb-4">Cookies</h2>
             <p>
-              Ce site n'utilise pas de cookies de traçage ou de profilage. Aucun cookie tiers à des
-              fins publicitaires n'est déposé sur votre appareil.
+              Ce site utilise Vercel Analytics et Vercel Speed Insights, des outils de mesure
+              d'audience et de performance qui ne déposent aucun cookie et ne collectent aucune
+              donnée personnelle identifiable. Aucun cookie de traçage publicitaire ou de profilage
+              n'est utilisé sur ce site.
             </p>
           </div>
 

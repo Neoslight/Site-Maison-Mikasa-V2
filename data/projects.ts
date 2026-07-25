@@ -41,6 +41,8 @@ export const projectsData: Project[] = [
       { before: '/tassigny/tassigny-avant-4.webp', after: '/tassigny/tassigny-apres-4.webp' },
       { before: '/tassigny/tassigny-avant-5.webp', after: '/tassigny/tassigny-apres-5.webp' },
     ],
+    metaDescription:
+      "Rénovation complète d'un T4 sur le port de Vannes (56) : pièce de vie traversante, suite parentale et parquet massif. Par Maison Mikasa, architecte d'intérieur.",
     description:
       "Rénovation complète et ameublement d'un T4 sur le port de Vannes pour un couple de retraités. L'objectif était de transformer un intérieur daté en un lieu de vie chaleureux, fonctionnel et baigné de lumière.",
     challenge:
@@ -87,6 +89,8 @@ export const projectsData: Project[] = [
       { before: '/marchais/marchais-avant-6.webp', after: '/marchais/marchais-apres-6.webp' },
       { before: '/marchais/marchais-avant-7.webp', after: '/marchais/marchais-apres-7.webp' },
     ],
+    metaDescription:
+      "Rénovation d'un appartement sous les toits en centre-ville de Vannes (56) : nouvel escalier, îlot dînatoire et bureau sur mesure. Maison Mikasa, architecte d'intérieur.",
     description:
       "Rénovation, optimisation et ameublement d'un appartement sous les toits en centre-ville pour un jeune couple. L'objectif : repenser l'accès à la mezzanine, maximiser les rangements dans ce volume atypique et créer un espace de vie lumineux et convivial.",
     challenge:
@@ -156,6 +160,8 @@ export const projectsData: Project[] = [
       { before: '/tabarly/tabarly-avant-7.webp', after: '/tabarly/tabarly-apres-7.webp' },
       { before: '/tabarly/tabarly-avant-8.webp', after: '/tabarly/tabarly-apres-8.webp' },
     ],
+    metaDescription:
+      "Aménagement de l'entrée et de l'espace nuit d'une maison de famille à Baden (56) : rangements sur mesure et décoration apaisante. Maison Mikasa, architecte d'intérieur.",
     description:
       "Repenser l'entrée et l'espace nuit d'une maison familiale pour allier esthétisme et fonctionnalité.",
     challenge:
@@ -204,6 +210,8 @@ export const projectsData: Project[] = [
       { before: '/bindo/bindo-avant-1.webp', after: '/bindo/bindo-apres-1.webp' },
       { before: '/bindo/bindo-avant-2.webp', after: '/bindo/bindo-apres-2.webp' },
     ],
+    metaDescription:
+      "Rénovation des combles d'une maison de pêcheur à Île-aux-Moines, Golfe du Morbihan : suite parentale, poutres apparentes et vue sur le Golfe.",
     description:
       "Rénovation des combles d'une ancienne maison de pêcheur devenue maison de vacances.",
     challenge:
@@ -216,22 +224,22 @@ export const projectsData: Project[] = [
     title: 'Maison Bretonne',
     projectType: 'Maison',
     category: 'Rénovation complète',
-    location: 'Baden',
+    location: "Île-d'Arz",
     year: '2023',
     surface: '38m²',
     duration: '5 mois',
     coverImage: '/penher/penher-cover.webp',
     coverImageAlt:
-      "Rénovation complète petite maison bretonne Baden Île d'Arz - Rez-de-chaussée ouvert cuisine bleu-gris lumineuse",
+      "Rénovation complète petite maison bretonne à l'Île-d'Arz - Rez-de-chaussée ouvert cuisine bleu-gris lumineuse",
     galleryAlts: [
-      'Maison bretonne rénovée Baden - Espace ouvert rez-de-chaussée avant après travaux',
-      'Rénovation maison vacances Baden Morbihan - Cuisine bleue grise moderne',
-      "Architecture intérieure Baden - Entrée et salle d'eau rénovées maison bretonne",
+      "Maison bretonne rénovée Île-d'Arz - Espace ouvert rez-de-chaussée avant après travaux",
+      "Rénovation maison de vacances Île-d'Arz Morbihan - Cuisine bleue grise moderne",
+      "Architecture intérieure Île-d'Arz - Entrée et salle d'eau rénovées maison bretonne",
       "Maison de vacances Île d'Arz - Combles ouverts fenêtre de toit vue mer",
-      'Rénovation complète Baden - Espace nuit lumineux cocon vue percée sur mer',
-      'Décoration intérieure maison bretonne Baden - Détail cuisine ouverte',
+      "Rénovation complète Île-d'Arz - Espace nuit lumineux cocon vue percée sur mer",
+      "Décoration intérieure maison bretonne Île-d'Arz - Détail cuisine ouverte",
       'Maison de vacances Morbihan - Vue ensemble après rénovation totale',
-      'Architecture intérieure Baden 56 - Chambre combles transformée espace nuit paisible',
+      "Architecture intérieure Île-d'Arz 56 - Chambre combles transformée espace nuit paisible",
     ],
     gallery: [
       '/penher/penher-zoom-1.webp',
@@ -243,6 +251,8 @@ export const projectsData: Project[] = [
       '/penher/penher-apres-6.webp',
       '/penher/penher-apres-7.webp',
     ],
+    metaDescription:
+      "Rénovation complète d'une maison bretonne à l'Île-d'Arz (56) : rez-de-chaussée ouvert, cuisine bleu-gris et combles lumineux avec vue mer.",
     description: "Rénovation complète d'une petite maison bretonne sur l'Île d'Arz.",
     challenge:
       'Réveiller une maison sombre, restée "dans son jus" depuis de nombreuses années, pour la transformer en une maison de vacances lumineuse, respirante et accueillante.',
@@ -398,6 +408,8 @@ export const projectsData: Project[] = [
       { before: '/petard/petard-avant-5.webp', after: '/petard/petard-apres-5.webp' },
       { before: '/petard/petard-avant-6.webp', after: '/petard/petard-apres-6.webp' },
     ],
+    metaDescription:
+      "Rénovation d'un bar transformé en cave à vins à Plumelec, Morbihan : mobilier brocante, teintes ambrées et ambiance chaleureuse et conviviale.",
     description:
       "Rénovation d'un ancien bar pour le transformer en cave et bar à vins, avec la volonté de préserver l'authenticité et le cachet des lieux.",
     challenge:

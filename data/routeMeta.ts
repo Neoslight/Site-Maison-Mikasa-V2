@@ -1,7 +1,9 @@
 import { projectsData } from './projects';
 
 export const SITE_URL = 'https://www.maisonmikasa.fr';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/homepage-photo-accueil.webp`;
+// Stable, unhashed filenames written by scripts/generate-og-images.ts — safe to
+// reference by static path since they're regenerated fresh on every build.
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og/home.jpg`;
 
 export interface RouteMeta {
   title: string;
@@ -12,11 +14,19 @@ export interface RouteMeta {
 
 const withSuffix = (title: string) => `${title} | Maison Mikasa`;
 
+/** Truncate at the last whitespace before `max` chars and append an ellipsis. */
+function truncateDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : max)}…`;
+}
+
 const staticRouteMeta: Record<string, RouteMeta> = {
   '/': {
-    title: "Maison Mikasa | Architecte d'intérieur à Baden, Morbihan",
+    title: "Architecte d'intérieur Vannes & Golfe du Morbihan | Maison Mikasa",
     description:
-      "Laurine Fourcherot, architecte d'intérieur à Baden (56). Projets sur-mesure dans le Golfe du Morbihan : Vannes, Île-aux-Moines, Saint-Armel. Prenez rendez-vous.",
+      "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden, Vannes et dans tout le Golfe du Morbihan (Auray, Arradon...). Conception sur-mesure et suivi de chantier.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/`,
   },
@@ -87,14 +97,14 @@ function projectRouteMeta(projectId: string): RouteMeta | null {
   if (!project) return null;
 
   const path = `/realisations/${project.id}`;
-  const absoluteImage = project.coverImage.startsWith('http')
+  const ogImage = project.coverImage.startsWith('http')
     ? project.coverImage
-    : `${SITE_URL}${project.coverImage}`;
+    : `${SITE_URL}/og/${project.id}.jpg`;
 
   return {
     title: withSuffix(project.title),
-    description: (project.description ?? '').slice(0, 155),
-    ogImage: absoluteImage,
+    description: truncateDescription(project.metaDescription ?? project.description ?? ''),
+    ogImage,
     canonical: `${SITE_URL}${path}`,
   };
 }

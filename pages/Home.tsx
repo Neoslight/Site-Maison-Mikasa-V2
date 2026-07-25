@@ -4,7 +4,7 @@ import AboutPreview from '../components/home/AboutPreview';
 import FeaturedProjects from '../components/home/FeaturedProjects';
 import ServicesPreview from '../components/home/ServicesPreview';
 import Testimonials from '../components/home/Testimonials';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 import JsonLd from '../components/seo/JsonLd';
 
 const LOCAL_BUSINESS_SCHEMA = {
@@ -51,15 +51,7 @@ const LOCAL_BUSINESS_SCHEMA = {
 };
 
 const Home: React.FC = () => {
-  usePageMeta(
-    "Architecte d'intérieur à Baden, Morbihan",
-    "Laurine Fourcherot, architecte d'intérieur à Baden (56). Projets sur-mesure dans le Golfe du Morbihan : Vannes, Île-aux-Moines, Saint-Armel. Prenez rendez-vous.",
-    {
-      ogUrl: 'https://www.maisonmikasa.fr/',
-      ogImage: 'https://www.maisonmikasa.fr/homepage-photo-accueil.webp',
-      canonical: 'https://www.maisonmikasa.fr/',
-    }
-  );
+  useRouteMeta();
 
   return (
     <>

@@ -15,6 +15,8 @@ export interface Project {
   gallery: string[];
   galleryAlts?: string[];
   beforeAfterGallery?: { before: string; after: string }[];
+  /** 150-160 char meta description for the project page. Falls back to a truncated `description`. */
+  metaDescription?: string;
   description: string;
   challenge: string;
   solution: string;

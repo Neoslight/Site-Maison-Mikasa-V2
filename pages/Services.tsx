@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 import {
   Sparkles,
   Home,
@@ -17,10 +17,7 @@ import {
 } from 'lucide-react';
 
 const Services: React.FC = () => {
-  usePageMeta(
-    'Prestations',
-    "Conseil, conception et suivi de chantier pour vos projets d'aménagement intérieur dans le Golfe du Morbihan."
-  );
+  useRouteMeta();
 
   return (
     <div className="bg-white">
@@ -31,7 +28,7 @@ const Services: React.FC = () => {
             Offres & Services
           </span>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-stone-800 mb-10">
-            Mes prestations
+            Mes prestations d'architecte d'intérieur dans le Golfe du Morbihan
           </h1>
 
           <div className="flex justify-center">

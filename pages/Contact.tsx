@@ -12,7 +12,7 @@ import {
   Clock,
   CalendarDays,
 } from 'lucide-react';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -35,7 +35,7 @@ const getServiceFromSearch = (search: string): string => {
 };
 
 const Contact: React.FC = () => {
-  usePageMeta('Contact', "Contactez Maison Mikasa pour votre projet d'architecture d'intérieur.");
+  useRouteMeta();
   const location = useLocation();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 
@@ -112,6 +112,9 @@ const Contact: React.FC = () => {
             Contact
           </span>
           <h1 className="font-serif text-4xl md:text-5xl text-stone-800 mb-6">
+            <span className="block text-sm md:text-base text-sage-600 font-sans uppercase tracking-widest mb-3">
+              Architecte d'intérieur à Baden &amp; Vannes
+            </span>
             Parlons de votre projet
           </h1>
           <p className="text-stone-600 font-light max-w-2xl mx-auto leading-relaxed">

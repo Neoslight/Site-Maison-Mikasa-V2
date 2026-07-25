@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { CalendarDays, Phone, ArrowLeft } from 'lucide-react';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 
 const Cal = React.lazy(() => import('@calcom/embed-react'));
 
@@ -22,10 +22,7 @@ const CalSkeleton: React.FC = () => (
 );
 
 const RendezVous: React.FC = () => {
-  usePageMeta(
-    'Prendre Rendez-vous',
-    "Réservez directement un créneau de consultation avec Maison Mikasa, architecte d'intérieur."
-  );
+  useRouteMeta();
 
   useEffect(() => {
     if (!CAL_CONFIGURED) return;

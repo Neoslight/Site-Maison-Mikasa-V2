@@ -5,9 +5,16 @@ import { resolveAssetPath } from '../../lib/resolveAssetPath';
 interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
+  beforeAlt?: string;
+  afterAlt?: string;
 }
 
-const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ beforeImage, afterImage }) => {
+const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
+  beforeImage,
+  afterImage,
+  beforeAlt = 'Avant travaux',
+  afterAlt = 'Après travaux',
+}) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +84,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ beforeImage, afte
       {/* After Image (Background) */}
       <img
         src={resolveAssetPath(afterImage)}
-        alt="Après"
+        alt={afterAlt}
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
@@ -89,7 +96,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ beforeImage, afte
       >
         <img
           src={resolveAssetPath(beforeImage)}
-          alt="Avant"
+          alt={beforeAlt}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover max-w-none"
           style={{ width: '100%', height: '100%' }}

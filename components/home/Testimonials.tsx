@@ -37,7 +37,7 @@ const testimonialsData = [
     id: 6,
     text: 'Nous avons fait appel à Laurine pour notre projet d\u2019aménagement d\u2019une extension, existante mais à l\u2019état brut. Laurine est très à l\u2019écoute des souhaits et contraintes. Elle nous a soumis plusieurs plans possibles, ce qui nous permet de nous projeter et de démarcher auprès d\u2019entrepreneurs. Ravis de son intervention, elle est souriante et efficace, nous recommandons !',
     author: 'Dorothée et Benjamin',
-    project: 'Aménagement d\u2019extension, Saint Donan (56)',
+    project: 'Aménagement d\u2019extension, Saint-Donan (22)',
   },
 ];
 

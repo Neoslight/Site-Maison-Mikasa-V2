@@ -23,17 +23,21 @@ const Introduction: React.FC = () => {
 
           {/* Text content — staggered reveal via hero-item CSS animation */}
           <div className="relative z-10 max-w-3xl mx-auto text-center px-6 drop-shadow-2xl space-y-8">
-            <h1 className="sr-only">
-              Maison Mikasa - Architecte d'intérieur à Baden, Golfe du Morbihan
+            <h1>
+              <span
+                className="hero-item block text-white/85 font-sans uppercase tracking-[0.2em] text-xs md:text-sm font-bold mb-4"
+                style={{ animationDelay: '0ms' }}
+              >
+                Architecte d'intérieur — Vannes, Baden &amp; Golfe du Morbihan
+              </span>
+              <span
+                className="hero-item block font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight drop-shadow-xl"
+                style={{ animationDelay: '0ms' }}
+              >
+                Maison Mikasa imagine pour vous un{' '}
+                <span className="italic text-stone-200">refuge sur-mesure.</span>
+              </span>
             </h1>
-
-            <h2
-              className="hero-item font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight drop-shadow-xl"
-              style={{ animationDelay: '0ms' }}
-            >
-              Maison Mikasa imagine pour vous un{' '}
-              <span className="italic text-stone-200">refuge sur-mesure.</span>
-            </h2>
 
             <div
               className="hero-item w-16 h-0.5 bg-sage-300 mx-auto drop-shadow-md"

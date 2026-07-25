@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useRouteMeta } from '../lib/useRouteMeta';
 
 const NotFound: React.FC = () => {
+  useRouteMeta({
+    title: 'Page introuvable',
+    description: "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+    robots: 'noindex, follow',
+  });
+
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-6">
       <h1 className="font-serif text-6xl md:text-8xl text-sage-600 mb-6">404</h1>

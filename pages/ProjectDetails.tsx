@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 import JsonLd from '../components/seo/JsonLd';
 
 const ProjectDetails: React.FC = () => {
@@ -29,11 +29,7 @@ const ProjectDetails: React.FC = () => {
     ? `${BASE_URL}${project.coverImage}`
     : project?.coverImage;
 
-  usePageMeta(
-    project?.title ?? 'Réalisation',
-    project?.description?.slice(0, 155),
-    project ? { ogImage, ogUrl: projectUrl, canonical: projectUrl } : undefined
-  );
+  useRouteMeta();
 
   const creativeWorkSchema = project
     ? {
@@ -325,7 +321,9 @@ const ProjectDetails: React.FC = () => {
               <img
                 ref={imageRef}
                 src={resolveAssetPath(project.gallery[photoIndex])}
-                alt={`Vue ${photoIndex + 1}`}
+                alt={
+                  project.galleryAlts?.[photoIndex] ?? `Vue ${photoIndex + 1} - ${project.title}`
+                }
                 className="block shadow-2xl transition-transform duration-200 ease-out"
                 style={{
                   maxWidth: 'calc(100vw - 4rem)',
@@ -509,7 +507,12 @@ const ProjectDetails: React.FC = () => {
             <div className="grid grid-cols-1 gap-12">
               {project.beforeAfterGallery.map((item, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <BeforeAfterSlider beforeImage={item.before} afterImage={item.after} />
+                  <BeforeAfterSlider
+                    beforeImage={item.before}
+                    afterImage={item.after}
+                    beforeAlt={`${project.title} à ${project.location} - Avant rénovation (${index + 1})`}
+                    afterAlt={`${project.title} à ${project.location} - Après rénovation (${index + 1})`}
+                  />
                 </div>
               ))}
             </div>

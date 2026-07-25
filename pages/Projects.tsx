@@ -6,7 +6,7 @@ import { projectsData } from '../data/projects';
 import { ArrowRight } from 'lucide-react';
 import { ProjectType } from '../types';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
-import { usePageMeta } from '../lib/usePageMeta';
+import { useRouteMeta } from '../lib/useRouteMeta';
 
 interface ProjectsPageProps {
   initialType?: ProjectType | 'Tous';
@@ -34,7 +34,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
       case 'Professionnel':
         return 'Espaces Professionnels';
       default:
-        return 'Toutes nos Réalisations';
+        return "Réalisations d'architecture et décoration — Golfe du Morbihan";
     }
   };
 
@@ -51,10 +51,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
     }
   };
 
-  usePageMeta(
-    getTitle(),
-    "Découvrez les réalisations d'architecture et décoration d'intérieur de Maison Mikasa."
-  );
+  useRouteMeta();
 
   // Première carte large uniquement sur la vue "Tous" avec au moins 2 projets
   const showFeaturedFirst = filter === 'Tous' && filteredProjects.length > 1;
