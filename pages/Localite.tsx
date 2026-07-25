@@ -6,9 +6,8 @@ import { useRouteMeta } from '../lib/useRouteMeta';
 import { locationsData } from '../data/locations';
 import { projectsData } from '../data/projects';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
+import { faqPageSchema, SITE_URL } from '../data/schema';
 import JsonLd from '../components/seo/JsonLd';
-
-const SITE_URL = 'https://www.maisonmikasa.fr';
 
 interface LocaliteProps {
   slug: string;
@@ -45,6 +44,7 @@ const Localite: React.FC<LocaliteProps> = ({ slug }) => {
   return (
     <div className="bg-white">
       <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={faqPageSchema(location.faq)} />
 
       {/* Header */}
       <Section bgColor="bg-stone-50" className="text-center" py="py-20 md:py-28">

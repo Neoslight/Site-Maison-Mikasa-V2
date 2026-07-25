@@ -7,49 +7,7 @@ import Testimonials from '../components/home/Testimonials';
 import ServiceAreas from '../components/home/ServiceAreas';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import JsonLd from '../components/seo/JsonLd';
-
-const LOCAL_BUSINESS_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'HomeAndConstructionBusiness',
-  name: 'Maison Mikasa',
-  description:
-    "Architecture d'intérieur et décoration sur-mesure en Bretagne et Golfe du Morbihan. Laurine Fourcherot, architecte d'intérieur à Baden (56).",
-  url: 'https://www.maisonmikasa.fr',
-  telephone: '+33689408566',
-  email: 'maisonmikasa@gmail.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Baden',
-    postalCode: '56870',
-    addressRegion: 'Morbihan',
-    addressCountry: 'FR',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 47.6102,
-    longitude: -2.9064,
-  },
-  areaServed: [
-    { '@type': 'City', name: 'Baden' },
-    { '@type': 'City', name: 'Vannes' },
-    { '@type': 'City', name: 'Île-aux-Moines' },
-    { '@type': 'City', name: 'Larmor-Baden' },
-    { '@type': 'City', name: 'Saint-Armel' },
-    { '@type': 'AdministrativeArea', name: 'Morbihan' },
-    { '@type': 'AdministrativeArea', name: 'Bretagne' },
-  ],
-  founder: {
-    '@type': 'Person',
-    name: 'Laurine Fourcherot',
-    jobTitle: "Architecte d'intérieur",
-  },
-  image: 'https://www.maisonmikasa.fr/homepage-photo-accueil.webp',
-  sameAs: [
-    'https://www.facebook.com/maisonmikasa/',
-    'https://www.instagram.com/maisonmikasa/',
-    'https://www.linkedin.com/in/laurine-fourcherot/',
-  ],
-};
+import { LOCAL_BUSINESS_SCHEMA } from '../data/schema';
 
 const Home: React.FC = () => {
   useRouteMeta();

@@ -4,6 +4,8 @@ import { HashLink } from 'react-router-hash-link';
 import { Menu, X, Phone, Mail, ChevronDown, ArrowRight, CalendarDays } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { locationsData } from '../../data/locations';
+import { WEBSITE_SCHEMA } from '../../data/schema';
+import JsonLd from '../seo/JsonLd';
 
 // TODO: Remplacer par les vraies icônes de marque (lucide-react a déprécié les icônes de marques tierces)
 // Option recommandée : react-icons (ri) ou SVGs inline
@@ -110,6 +112,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <JsonLd schema={WEBSITE_SCHEMA} />
+
       {/* Top Bar - Contact Info */}
       <div className="bg-white border-b border-gray-100 py-2 hidden md:block">
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-xs text-stone-600 font-sans tracking-wide">

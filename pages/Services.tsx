@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import { locationsData } from '../data/locations';
+import { serviceSchema } from '../data/schema';
+import JsonLd from '../components/seo/JsonLd';
 import {
   Sparkles,
   Home,
@@ -18,11 +20,39 @@ import {
   MapPin,
 } from 'lucide-react';
 
+const SERVICE_SCHEMAS = [
+  serviceSchema({
+    name: 'Rendez-vous Conseil',
+    description:
+      'Immersion de 2 heures chez vous pour clarifier votre projet, avec un book de recommandations envoyé sous 48h.',
+    price: 320,
+  }),
+  serviceSchema({
+    name: "Aménagement et décoration d'intérieur - Résidence principale",
+    description:
+      "Conception sur-mesure d'une résidence principale : étude, plans techniques, sourcing et suivi de chantier.",
+  }),
+  serviceSchema({
+    name: "Aménagement et décoration d'intérieur - Résidence secondaire",
+    description:
+      'Conception et gestion à distance de résidences secondaires et biens locatifs dans le Golfe du Morbihan.',
+  }),
+  serviceSchema({
+    name: 'Dossier de déclaration préalable de travaux',
+    description:
+      'Constitution du dossier administratif (plans, formulaires Cerfa) pour vos modifications de façade et petites extensions.',
+    price: 350,
+  }),
+];
+
 const Services: React.FC = () => {
   useRouteMeta();
 
   return (
     <div className="bg-white">
+      {SERVICE_SCHEMAS.map((schema, i) => (
+        <JsonLd key={i} schema={schema} />
+      ))}
       {/* Hero Header */}
       <Section bgColor="bg-stone-50" className="text-center" py="py-20 md:py-32">
         <div className="max-w-4xl mx-auto px-6">
