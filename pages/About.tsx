@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../components/ui/Section';
 import { Heart, Ruler, Sparkles, MapPin } from 'lucide-react';
 import { useRouteMeta } from '../lib/useRouteMeta';
-import { resolveAssetPath } from '../lib/resolveAssetPath';
+import Img from '../components/ui/Img';
 
 const valuesData = [
   {
@@ -56,9 +56,10 @@ const About: React.FC = () => {
           {/* Image Column */}
           <div className="relative order-1 md:order-1">
             <div className="aspect-[3/4] bg-stone-100 rounded-sm overflow-hidden shadow-xl">
-              <img
-                src={resolveAssetPath('photo-profil.webp')}
+              <Img
+                src="photo-profil.webp"
                 alt="Laurine Fourcherot - Architecte d'intérieur à Baden, Morbihan"
+                sizes="(max-width: 768px) 90vw, 500px"
                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />

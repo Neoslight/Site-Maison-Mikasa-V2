@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Section from '../ui/Section';
-import { resolveAssetPath } from '../../lib/resolveAssetPath';
+import Img from '../ui/Img';
 
 const Introduction: React.FC = () => {
   return (
@@ -10,9 +10,10 @@ const Introduction: React.FC = () => {
       <Section py="py-0" className="w-full">
         <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
           {/* Hero image */}
-          <img
-            src={resolveAssetPath('/homepage-photo-accueil.webp')}
+          <Img
+            src="/homepage-photo-accueil.webp"
             alt="Maison Mikasa - Architecture d'intérieur"
+            sizes="100vw"
             loading="eager"
             fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover object-center scale-105"

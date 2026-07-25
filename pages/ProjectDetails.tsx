@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
+import Img from '../components/ui/Img';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import { getLocationForProjectLocation } from '../data/locations';
 import JsonLd from '../components/seo/JsonLd';
@@ -361,9 +362,12 @@ const ProjectDetails: React.FC = () => {
 
       {/* Hero Image */}
       <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
-        <img
-          src={resolveAssetPath(project.coverImage)}
+        <Img
+          src={project.coverImage}
           alt={project.coverImageAlt ?? project.title}
+          sizes="100vw"
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-cover fade-in-section is-visible"
         />
         <div className="absolute inset-0 bg-black/20"></div>
@@ -494,9 +498,14 @@ const ProjectDetails: React.FC = () => {
                 index % 3 === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
               )}
             >
-              <img
-                src={resolveAssetPath(img)}
+              <Img
+                src={img}
                 alt={project.galleryAlts?.[index] ?? `Vue ${index + 1} - ${project.title}`}
+                sizes={
+                  index % 3 === 0
+                    ? '(max-width: 768px) 100vw, 66vw'
+                    : '(max-width: 768px) 100vw, 33vw'
+                }
                 loading="lazy"
                 className="w-full h-full object-cover transition-all duration-700"
               />

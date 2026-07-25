@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { resolveAssetPath } from '../../lib/resolveAssetPath';
+import Img from './Img';
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -82,9 +82,10 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       }}
     >
       {/* After Image (Background) */}
-      <img
-        src={resolveAssetPath(afterImage)}
+      <Img
+        src={afterImage}
         alt={afterAlt}
+        sizes="(max-width: 768px) 100vw, 1152px"
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
@@ -94,12 +95,12 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
         style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
       >
-        <img
-          src={resolveAssetPath(beforeImage)}
+        <Img
+          src={beforeImage}
           alt={beforeAlt}
+          sizes="(max-width: 768px) 100vw, 1152px"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover max-w-none"
-          style={{ width: '100%', height: '100%' }}
         />
       </div>
 

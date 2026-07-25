@@ -5,7 +5,7 @@ import Section from '../components/ui/Section';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import { locationsData } from '../data/locations';
 import { projectsData } from '../data/projects';
-import { resolveAssetPath } from '../lib/resolveAssetPath';
+import Img from '../components/ui/Img';
 import { faqPageSchema, SITE_URL } from '../data/schema';
 import JsonLd from '../components/seo/JsonLd';
 
@@ -104,9 +104,10 @@ const Localite: React.FC<LocaliteProps> = ({ slug }) => {
               <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
                 <div className="relative overflow-hidden aspect-[4/5] mb-4 bg-stone-100 rounded-sm">
                   <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                  <img
-                    src={resolveAssetPath(project.coverImage)}
+                  <Img
+                    src={project.coverImage}
                     alt={project.coverImageAlt ?? project.title}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     loading="lazy"
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                   />

@@ -5,7 +5,7 @@ import StaggerReveal from '../components/ui/StaggerReveal';
 import { projectsData } from '../data/projects';
 import { ArrowRight } from 'lucide-react';
 import { ProjectType } from '../types';
-import { resolveAssetPath } from '../lib/resolveAssetPath';
+import Img from '../components/ui/Img';
 import { useRouteMeta } from '../lib/useRouteMeta';
 
 interface ProjectsPageProps {
@@ -107,9 +107,10 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                   <Link to={`/realisations/${filteredProjects[0].id}`} className="group block">
                     <div className="relative overflow-hidden aspect-[21/9] mb-6 bg-stone-100 rounded-sm">
                       <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                      <img
-                        src={resolveAssetPath(filteredProjects[0].coverImage)}
+                      <Img
+                        src={filteredProjects[0].coverImage}
                         alt={filteredProjects[0].coverImageAlt ?? filteredProjects[0].title}
+                        sizes="100vw"
                         loading="lazy"
                         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />
@@ -153,9 +154,10 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                     >
                       <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
                         <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                        <img
-                          src={resolveAssetPath(project.coverImage)}
+                        <Img
+                          src={project.coverImage}
                           alt={project.coverImageAlt ?? project.title}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                           loading="lazy"
                           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                         />
@@ -197,9 +199,10 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                   <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
                     <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
                       <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                      <img
-                        src={resolveAssetPath(project.coverImage)}
+                      <Img
+                        src={project.coverImage}
                         alt={project.coverImageAlt ?? project.title}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         loading="lazy"
                         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
                       />

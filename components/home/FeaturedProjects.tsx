@@ -4,7 +4,7 @@ import Section from '../ui/Section';
 import StaggerReveal from '../ui/StaggerReveal';
 import { ArrowRight } from 'lucide-react';
 import { projectsData } from '../../data/projects';
-import { resolveAssetPath } from '../../lib/resolveAssetPath';
+import Img from '../ui/Img';
 
 const FeaturedProjects: React.FC = () => {
   // Select first 3 visible projects for featured section
@@ -28,9 +28,10 @@ const FeaturedProjects: React.FC = () => {
             <div className="relative overflow-hidden aspect-[4/5] mb-5 bg-stone-100 rounded-sm">
               <div className="absolute inset-0 bg-stone-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
-              <img
-                src={resolveAssetPath(project.coverImage)}
+              <Img
+                src={project.coverImage}
                 alt={project.coverImageAlt ?? project.title}
+                sizes="(max-width: 768px) 100vw, 33vw"
                 loading="lazy"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
               />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
-import { resolveAssetPath } from '../../lib/resolveAssetPath';
+import Img from '../ui/Img';
 
 const AboutPreview: React.FC = () => {
   return (
@@ -15,9 +15,10 @@ const AboutPreview: React.FC = () => {
         {/* Image */}
         <div className="flex justify-center md:justify-end">
           <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-sm shadow-md group">
-            <img
-              src={resolveAssetPath('photo-profil.webp')}
+            <Img
+              src="photo-profil.webp"
               alt="Laurine Fourcherot"
+              sizes="(max-width: 768px) 90vw, 400px"
               loading="lazy"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
