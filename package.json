@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:ssg": "vite build && vite build --ssr entry-server.tsx --outDir dist/server && tsx scripts/generate-og-images.ts && tsx scripts/prerender.ts",
+    "optimize:images": "tsx scripts/optimize-source-images.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
