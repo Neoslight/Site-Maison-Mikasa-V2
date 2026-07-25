@@ -206,8 +206,8 @@ const Contact: React.FC = () => {
                 <h3 className="font-serif text-lg text-stone-800">Prendre rendez-vous</h3>
               </div>
               <p className="text-stone-500 font-light text-sm leading-relaxed">
-                Vous préférez choisir directement un créneau ? Réservez en ligne, c'est gratuit et
-                sans engagement.
+                Vous préférez choisir directement un créneau ? Réservez un appel découverte de 20
+                minutes, gratuit et sans engagement.
               </p>
               <Link
                 to="/rendez-vous"

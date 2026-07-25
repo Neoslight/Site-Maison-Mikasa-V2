@@ -81,7 +81,7 @@ const staticRouteMeta: Record<string, RouteMeta> = {
   '/rendez-vous': {
     title: withSuffix('Prendre Rendez-vous'),
     description:
-      "Réservez directement un créneau de consultation avec Maison Mikasa, architecte d'intérieur.",
+      "Réservez un appel découverte gratuit de 20 minutes ou une visite conseil à domicile avec Maison Mikasa, architecte d'intérieur.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/rendez-vous`,
   },

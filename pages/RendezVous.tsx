@@ -1,14 +1,72 @@
-import React, { Suspense, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Suspense, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Section from '../components/ui/Section';
-import { CalendarDays, Phone, ArrowLeft } from 'lucide-react';
+import { CalendarDays, Phone, ArrowLeft, PhoneCall, Home, Check } from 'lucide-react';
 import { useRouteMeta } from '../lib/useRouteMeta';
 
 const Cal = React.lazy(() => import('@calcom/embed-react'));
 
-const CAL_LINK = import.meta.env.VITE_CALCOM_LINK;
-const CAL_NAMESPACE = 'rdv-mikasa';
-const CAL_CONFIGURED = Boolean(CAL_LINK) && CAL_LINK !== 'your_calcom_username/your_event_slug';
+type MeetingId = 'appel' | 'conseil';
+
+const isConfigured = (link?: string): boolean =>
+  Boolean(link) && link !== 'your_calcom_username/your_event_slug';
+
+type Meeting = {
+  id: MeetingId;
+  calLink?: string;
+  namespace: string;
+  icon: React.ElementType;
+  title: string;
+  duration: string;
+  price: string;
+  priceNote: string;
+  description: string;
+  bullets: string[];
+};
+
+const MEETINGS: Meeting[] = [
+  {
+    id: 'appel',
+    calLink: import.meta.env.VITE_CALCOM_LINK_APPEL,
+    namespace: 'rdv-mikasa-appel',
+    icon: PhoneCall,
+    title: 'Appel découverte',
+    duration: '20 min · par téléphone',
+    price: 'Gratuit',
+    priceNote: 'Sans engagement',
+    description:
+      'Un premier échange pour me raconter votre projet, valider vos idées et savoir si nous sommes faits pour travailler ensemble.',
+    bullets: [
+      'Vos envies, votre calendrier, votre budget',
+      'Mon avis à chaud sur la faisabilité',
+      'Les prochaines étapes possibles, sans obligation',
+    ],
+  },
+  {
+    id: 'conseil',
+    calLink: import.meta.env.VITE_CALCOM_LINK,
+    namespace: 'rdv-mikasa',
+    icon: Home,
+    title: 'Le Rendez-vous Conseil',
+    duration: '2 h · chez vous',
+    price: '320 €',
+    priceNote: 'Déduit si nous poursuivons ensemble',
+    description:
+      'Une immersion sur place pour analyser le potentiel du lieu, suivie d’un book de recommandations envoyé sous 48h.',
+    bullets: [
+      'Diagnostic complet : volumes, lumière, circulation',
+      'Pistes d’agencement et regard technique',
+      'Book personnalisé sous 48h (couleurs, matériaux…)',
+    ],
+  },
+];
+
+const AVAILABLE = MEETINGS.filter((m) => isConfigured(m.calLink));
+
+const getMeetingFromSearch = (search: string): MeetingId | null => {
+  const param = new URLSearchParams(search).get('type');
+  return param === 'appel' || param === 'conseil' ? param : null;
+};
 
 const CalSkeleton: React.FC = () => (
   <div
@@ -21,20 +79,99 @@ const CalSkeleton: React.FC = () => (
   </div>
 );
 
+const MeetingCard: React.FC<{
+  meeting: Meeting;
+  active: boolean;
+  onSelect: () => void;
+}> = ({ meeting, active, onSelect }) => {
+  const Icon = meeting.icon;
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={active}
+      className={`group flex flex-col text-left rounded-sm border p-8 transition-all duration-300 ${
+        active
+          ? 'border-sage-400 bg-white shadow-lg ring-1 ring-sage-200'
+          : 'border-stone-200 bg-stone-50/60 hover:border-sage-300 hover:bg-white hover:shadow-md'
+      }`}
+    >
+      <div className="flex items-start justify-between mb-6">
+        <div
+          className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 ${
+            active ? 'bg-sage-600 text-white' : 'bg-sage-50 text-sage-600'
+          }`}
+        >
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="text-right">
+          <span className="font-serif text-xl text-stone-800 block">{meeting.price}</span>
+          <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold">
+            {meeting.priceNote}
+          </span>
+        </div>
+      </div>
+
+      <h2 className="font-serif text-2xl text-stone-800 mb-1">{meeting.title}</h2>
+      <p className="text-sage-600 text-[10px] uppercase tracking-widest font-bold mb-5">
+        {meeting.duration}
+      </p>
+
+      <p className="text-sm text-stone-600 font-light leading-relaxed mb-6">
+        {meeting.description}
+      </p>
+
+      <ul className="space-y-2.5 mb-8">
+        {meeting.bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start">
+            <Check className="w-3.5 h-3.5 text-sage-400 mr-2.5 mt-0.5 flex-shrink-0" />
+            <span className="text-xs text-stone-600 font-light leading-relaxed">{bullet}</span>
+          </li>
+        ))}
+      </ul>
+
+      <span
+        className={`mt-auto block w-full text-center text-[10px] uppercase tracking-widest font-bold py-3.5 rounded-sm transition-colors ${
+          active
+            ? 'bg-sage-600 text-white'
+            : 'border border-stone-300 text-stone-600 group-hover:border-sage-400 group-hover:text-sage-600'
+        }`}
+      >
+        {active ? 'Créneaux affichés ci-dessous' : 'Choisir ce rendez-vous'}
+      </span>
+    </button>
+  );
+};
+
 const RendezVous: React.FC = () => {
   useRouteMeta();
+  const location = useLocation();
+
+  const requested = getMeetingFromSearch(location.search);
+  const initial =
+    (requested && AVAILABLE.some((m) => m.id === requested) ? requested : AVAILABLE[0]?.id) ??
+    'appel';
+  const [selected, setSelected] = useState<MeetingId>(initial);
+
+  const active = AVAILABLE.find((m) => m.id === selected);
 
   useEffect(() => {
-    if (!CAL_CONFIGURED) return;
+    if (!active) return;
+    let cancelled = false;
     (async () => {
       const { getCalApi } = await import('@calcom/embed-react');
-      const cal = await getCalApi({ namespace: CAL_NAMESPACE });
+      const cal = await getCalApi({ namespace: active.namespace });
+      if (cancelled) return;
       cal('ui', {
         hideEventTypeDetails: false,
         layout: 'month_view',
       });
     })();
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [active]);
 
   return (
     <div className="bg-white">
@@ -48,25 +185,46 @@ const RendezVous: React.FC = () => {
             Choisissez votre créneau
           </h1>
           <p className="text-stone-600 font-light max-w-2xl mx-auto leading-relaxed">
-            Sélectionnez directement un horaire disponible dans mon agenda. La consultation est
-            gratuite et sans engagement — un premier échange pour explorer votre projet ensemble.
+            {AVAILABLE.length > 1
+              ? 'Deux façons de commencer : un appel découverte gratuit pour explorer votre projet, ou la visite conseil complète chez vous. Sélectionnez la formule qui vous convient, puis un horaire dans mon agenda.'
+              : 'Sélectionnez directement un horaire disponible dans mon agenda pour échanger sur votre projet.'}
           </p>
         </div>
       </Section>
 
+      {/* Choix de la formule */}
+      {AVAILABLE.length > 1 && (
+        <Section className="max-w-5xl mx-auto px-6" py="pt-16 pb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {AVAILABLE.map((meeting) => (
+              <MeetingCard
+                key={meeting.id}
+                meeting={meeting}
+                active={meeting.id === selected}
+                onSelect={() => setSelected(meeting.id)}
+              />
+            ))}
+          </div>
+          <p className="text-center text-xs text-stone-400 font-light mt-8">
+            Pas encore sûr·e ? Commencez par l’appel découverte — il ne vous engage à rien.
+          </p>
+        </Section>
+      )}
+
       {/* Cal.com embed ou fallback */}
       <Section className="max-w-5xl mx-auto px-6" py="py-16">
-        {CAL_CONFIGURED ? (
+        {active ? (
           <Suspense fallback={<CalSkeleton />}>
             <Cal
-              namespace={CAL_NAMESPACE}
-              calLink={CAL_LINK}
+              key={active.namespace}
+              namespace={active.namespace}
+              calLink={active.calLink as string}
               style={{ width: '100%', height: '700px', overflow: 'scroll' }}
               config={{ layout: 'month_view' }}
             />
           </Suspense>
         ) : (
-          /* Fallback si VITE_CALCOM_LINK non configuré */
+          /* Fallback si aucun lien Cal.com n'est configuré */
           <div className="bg-stone-50 rounded-sm border border-gray-200 p-12 text-center shadow-sm">
             <div className="w-16 h-16 rounded-full bg-sage-50 flex items-center justify-center text-sage-600 mx-auto mb-6">
               <CalendarDays className="w-8 h-8" />

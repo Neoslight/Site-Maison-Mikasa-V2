@@ -9,6 +9,7 @@ declare namespace React {
 interface ImportMetaEnv {
   readonly VITE_FORMSPREE_ID: string;
   readonly VITE_CALCOM_LINK: string;
+  readonly VITE_CALCOM_LINK_APPEL: string;
 }
 
 interface ImportMeta {
