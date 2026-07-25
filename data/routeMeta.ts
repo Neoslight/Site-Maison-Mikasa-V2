@@ -1,4 +1,5 @@
 import { projectsData } from './projects';
+import { locationsData } from './locations';
 
 export const SITE_URL = 'https://www.maisonmikasa.fr';
 // Stable, unhashed filenames written by scripts/generate-og-images.ts — safe to
@@ -109,6 +110,26 @@ function projectRouteMeta(projectId: string): RouteMeta | null {
   };
 }
 
+function locationRouteMeta(path: string): RouteMeta | null {
+  const location = locationsData.find((l) => l.path === path);
+  if (!location) return null;
+
+  const ogProject = location.ogImageProjectId
+    ? projectsData.find((p) => p.id === location.ogImageProjectId)
+    : undefined;
+  const ogImage =
+    ogProject && !ogProject.coverImage.startsWith('http')
+      ? `${SITE_URL}/og/${ogProject.id}.jpg`
+      : DEFAULT_OG_IMAGE;
+
+  return {
+    title: withSuffix(location.metaTitle),
+    description: location.metaDescription,
+    ogImage,
+    canonical: `${SITE_URL}${location.path}`,
+  };
+}
+
 export function getRouteMeta(path: string): RouteMeta {
   const staticMeta = staticRouteMeta[path];
   if (staticMeta) return staticMeta;
@@ -119,11 +140,15 @@ export function getRouteMeta(path: string): RouteMeta {
     if (meta) return meta;
   }
 
+  const locationMeta = locationRouteMeta(path);
+  if (locationMeta) return locationMeta;
+
   return staticRouteMeta['/'];
 }
 
 export function getAllPrerenderRoutes(): string[] {
   const staticRoutes = Object.keys(staticRouteMeta).filter((r) => r !== '/mentions-legales');
   const projectRoutes = projectsData.filter((p) => !p.hidden).map((p) => `/realisations/${p.id}`);
-  return [...staticRoutes, ...projectRoutes, '/mentions-legales'];
+  const locationRoutes = locationsData.map((l) => l.path);
+  return [...staticRoutes, ...locationRoutes, ...projectRoutes, '/mentions-legales'];
 }

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Menu, X, Phone, Mail, ChevronDown, ArrowRight, CalendarDays } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { locationsData } from '../../data/locations';
 
 // TODO: Remplacer par les vraies icônes de marque (lucide-react a déprécié les icônes de marques tierces)
 // Option recommandée : react-icons (ri) ou SVGs inline
@@ -416,6 +417,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               Prendre contact <ArrowRight className="w-3 h-3 ml-2" />
             </Link>
           </div>
+
+          <nav aria-label="Zones d'intervention" className="border-t border-gray-100 pt-8 mb-8">
+            <span className="block text-[10px] text-stone-400 uppercase tracking-widest mb-4">
+              Zones d'intervention
+            </span>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-stone-600 uppercase tracking-widest">
+              {locationsData.map((location) => (
+                <Link key={location.slug} to={location.path} className="hover:text-sage-600">
+                  {location.city}
+                </Link>
+              ))}
+            </div>
+          </nav>
 
           <nav
             aria-label="Navigation secondaire"

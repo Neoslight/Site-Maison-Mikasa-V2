@@ -4,6 +4,7 @@ import AboutPreview from '../components/home/AboutPreview';
 import FeaturedProjects from '../components/home/FeaturedProjects';
 import ServicesPreview from '../components/home/ServicesPreview';
 import Testimonials from '../components/home/Testimonials';
+import ServiceAreas from '../components/home/ServiceAreas';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import JsonLd from '../components/seo/JsonLd';
 
@@ -61,6 +62,7 @@ const Home: React.FC = () => {
       <FeaturedProjects />
       <ServicesPreview />
       <Testimonials />
+      <ServiceAreas />
     </>
   );
 };

@@ -8,12 +8,14 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Services from './pages/Services';
+import Localite from './pages/Localite';
 import Contact from './pages/Contact';
 import RendezVous from './pages/RendezVous';
 import MentionsLegales from './pages/MentionsLegales';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/common/ScrollToTop';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import { locationsData } from './data/locations';
 
 const App: React.FC = () => {
   return (
@@ -37,6 +39,13 @@ const App: React.FC = () => {
             element={<Projects initialType="Professionnel" />}
           />
           <Route path="/realisations/:projectId" element={<ProjectDetails />} />
+          {locationsData.map((location) => (
+            <Route
+              key={location.slug}
+              path={location.path}
+              element={<Localite slug={location.slug} />}
+            />
+          ))}
           <Route path="/contact" element={<Contact />} />
           <Route path="/rendez-vous" element={<RendezVous />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />

@@ -17,6 +17,7 @@ import {
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
 import { useRouteMeta } from '../lib/useRouteMeta';
+import { getLocationForProjectLocation } from '../data/locations';
 import JsonLd from '../components/seo/JsonLd';
 
 const ProjectDetails: React.FC = () => {
@@ -76,6 +77,8 @@ const ProjectDetails: React.FC = () => {
         ],
       }
     : null;
+  const nearbyLocation = project ? getLocationForProjectLocation(project.location) : undefined;
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -409,6 +412,19 @@ const ProjectDetails: React.FC = () => {
               </div>
             )}
           </div>
+          {nearbyLocation && (
+            <div className="text-center mt-6">
+              <Link
+                to={nearbyLocation.path}
+                className="inline-flex items-center text-xs uppercase tracking-widest text-sage-600 hover:text-sage-700 border-b border-sage-300 pb-0.5 transition-colors"
+              >
+                <MapPin className="w-3 h-3 mr-2" />
+                Voir nos réalisations{' '}
+                {nearbyLocation.city === 'Golfe du Morbihan' ? 'dans le' : 'à'}{' '}
+                {nearbyLocation.city}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
