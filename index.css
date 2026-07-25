@@ -1,5 +1,33 @@
 @import 'tailwindcss';
 
+/* Self-hosted fonts (public/fonts/) — replaces the render-blocking Google
+   Fonts stylesheet. Montserrat and Playfair Display "normal" are variable
+   fonts: one file each covers every weight below, so declaring several
+   @font-face rules per file costs no extra requests. */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('/fonts/montserrat-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-display-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/playfair-display-italic-variable.woff2') format('woff2');
+}
+
 @theme {
   /* Sage color palette (brand) */
   --color-sage-50: #f4f7f4;
