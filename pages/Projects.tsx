@@ -1,249 +1,144 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Section from '../components/ui/Section';
-import StaggerReveal from '../components/ui/StaggerReveal';
 import { projectsData } from '../data/projects';
-import { ArrowRight } from 'lucide-react';
 import { ProjectType } from '../types';
-import Img from '../components/ui/Img';
 import { useRouteMeta } from '../lib/useRouteMeta';
+import { cn } from '../lib/utils';
+import Container from '../components/ui/Container';
+import PageHeader from '../components/ui/PageHeader';
+import ProjectCard from '../components/ui/ProjectCard';
+import Reveal from '../components/ui/Reveal';
+
+type Filter = ProjectType | 'Tous';
 
 interface ProjectsPageProps {
-  initialType?: ProjectType | 'Tous';
+  initialType?: Filter;
 }
 
+const FILTERS: { type: Filter; label: string; path: string; title: string }[] = [
+  {
+    type: 'Tous',
+    label: 'Tous les projets',
+    path: '/realisations',
+    title: "Réalisations d'architecture et décoration — Golfe du Morbihan",
+  },
+  { type: 'Maison', label: 'Maisons', path: '/realisations/maison', title: 'Nos Maisons' },
+  {
+    type: 'Appartement',
+    label: 'Appartements',
+    path: '/realisations/appartement',
+    title: 'Nos Appartements',
+  },
+  {
+    type: 'Professionnel',
+    label: 'Professionnels',
+    path: '/realisations/professionnel',
+    title: 'Espaces Professionnels',
+  },
+];
+
 const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
-  const [filter, setFilter] = useState<ProjectType | 'Tous'>(initialType);
-
-  useEffect(() => {
-    setFilter(initialType);
-  }, [initialType]);
-
-  const categories: (ProjectType | 'Tous')[] = ['Tous', 'Maison', 'Appartement', 'Professionnel'];
-
-  const visibleProjects = projectsData.filter((p) => !p.hidden);
-  const filteredProjects =
-    filter === 'Tous' ? visibleProjects : visibleProjects.filter((p) => p.projectType === filter);
-
-  const getTitle = () => {
-    switch (filter) {
-      case 'Maison':
-        return 'Nos Maisons';
-      case 'Appartement':
-        return 'Nos Appartements';
-      case 'Professionnel':
-        return 'Espaces Professionnels';
-      default:
-        return "Réalisations d'architecture et décoration — Golfe du Morbihan";
-    }
-  };
-
-  const getPath = (cat: ProjectType | 'Tous') => {
-    switch (cat) {
-      case 'Maison':
-        return '/realisations/maison';
-      case 'Appartement':
-        return '/realisations/appartement';
-      case 'Professionnel':
-        return '/realisations/professionnel';
-      default:
-        return '/realisations';
-    }
-  };
-
   useRouteMeta();
 
-  // Première carte large uniquement sur la vue "Tous" avec au moins 2 projets
-  const showFeaturedFirst = filter === 'Tous' && filteredProjects.length > 1;
+  const visibleProjects = projectsData.filter((p) => !p.hidden);
+  const countFor = (type: Filter) =>
+    type === 'Tous'
+      ? visibleProjects.length
+      : visibleProjects.filter((p) => p.projectType === type).length;
+  const filteredProjects =
+    initialType === 'Tous'
+      ? visibleProjects
+      : visibleProjects.filter((p) => p.projectType === initialType);
+  const current = FILTERS.find((f) => f.type === initialType) ?? FILTERS[0];
+
+  // Première carte en grand format uniquement sur la vue "Tous"
+  const showFeaturedFirst = initialType === 'Tous' && filteredProjects.length > 1;
+  const [featured, ...rest] = showFeaturedFirst
+    ? filteredProjects
+    : [undefined, ...filteredProjects];
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* Header */}
-      <Section bgColor="bg-stone-50" className="text-center" py="py-24">
-        <div className="max-w-4xl mx-auto px-6">
-          <span className="text-sage-600 uppercase tracking-widest text-xs font-bold mb-4 block">
-            Portfolio
-          </span>
-          <h1 className="font-serif text-4xl md:text-5xl text-stone-800 mb-6">{getTitle()}</h1>
-          <p className="text-stone-600 font-light max-w-2xl mx-auto">
-            Découvrez une sélection de projets d'architecture et de décoration d'intérieur. Chaque
-            lieu raconte une histoire unique, la vôtre.
-          </p>
-        </div>
-      </Section>
+    <>
+      <PageHeader
+        eyebrow="Réalisations"
+        title={current.title}
+        intro="Une sélection de projets d'architecture et de décoration d'intérieur. Chaque lieu raconte une histoire unique, la vôtre."
+      />
 
-      {/* Filters */}
-      <div className="sticky top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-100 py-4">
-        <div className="max-w-7xl mx-auto px-6 overflow-x-auto">
-          <div className="flex justify-center space-x-2 md:space-x-6 min-w-max">
-            {categories.map((cat) => (
-              <Link
-                key={cat}
-                to={getPath(cat)}
-                className={`
-                  text-xs uppercase tracking-widest px-4 py-2 rounded-sm transition-all duration-300
-                  ${
-                    filter === cat
-                      ? 'bg-sage-600 text-white'
-                      : 'text-stone-500 hover:text-sage-600 hover:bg-sage-50'
-                  }
-                `}
-              >
-                {cat === 'Tous' ? 'Tous' : cat === 'Professionnel' ? 'Professionnels' : cat + 's'}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Gallery */}
-      <Section className="max-w-7xl mx-auto px-6">
-        {filteredProjects.length > 0 ? (
-          <>
-            {showFeaturedFirst ? (
-              <>
-                {/* Première carte en grand format cinémascope */}
-                <div className="mb-12">
-                  <Link to={`/realisations/${filteredProjects[0].id}`} className="group block">
-                    <div className="relative overflow-hidden aspect-[21/9] mb-6 bg-stone-100 rounded-sm">
-                      <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                      <Img
-                        src={filteredProjects[0].coverImage}
-                        alt={filteredProjects[0].coverImageAlt ?? filteredProjects[0].title}
-                        sizes="100vw"
-                        loading="lazy"
-                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
-                      />
-
-                      {/* Badge année */}
-                      {filteredProjects[0].year && (
-                        <div className="absolute top-4 left-4 z-20">
-                          <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                            {filteredProjects[0].year}
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="absolute bottom-6 left-6 z-20">
-                        <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                          <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
-                            Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                        {filteredProjects[0].title}
-                      </h3>
-                      <p className="text-xs text-stone-500 uppercase tracking-widest">
-                        {filteredProjects[0].location} • {filteredProjects[0].category}
-                      </p>
-                    </div>
+      {/* Filtres — de vraies routes, indexables */}
+      <nav
+        aria-label="Filtrer les réalisations"
+        className="sticky top-20 z-30 border-y border-line bg-canvas"
+      >
+        <Container className="overflow-x-auto">
+          <ul className="flex min-w-max gap-8">
+            {FILTERS.map((item) => {
+              const active = item.type === initialType;
+              return (
+                <li key={item.type}>
+                  <Link
+                    to={item.path}
+                    aria-current={active ? 'page' : undefined}
+                    className={cn(
+                      'relative block py-4 text-sm transition-colors duration-300',
+                      'after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-stone-900 after:transition-transform after:duration-300',
+                      active
+                        ? 'text-stone-900 after:scale-x-100'
+                        : 'text-stone-500 after:scale-x-0 hover:text-stone-900'
+                    )}
+                  >
+                    {item.label}
+                    <sup className="ml-1 text-[0.6875rem] text-stone-400">
+                      {countFor(item.type)}
+                    </sup>
                   </Link>
-                </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Container>
+      </nav>
 
-                {/* Reste des projets en grille standard */}
-                <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                  {filteredProjects.slice(1).map((project) => (
-                    <Link
-                      key={project.id}
-                      to={`/realisations/${project.id}`}
-                      className="group block"
-                    >
-                      <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
-                        <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                        <Img
-                          src={project.coverImage}
-                          alt={project.coverImageAlt ?? project.title}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                          loading="lazy"
-                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
+      <section className="bg-canvas py-14 md:py-20">
+        <Container>
+          {filteredProjects.length === 0 ? (
+            <p className="py-20 text-center text-stone-500">
+              Aucun projet pour le moment dans cette catégorie.
+            </p>
+          ) : (
+            <>
+              {featured && (
+                <ProjectCard
+                  project={featured}
+                  featured
+                  as="h2"
+                  sizes="(max-width: 1280px) 100vw, 1200px"
+                  className="mb-16 md:mb-24"
+                />
+              )}
+              <div className="grid gap-16 md:grid-cols-2 md:gap-x-10 md:gap-y-24">
+                {rest.map(
+                  (project, index) =>
+                    project && (
+                      <Reveal
+                        key={project.id}
+                        delay={(index % 2) * 120}
+                        className={index % 2 === 1 ? 'md:mt-24' : ''}
+                      >
+                        <ProjectCard
+                          project={project}
+                          as="h2"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
-
-                        {/* Badge année */}
-                        {project.year && (
-                          <div className="absolute top-4 left-4 z-20">
-                            <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                              {project.year}
-                            </span>
-                          </div>
-                        )}
-
-                        <div className="absolute bottom-6 left-6 z-20">
-                          <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
-                              Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                        <p className="text-xs text-stone-500 uppercase tracking-widest">
-                          {project.location} • {project.category}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </StaggerReveal>
-              </>
-            ) : (
-              /* Vue filtrée : grille standard sans mise en avant */
-              <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                {filteredProjects.map((project) => (
-                  <Link key={project.id} to={`/realisations/${project.id}`} className="group block">
-                    <div className="relative overflow-hidden aspect-[4/5] mb-6 bg-stone-100 rounded-sm">
-                      <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/20 transition-colors duration-500 z-10" />
-                      <Img
-                        src={project.coverImage}
-                        alt={project.coverImageAlt ?? project.title}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        loading="lazy"
-                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
-                      />
-
-                      {project.year && (
-                        <div className="absolute top-4 left-4 z-20">
-                          <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                            {project.year}
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="absolute bottom-6 left-6 z-20">
-                        <div className="bg-white/90 backdrop-blur-md px-4 py-3 rounded-sm transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                          <span className="flex items-center text-xs uppercase tracking-widest text-stone-800 font-bold">
-                            Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-stone-500 uppercase tracking-widest">
-                        {project.location} • {project.category}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </StaggerReveal>
-            )}
-          </>
-        ) : (
-          <div className="text-center py-20 text-stone-500 font-light italic">
-            Aucun projet pour le moment dans cette catégorie.
-          </div>
-        )}
-      </Section>
-    </div>
+                      </Reveal>
+                    )
+                )}
+              </div>
+            </>
+          )}
+        </Container>
+      </section>
+    </>
   );
 };
 

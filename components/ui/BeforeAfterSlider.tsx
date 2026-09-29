@@ -71,7 +71,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-sm select-none cursor-ew-resize group"
+      className="relative w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden select-none cursor-ew-resize group"
       onMouseDown={(e) => {
         setIsDragging(true);
         handleMove(e.clientX);
@@ -106,20 +106,20 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
       {/* Slider Handle */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.3)]"
+        className="absolute top-0 bottom-0 w-px bg-white cursor-ew-resize flex items-center justify-center"
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
       >
-        <div className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center transition-transform group-hover:scale-110">
+        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
           <ChevronLeft className="w-4 h-4 text-stone-600 -mr-1" />
           <ChevronRight className="w-4 h-4 text-stone-600 -ml-1" />
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-white text-xs uppercase tracking-widest px-3 py-1 rounded-full pointer-events-none">
+      <div className="absolute top-4 left-4 bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
         Avant
       </div>
-      <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white text-xs uppercase tracking-widest px-3 py-1 rounded-full pointer-events-none">
+      <div className="absolute top-4 right-4 bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
         Après
       </div>
     </div>

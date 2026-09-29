@@ -1,19 +1,14 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useParams, Link } from 'react-router-dom';
-import Section from '../components/ui/Section';
 import BeforeAfterSlider from '../components/ui/BeforeAfterSlider';
+import Button from '../components/ui/Button';
+import Container from '../components/ui/Container';
+import Reveal from '../components/ui/Reveal';
+import Section from '../components/ui/Section';
+import SectionHeading from '../components/ui/SectionHeading';
 import { projectsData } from '../data/projects';
-import {
-  ArrowLeft,
-  Calendar,
-  MapPin,
-  Ruler,
-  X,
-  ZoomIn,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { resolveAssetPath } from '../lib/resolveAssetPath';
 import Img from '../components/ui/Img';
@@ -251,71 +246,88 @@ const ProjectDetails: React.FC = () => {
   }, [lightboxOpen, isZoomed, nextPhoto, prevPhoto, closeLightbox]);
 
   if (!project) {
-    return <div className="min-h-screen flex items-center justify-center">Projet introuvable</div>;
+    return (
+      <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-6 text-center">
+        <p className="type-subtitle">Projet introuvable</p>
+        <Button to="/realisations" variant="link">
+          Toutes les réalisations
+        </Button>
+      </Container>
+    );
   }
 
+  const facts = [
+    { label: 'Lieu', value: project.location },
+    { label: 'Année', value: project.year },
+    { label: 'Surface', value: project.surface },
+    { label: 'Durée', value: project.duration },
+  ].filter((fact) => fact.value);
+
+  const story = [
+    { title: 'Le Projet', text: project.description },
+    { title: 'Le Défi', text: project.challenge },
+    { title: 'La Solution', text: project.solution },
+  ].filter((block) => block.text);
+
   return (
-    <div className="bg-white min-h-screen">
+    <>
       {creativeWorkSchema && <JsonLd schema={creativeWorkSchema} />}
       {breadcrumbSchema && <JsonLd schema={breadcrumbSchema} />}
 
-      {/* Lightbox Overlay — rendu via Portal sur document.body pour éviter que
-          l'animation CSS transform de <main> ne casse le positionnement fixed */}
+      {/* Visionneuse — rendue via Portal sur document.body */}
       {lightboxOpen &&
         createPortal(
           <div
             ref={lightboxRef}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-950/95"
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
             aria-label="Visionneuse de photos"
           >
-            {/* Top Controls */}
-            <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50 pointer-events-none">
-              <div className="text-white/80 text-sm font-medium tracking-widest pointer-events-auto bg-black/20 px-4 py-2 rounded-full backdrop-blur-md">
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-50 flex items-center justify-between p-4 md:p-6">
+              <span className="pointer-events-auto text-sm tabular-nums text-white/70">
                 {photoIndex + 1} / {project.gallery.length}
-              </div>
+              </span>
               <button
-                className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all pointer-events-auto"
+                className="pointer-events-auto p-2 text-white/70 transition-colors hover:text-white"
                 onClick={closeLightbox}
                 aria-label="Fermer la visionneuse"
               >
-                <X className="w-8 h-8" aria-hidden="true" />
+                <X className="h-7 w-7" strokeWidth={1.5} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Navigation Buttons (hidden when zoomed) */}
             {!isZoomed && (
               <>
                 <button
-                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
+                  className="absolute left-2 top-1/2 z-50 -translate-y-1/2 p-3 text-white/60 transition-colors hover:text-white md:left-6"
                   onClick={prevPhoto}
                   aria-label="Image précédente"
                 >
                   <ChevronLeft
-                    className="w-8 h-8 md:w-10 md:h-10 group-hover:-translate-x-1 transition-transform"
+                    className="h-8 w-8 md:h-10 md:w-10"
+                    strokeWidth={1.25}
                     aria-hidden="true"
                   />
                 </button>
-
                 <button
-                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all p-4 z-50 hover:bg-white/10 rounded-full group"
+                  className="absolute right-2 top-1/2 z-50 -translate-y-1/2 p-3 text-white/60 transition-colors hover:text-white md:right-6"
                   onClick={nextPhoto}
                   aria-label="Image suivante"
                 >
                   <ChevronRight
-                    className="w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-1 transition-transform"
+                    className="h-8 w-8 md:h-10 md:w-10"
+                    strokeWidth={1.25}
                     aria-hidden="true"
                   />
                 </button>
               </>
             )}
 
-            {/* Image Container */}
             <div
               className={cn(
-                'absolute inset-0 flex items-center justify-center transition-all duration-300',
+                'absolute inset-0 flex items-center justify-center',
                 isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
               )}
               onClick={toggleZoom}
@@ -328,7 +340,7 @@ const ProjectDetails: React.FC = () => {
                 alt={
                   project.galleryAlts?.[photoIndex] ?? `Vue ${photoIndex + 1} - ${project.title}`
                 }
-                className="block shadow-2xl transition-transform duration-200 ease-out"
+                className="block transition-transform duration-200 ease-out"
                 style={{
                   maxWidth: 'calc(100vw - 4rem)',
                   maxHeight: 'calc(100vh - 6rem)',
@@ -342,237 +354,194 @@ const ProjectDetails: React.FC = () => {
               />
             </div>
 
-            {/* Mobile hint */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-[10px] uppercase tracking-widest md:hidden pointer-events-none">
+            <p className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-white/50 md:hidden">
               {isZoomed ? 'Glisser pour explorer' : 'Toucher pour zoomer'}
-            </div>
+            </p>
           </div>,
           document.body
         )}
 
-      {/* Back Button */}
-      <div className="fixed top-24 left-6 z-40 hidden xl:block">
-        <Link
-          to="/realisations"
-          className="flex items-center text-xs uppercase tracking-widest text-stone-500 hover:text-sage-600 transition-all bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-100 hover:shadow-md hover:-translate-x-1"
-        >
-          <ArrowLeft className="w-3 h-3 mr-2" /> Retour aux réalisations
-        </Link>
-      </div>
+      <header className="bg-canvas pt-8 md:pt-12">
+        <Container>
+          <nav aria-label="Fil d'Ariane" className="mb-10 text-sm text-stone-500 md:mb-14">
+            <ol className="flex flex-wrap items-center gap-2">
+              <li>
+                <Link to="/" className="hover:text-stone-900">
+                  Accueil
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link to="/realisations" className="hover:text-stone-900">
+                  Réalisations
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-stone-900">
+                {project.title}
+              </li>
+            </ol>
+          </nav>
 
-      {/* Hero Image */}
-      <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
-        <Img
-          src={project.coverImage}
-          alt={project.coverImageAlt ?? project.title}
-          sizes="100vw"
-          loading="eager"
-          fetchPriority="high"
-          className="w-full h-full object-cover fade-in-section is-visible"
-        />
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4">
-            <span className="uppercase tracking-[0.2em] text-sm md:text-base font-medium mb-4 block opacity-90">
-              {project.category}
-            </span>
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6 shadow-sm">
-              {project.title}
-            </h1>
-            <div className="flex items-center justify-center space-x-2 text-sm md:text-base font-light opacity-90">
-              <MapPin className="w-4 h-4" />
-              <span>{project.location}</span>
+          <div className="grid gap-10 pb-10 md:pb-14 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="eyebrow mb-5">{project.category}</p>
+              <h1 className="type-display">{project.title}</h1>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Project Info Bar */}
-      <div className="bg-stone-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-center">
-            {project.location && (
-              <div className="space-y-1">
-                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
-                  <MapPin className="w-3 h-3 mr-2" /> Lieu
-                </div>
-                <p className="text-stone-800 font-serif">{project.location}</p>
-              </div>
-            )}
-            {project.year && (
-              <div className="space-y-1">
-                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
-                  <Calendar className="w-3 h-3 mr-2" /> Année
-                </div>
-                <p className="text-stone-800 font-serif">{project.year}</p>
-              </div>
-            )}
-            {project.surface && (
-              <div className="space-y-1">
-                <div className="flex items-center justify-center text-sage-600 text-xs uppercase tracking-widest font-bold">
-                  <Ruler className="w-3 h-3 mr-2" /> Surface
-                </div>
-                <p className="text-stone-800 font-serif">{project.surface}</p>
-              </div>
-            )}
-          </div>
-          {nearbyLocation && (
-            <div className="text-center mt-6">
-              <Link
-                to={nearbyLocation.path}
-                className="inline-flex items-center text-xs uppercase tracking-widest text-sage-600 hover:text-sage-700 border-b border-sage-300 pb-0.5 transition-colors"
-              >
-                <MapPin className="w-3 h-3 mr-2" />
-                Voir nos réalisations{' '}
-                {nearbyLocation.city === 'Golfe du Morbihan' ? 'dans le' : 'à'}{' '}
-                {nearbyLocation.city}
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-8">
-        {project.description && (
-          <div className="pb-8 border-b border-gray-100">
-            <h2 className="font-serif text-xl text-stone-800 mb-3">Le Projet</h2>
-            <p className="text-stone-600 font-light leading-relaxed text-base">
-              {project.description}
-            </p>
-          </div>
-        )}
-        {project.challenge && (
-          <div className="pb-8 border-b border-gray-100">
-            <h2 className="font-serif text-xl text-stone-800 mb-3">Le Défi</h2>
-            <p className="text-stone-600 font-light leading-relaxed text-base">
-              {project.challenge}
-            </p>
-          </div>
-        )}
-        {project.solution && (
-          <div className="pb-8 border-b border-gray-100">
-            <h2 className="font-serif text-xl text-stone-800 mb-3">La Solution</h2>
-            <p className="text-stone-600 font-light leading-relaxed text-base">
-              {project.solution}
-            </p>
-          </div>
-        )}
-
-        {/* Un projet similaire */}
-        <div className="pt-10 border-t border-gray-100 flex flex-col items-center text-center gap-6">
-          <h3 className="font-serif text-2xl text-stone-800">Un projet similaire ?</h3>
-          <p className="text-stone-600 font-light max-w-md">
-            Vous avez un projet de rénovation ou de décoration ? Discutons-en ensemble.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-sage-600 text-white text-xs uppercase tracking-widest py-3 px-10 hover:bg-sage-700 transition-all duration-300 rounded-sm hover:-translate-y-1 hover:shadow-lg active:translate-y-0 shadow-sm"
-          >
-            Contactez-nous
-          </Link>
-        </div>
-      </div>
-
-      {/* Gallery Grid */}
-      <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-24">
-        <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Galerie photos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-          {project.gallery.map((img, index) => (
-            <div
-              key={index}
-              ref={(el) => {
-                thumbnailRefs.current[index] = el;
-              }}
-              onClick={() => openLightbox(index)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openLightbox(index);
-                }
-              }}
-              tabIndex={0}
-              role="button"
-              aria-label={`Agrandir la vue ${index + 1}`}
-              className={cn(
-                'relative overflow-hidden rounded-sm cursor-zoom-in group shadow-sm hover:shadow-xl transition-all duration-500',
-                index % 3 === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
-              )}
-            >
-              <Img
-                src={img}
-                alt={project.galleryAlts?.[index] ?? `Vue ${index + 1} - ${project.title}`}
-                sizes={
-                  index % 3 === 0
-                    ? '(max-width: 768px) 100vw, 66vw'
-                    : '(max-width: 768px) 100vw, 33vw'
-                }
-                loading="lazy"
-                className="w-full h-full object-cover transition-all duration-700"
-              />
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-300 flex items-center justify-center">
-                <div className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center shadow-lg">
-                  <ZoomIn className="w-4 h-4 text-stone-800 mr-2" />
-                  <span className="text-xs uppercase tracking-widest text-stone-800 font-bold">
-                    Agrandir
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Before/After Gallery */}
-      {project.beforeAfterGallery && project.beforeAfterGallery.length > 0 && (
-        <div className="bg-stone-50 py-16 md:py-24">
-          <Section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
-            <h2 className="font-serif text-3xl text-stone-800 mb-12 text-center">Avant / Après</h2>
-            <div className="grid grid-cols-1 gap-12">
-              {project.beforeAfterGallery.map((item, index) => (
-                <div key={index} className="flex flex-col items-center">
-                  <BeforeAfterSlider
-                    beforeImage={item.before}
-                    afterImage={item.after}
-                    beforeAlt={`${project.title} à ${project.location} - Avant rénovation (${index + 1})`}
-                    afterAlt={`${project.title} à ${project.location} - Après rénovation (${index + 1})`}
-                  />
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-6 lg:col-span-4 lg:col-start-9">
+              {facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt className="text-xs uppercase tracking-[0.16em] text-stone-500">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-1.5 text-stone-900">{fact.value}</dd>
                 </div>
               ))}
-            </div>
-          </Section>
+            </dl>
+          </div>
+        </Container>
+
+        <div className="mx-auto max-w-[1600px] md:px-10">
+          <div className="aspect-[4/5] overflow-hidden bg-sand sm:aspect-[3/2] lg:aspect-[16/9]">
+            <Img
+              src={project.coverImage}
+              alt={project.coverImageAlt ?? project.title}
+              sizes="(max-width: 1600px) 100vw, 1600px"
+              loading="eager"
+              fetchPriority="high"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
+      </header>
+
+      <Section>
+        <Container>
+          {story.map((block) => (
+            <Reveal
+              key={block.title}
+              className="grid gap-4 border-t border-line py-10 first:border-t-0 first:pt-0 md:grid-cols-12 md:gap-8 md:py-14"
+            >
+              <h2 className="type-subtitle md:col-span-4">{block.title}</h2>
+              <p className="text-base leading-relaxed text-stone-600 md:col-span-7 md:col-start-6 md:text-lg">
+                {block.text}
+              </p>
+            </Reveal>
+          ))}
+
+          {nearbyLocation && (
+            <div className="border-t border-line pt-10 md:grid md:grid-cols-12 md:gap-8">
+              <div className="md:col-span-7 md:col-start-6">
+                <Button to={nearbyLocation.path} variant="link">
+                  Voir nos réalisations{' '}
+                  {nearbyLocation.city === 'Golfe du Morbihan' ? 'dans le' : 'à'}{' '}
+                  {nearbyLocation.city}
+                </Button>
+              </div>
+            </div>
+          )}
+        </Container>
+      </Section>
+
+      <Section spacing="none" className="pb-20 md:pb-32">
+        <Container>
+          <SectionHeading eyebrow="Galerie" title="Le projet en images" />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+            {project.gallery.map((img, index) => {
+              // Une photo sur trois en pleine largeur ; la dernière aussi si elle resterait seule
+              const wide =
+                index % 3 === 0 || (index === project.gallery.length - 1 && index % 3 === 1);
+              return (
+                <div
+                  key={index}
+                  ref={(el) => {
+                    thumbnailRefs.current[index] = el;
+                  }}
+                  onClick={() => openLightbox(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      openLightbox(index);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Agrandir la vue ${index + 1}`}
+                  className={cn(
+                    'group cursor-zoom-in overflow-hidden bg-sand',
+                    wide ? 'aspect-[3/2] md:col-span-2 md:aspect-[16/9]' : 'aspect-[4/3]'
+                  )}
+                >
+                  <Img
+                    src={img}
+                    alt={project.galleryAlts?.[index] ?? `Vue ${index + 1} - ${project.title}`}
+                    sizes={
+                      wide ? '(max-width: 1280px) 100vw, 1200px' : '(max-width: 768px) 100vw, 50vw'
+                    }
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.02]"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      {project.beforeAfterGallery && project.beforeAfterGallery.length > 0 && (
+        <Section tone="sand">
+          <Container size="medium">
+            <SectionHeading eyebrow="Transformation" title="Avant / Après" align="center" />
+            <div className="grid grid-cols-1 gap-12">
+              {project.beforeAfterGallery.map((item, index) => (
+                <BeforeAfterSlider
+                  key={index}
+                  beforeImage={item.before}
+                  afterImage={item.after}
+                  beforeAlt={`${project.title} à ${project.location} - Avant rénovation (${index + 1})`}
+                  afterAlt={`${project.title} à ${project.location} - Après rénovation (${index + 1})`}
+                />
+              ))}
+            </div>
+          </Container>
+        </Section>
       )}
 
-      {/* Navigation Footer */}
-      <div className="border-t border-gray-100">
-        <div className="grid grid-cols-2 divide-x divide-gray-100">
+      <nav aria-label="Autres projets" className="border-t border-line bg-canvas">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-line">
           <Link
             to={`/realisations/${prevProject.id}`}
-            className="group block p-8 md:p-12 hover:bg-stone-50 transition-colors text-right"
+            className="group block px-6 py-10 md:px-10 md:py-14"
           >
-            <span className="block text-xs uppercase tracking-widest text-stone-400 mb-2 group-hover:text-sage-600 transition-colors">
-              Projet Précédent
+            <span className="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-stone-500">
+              <ArrowLeft
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-1"
+                aria-hidden="true"
+              />
+              Projet précédent
             </span>
-            <span className="font-serif text-lg md:text-2xl text-stone-800 group-hover:translate-x-1 inline-block transition-transform duration-300">
+            <span className="mt-3 block font-serif text-lg text-stone-900 md:text-2xl">
               {prevProject.title}
             </span>
           </Link>
           <Link
             to={`/realisations/${nextProject.id}`}
-            className="group block p-8 md:p-12 hover:bg-stone-50 transition-colors text-left"
+            className="group block px-6 py-10 text-right md:px-10 md:py-14"
           >
-            <span className="block text-xs uppercase tracking-widest text-stone-400 mb-2 group-hover:text-sage-600 transition-colors">
-              Projet Suivant
+            <span className="flex items-center justify-end gap-2 text-xs uppercase tracking-[0.16em] text-stone-500">
+              Projet suivant
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </span>
-            <span className="font-serif text-lg md:text-2xl text-stone-800 group-hover:-translate-x-1 inline-block transition-transform duration-300">
+            <span className="mt-3 block font-serif text-lg text-stone-900 md:text-2xl">
               {nextProject.title}
             </span>
           </Link>
         </div>
-      </div>
-    </div>
+      </nav>
+    </>
   );
 };
 
