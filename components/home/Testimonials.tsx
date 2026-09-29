@@ -1,140 +1,74 @@
 import React, { useState } from 'react';
-import Section from '../ui/Section';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { testimonialsData } from '../../data/testimonials';
+import { cn } from '../../lib/utils';
+import Container from '../ui/Container';
+import Reveal from '../ui/Reveal';
+import Section from '../ui/Section';
 
+const navButton =
+  'flex h-11 w-11 items-center justify-center border border-stone-900/20 text-stone-700 transition-colors duration-300 hover:border-stone-900 hover:text-stone-900';
+
+/**
+ * Une citation à la fois. Toutes les citations sont empilées dans la même cellule
+ * de grille : la hauteur est celle de la plus longue (aucun saut de mise en page)
+ * et tout le texte est présent dans le HTML prérendu.
+ */
 const Testimonials: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonialsData.length);
-  };
-
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
-  };
+  const [current, setCurrent] = useState(0);
+  const count = testimonialsData.length;
+  const go = (delta: number) => setCurrent((index) => (index + delta + count) % count);
 
   return (
-    <Section id="testimonials" className="max-w-7xl mx-auto px-6">
-      {/* En-tête de section */}
-      <div className="flex flex-col items-center text-center mb-12">
-        <div className="mb-6 text-sage-300">
-          <Quote className="w-10 h-10 rotate-180" />
-        </div>
-        <h2 className="font-serif text-3xl text-stone-800 mb-4">Ce qu'ils disent</h2>
-        <div className="w-12 h-0.5 bg-sage-400 mx-auto"></div>
-      </div>
+    <Section id="avis" tone="surface">
+      <Container size="medium">
+        <Reveal className="text-center">
+          <p className="eyebrow mb-10">Ils m'ont fait confiance</p>
 
-      {/* Desktop : carousel 3 cartes visibles */}
-      <div className="hidden md:block">
-        <div className="relative">
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-8 p-2 text-stone-400 hover:text-sage-600 transition-colors z-10"
-            aria-label="Témoignage précédent"
-          >
-            <ChevronLeft className="w-8 h-8" />
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-8 p-2 text-stone-400 hover:text-sage-600 transition-colors z-10"
-            aria-label="Témoignage suivant"
-          >
-            <ChevronRight className="w-8 h-8" />
-          </button>
-
-          <div className="grid grid-cols-3 gap-8">
-            {[0, 1, 2].map((offset) => {
-              const t = testimonialsData[(currentIndex + offset) % testimonialsData.length];
-              return (
-                <div
-                  key={`${currentIndex}-${offset}`}
-                  className="bg-stone-50 p-8 rounded-sm border border-gray-100 flex flex-col animate-testimonial-enter"
-                >
-                  <Quote className="w-6 h-6 text-sage-300 mb-4 rotate-180 flex-shrink-0" />
-                  <blockquote className="font-light text-stone-700 italic text-sm leading-relaxed flex-grow mb-6">
-                    « {t.text} »
-                  </blockquote>
-                  <div className="border-t border-gray-100 pt-4">
-                    <cite className="not-italic text-xs font-bold uppercase tracking-widest text-stone-800 block">
-                      {t.author}
-                    </cite>
-                    <span className="text-xs text-sage-600 uppercase tracking-widest">
-                      {t.project}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="grid" aria-live="polite">
+            {testimonialsData.map((testimonial, index) => (
+              <figure
+                key={testimonial.id}
+                aria-hidden={index !== current}
+                className={cn(
+                  'col-start-1 row-start-1 flex flex-col justify-center transition-opacity duration-500',
+                  index === current ? 'opacity-100' : 'pointer-events-none opacity-0'
+                )}
+              >
+                <blockquote className="font-serif text-xl leading-snug text-stone-900 md:text-[1.75rem]">
+                  «&nbsp;{testimonial.text}&nbsp;»
+                </blockquote>
+                <figcaption className="mt-8 text-sm text-stone-500">
+                  <span className="font-medium text-stone-900">{testimonial.author}</span> —{' '}
+                  {testimonial.project}
+                </figcaption>
+              </figure>
+            ))}
           </div>
-        </div>
 
-        <div className="flex justify-center space-x-2 mt-8">
-          {testimonialsData.map((_, index) => (
+          <div className="mt-12 flex items-center justify-center gap-6">
             <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-sage-600 w-4' : 'bg-stone-300 hover:bg-sage-400'
-              }`}
-              aria-label={`Aller au témoignage ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile : carousel */}
-      <div className="md:hidden flex flex-col items-center text-center">
-        <div className="relative w-full">
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 p-2 text-stone-400 hover:text-sage-600 transition-colors z-10"
-            aria-label="Témoignage précédent"
-          >
-            <ChevronLeft className="w-8 h-8" />
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 p-2 text-stone-400 hover:text-sage-600 transition-colors z-10"
-            aria-label="Témoignage suivant"
-          >
-            <ChevronRight className="w-8 h-8" />
-          </button>
-
-          <div
-            key={currentIndex}
-            className="px-8 min-h-[200px] flex flex-col justify-center animate-testimonial-enter"
-          >
-            <blockquote className="font-light text-stone-700 italic text-lg md:text-xl leading-relaxed mb-8">
-              « {testimonialsData[currentIndex].text} »
-            </blockquote>
-
-            <div className="flex flex-col items-center space-y-1">
-              <cite className="not-italic text-sm font-bold uppercase tracking-widest text-stone-800">
-                {testimonialsData[currentIndex].author}
-              </cite>
-              <span className="text-xs text-sage-600 uppercase tracking-widest">
-                {testimonialsData[currentIndex].project}
-              </span>
-            </div>
+              type="button"
+              onClick={() => go(-1)}
+              className={navButton}
+              aria-label="Avis précédent"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            </button>
+            <span className="min-w-12 text-sm tabular-nums text-stone-500">
+              {current + 1} / {count}
+            </span>
+            <button
+              type="button"
+              onClick={() => go(1)}
+              className={navButton}
+              aria-label="Avis suivant"
+            >
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
           </div>
-        </div>
-
-        <div className="flex space-x-2 mt-8">
-          {testimonialsData.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-sage-600 w-4' : 'bg-stone-300 hover:bg-sage-400'
-              }`}
-              aria-label={`Aller au témoignage ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+        </Reveal>
+      </Container>
     </Section>
   );
 };

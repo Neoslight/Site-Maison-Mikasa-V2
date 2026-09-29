@@ -1,10 +1,9 @@
 import React from 'react';
 import Introduction from '../components/home/Introduction';
-import AboutPreview from '../components/home/AboutPreview';
 import FeaturedProjects from '../components/home/FeaturedProjects';
-import ServicesPreview from '../components/home/ServicesPreview';
+import Approach from '../components/home/Approach';
+import ServicesList from '../components/home/ServicesList';
 import Testimonials from '../components/home/Testimonials';
-import ServiceAreas from '../components/home/ServiceAreas';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import JsonLd from '../components/seo/JsonLd';
 import { LOCAL_BUSINESS_SCHEMA } from '../data/schema';
@@ -16,11 +15,10 @@ const Home: React.FC = () => {
     <>
       <JsonLd schema={LOCAL_BUSINESS_SCHEMA} />
       <Introduction />
-      <AboutPreview />
       <FeaturedProjects />
-      <ServicesPreview />
+      <Approach />
+      <ServicesList />
       <Testimonials />
-      <ServiceAreas />
     </>
   );
 };

@@ -1,87 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import Section from '../ui/Section';
+import Button from '../ui/Button';
+import Container from '../ui/Container';
 import Img from '../ui/Img';
 
-const Introduction: React.FC = () => {
-  return (
-    <div id="intro">
-      <Section py="py-0" className="w-full">
-        <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
-          {/* Hero image */}
-          <Img
-            src="/homepage-photo-accueil.webp"
-            alt="Maison Mikasa - Architecture d'intérieur"
-            sizes="100vw"
-            loading="eager"
-            fetchPriority="high"
-            className="absolute inset-0 w-full h-full object-cover object-center scale-105"
-          />
+/** Hero éditorial : titre sur fond crème, puis grande photo panoramique. */
+const Introduction: React.FC = () => (
+  <section id="intro" className="bg-canvas">
+    <Container className="grid gap-8 pb-12 pt-10 md:pb-16 md:pt-20 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <h1 className="lg:col-span-8">
+        <span className="eyebrow mb-6">
+          Architecte d'intérieur — Vannes, Baden &amp; Golfe du Morbihan
+        </span>
+        <span className="type-display block">
+          Maison Mikasa imagine pour vous un{' '}
+          <span className="italic text-sage-700">refuge sur-mesure.</span>
+        </span>
+      </h1>
 
-          {/* Gradient overlay — dégradé du haut vers le bas pour plus de profondeur */}
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-stone-900/50 to-stone-900/70" />
+      <div className="lg:col-span-4 lg:pb-2">
+        <p className="text-base leading-relaxed text-stone-600">
+          Parce qu'un lieu de vie harmonieux améliore considérablement le quotidien. En alliant
+          l'exigence du fonctionnel à l'élégance de l'esthétique, je conçois des espaces durables,
+          pensés pour évoluer avec vous.
+        </p>
+        <Button to="/realisations" className="mt-8">
+          Découvrir les réalisations
+        </Button>
+      </div>
+    </Container>
 
-          {/* Text content — staggered reveal via hero-item CSS animation */}
-          <div className="relative z-10 max-w-3xl mx-auto text-center px-6 drop-shadow-2xl space-y-8">
-            <h1>
-              <span
-                className="hero-item block text-white/85 font-sans uppercase tracking-[0.2em] text-xs md:text-sm font-bold mb-4"
-                style={{ animationDelay: '0ms' }}
-              >
-                Architecte d'intérieur — Vannes, Baden &amp; Golfe du Morbihan
-              </span>
-              <span
-                className="hero-item block font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight drop-shadow-xl"
-                style={{ animationDelay: '0ms' }}
-              >
-                Maison Mikasa imagine pour vous un{' '}
-                <span className="italic text-stone-200">refuge sur-mesure.</span>
-              </span>
-            </h1>
-
-            <div
-              className="hero-item w-16 h-0.5 bg-sage-300 mx-auto drop-shadow-md"
-              style={{ animationDelay: '200ms' }}
-            />
-
-            <p
-              className="hero-item text-stone-100 leading-relaxed font-light text-lg drop-shadow-lg"
-              style={{ animationDelay: '350ms' }}
-            >
-              Parce qu'un lieu de vie harmonieux améliore considérablement le quotidien.
-              <br />
-              En alliant l'exigence du fonctionnel à l'élégance de l'esthétique, je conçois des
-              espaces durables, pensés pour évoluer avec vous. Découvrons le potentiel de votre
-              intérieur&nbsp;!
-            </p>
-
-            <div className="hero-item" style={{ animationDelay: '500ms' }}>
-              <Link
-                to="/realisations"
-                className="inline-flex items-center text-sm uppercase tracking-widest text-white border-b border-white/40 pb-0.5 hover:border-white transition-colors duration-300"
-              >
-                Découvrir les réalisations <ArrowRight className="w-3 h-3 ml-2" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Indicateur de scroll — ancré en bas du hero */}
-          <div
-            className="hero-item absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-            style={{ animationDelay: '700ms' }}
-          >
-            <div className="flex flex-col items-center space-y-2 text-white/60">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-sans">Découvrir</span>
-              <div className="w-px h-8 bg-white/40 relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/80 animate-scroll-line" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
+    <div className="mx-auto max-w-[1600px] md:px-10">
+      <div className="aspect-[4/3] overflow-hidden bg-sand md:aspect-[21/9]">
+        <Img
+          src="/homepage-photo-accueil.webp"
+          alt="Maison Mikasa - Architecture d'intérieur"
+          sizes="(max-width: 1600px) 100vw, 1600px"
+          loading="eager"
+          fetchPriority="high"
+          className="h-full w-full object-cover object-center"
+        />
+      </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default Introduction;

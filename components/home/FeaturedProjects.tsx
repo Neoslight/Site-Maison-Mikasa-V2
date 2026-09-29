@@ -1,79 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Section from '../ui/Section';
-import StaggerReveal from '../ui/StaggerReveal';
-import { ArrowRight } from 'lucide-react';
 import { projectsData } from '../../data/projects';
-import Img from '../ui/Img';
+import Button from '../ui/Button';
+import Container from '../ui/Container';
+import ProjectCard from '../ui/ProjectCard';
+import Reveal from '../ui/Reveal';
+import Section from '../ui/Section';
+import SectionHeading from '../ui/SectionHeading';
 
 const FeaturedProjects: React.FC = () => {
-  // Select first 3 visible projects for featured section
-  const featured = projectsData.filter((p) => !p.hidden).slice(0, 3);
+  const [first, ...others] = projectsData.filter((p) => !p.hidden).slice(0, 3);
 
   return (
-    <Section id="featured-projects" className="max-w-7xl mx-auto px-6">
-      <div className="text-center mb-12">
-        <h2 className="font-serif text-3xl text-stone-800 mb-4">Dernières réalisations</h2>
-        <div className="w-12 h-0.5 bg-sage-400 mx-auto"></div>
-      </div>
+    <Section id="realisations">
+      <Container>
+        <Reveal>
+          <SectionHeading
+            eyebrow="Réalisations"
+            title="Des lieux de vie, pensés un par un"
+            action={
+              <Button to="/realisations" variant="link">
+                Toutes les réalisations
+              </Button>
+            }
+          />
+        </Reveal>
 
-      {/* Les 3 projets en grille horizontale égale */}
-      <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {featured.map((project) => (
-          <Link
-            to={`/realisations/${project.id}`}
-            key={project.id}
-            className="group block cursor-pointer"
-          >
-            <div className="relative overflow-hidden aspect-[4/5] mb-5 bg-stone-100 rounded-sm">
-              <div className="absolute inset-0 bg-stone-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+        <Reveal>
+          <ProjectCard project={first} featured sizes="(max-width: 1280px) 100vw, 1200px" />
+        </Reveal>
 
-              <Img
-                src={project.coverImage}
-                alt={project.coverImageAlt ?? project.title}
-                sizes="(max-width: 768px) 100vw, 33vw"
-                loading="lazy"
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* Badge année */}
-              {project.year && (
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="text-[10px] text-white/80 uppercase tracking-widest bg-black/20 backdrop-blur-sm px-3 py-1 rounded-sm">
-                    {project.year}
-                  </span>
-                </div>
-              )}
-
-              <div className="absolute bottom-6 left-6 z-20 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
-                <span className="inline-flex items-center text-white text-xs uppercase tracking-widest border border-white/50 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-sm">
-                  Voir le projet <ArrowRight className="w-3 h-3 ml-2" />
-                </span>
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <h3 className="font-serif text-xl text-stone-800 group-hover:text-sage-600 transition-colors duration-300">
-                {project.title}
-              </h3>
-              <div className="flex items-center text-xs text-stone-500 uppercase tracking-widest font-light">
-                <span>{project.location}</span>
-                <span className="mx-2">•</span>
-                <span>{project.category}</span>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </StaggerReveal>
-
-      <div className="mt-12 text-center">
-        <Link
-          to="/realisations"
-          className="inline-block border-b border-stone-800 pb-1 text-sm uppercase tracking-widest text-stone-800 hover:text-sage-600 hover:border-sage-600 transition-colors"
-        >
-          Voir toutes les réalisations
-        </Link>
-      </div>
+        <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-2 md:gap-x-10">
+          {others.map((project, index) => (
+            <Reveal key={project.id} delay={index * 120} className={index === 1 ? 'md:mt-32' : ''}>
+              <ProjectCard project={project} sizes="(max-width: 768px) 100vw, 50vw" />
+            </Reveal>
+          ))}
+        </div>
+      </Container>
     </Section>
   );
 };
