@@ -7,8 +7,8 @@ import Reveal from '../ui/Reveal';
 const CtaBand: React.FC = () => (
   <section className="bg-sand py-20 md:py-28" aria-labelledby="cta-band-title">
     <Container>
-      <Reveal className="grid gap-10 md:grid-cols-12 md:items-end">
-        <div className="md:col-span-7">
+      <Reveal className="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-7">
           <p className="eyebrow mb-5">Votre projet</p>
           <h2 id="cta-band-title" className="type-title">
             Un intérieur à repenser&nbsp;? <span className="italic text-sage-700">Parlons-en.</span>
@@ -18,7 +18,7 @@ const CtaBand: React.FC = () => (
             d'un rendez-vous conseil.
           </p>
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end">
+        <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
           <Button to="/rendez-vous">Prendre rendez-vous</Button>
           <Button to="/contact" variant="secondary">
             Écrire un message

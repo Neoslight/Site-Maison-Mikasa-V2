@@ -7,7 +7,7 @@ import { cn } from '../../lib/utils';
 type ButtonVariant = 'primary' | 'secondary' | 'link';
 
 const base =
-  'inline-flex items-center justify-center gap-2.5 text-xs font-medium uppercase tracking-[0.16em] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60';
+  'inline-flex items-center justify-center gap-2.5 text-center text-xs sm:whitespace-nowrap font-medium uppercase tracking-[0.16em] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60';
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-sage-600 px-7 py-4 text-white hover:bg-sage-700',
