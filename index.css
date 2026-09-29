@@ -34,6 +34,8 @@
   --color-surface: #ffffff;
   --color-sand: #eeeae2;
   --color-line: #e3ddd2;
+  /* Erreur de formulaire — terre cuite, accordée à la palette chaude */
+  --color-error: #a2432f;
 
   /* Sage color palette (brand) */
   --color-sage-50: #f4f7f4;

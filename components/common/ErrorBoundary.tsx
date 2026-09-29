@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ui/Button';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -29,32 +30,21 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     if (!this.state.hasError) return this.props.children;
 
     return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center px-6">
-        <div className="max-w-md text-center">
-          <span className="text-sage-600 uppercase tracking-widest text-xs font-bold mb-4 block">
-            Oups
-          </span>
-          <h1 className="font-serif text-3xl md:text-4xl text-stone-800 mb-6">
-            Une erreur est survenue
-          </h1>
-          <p className="text-stone-600 font-light leading-relaxed mb-10">
+      <div className="flex min-h-screen items-center bg-canvas px-6">
+        <div className="mx-auto w-full max-w-3xl">
+          <p className="eyebrow mb-5">Oups</p>
+          <h1 className="type-display">Une erreur est survenue</h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-stone-600">
             Quelque chose s'est mal passé lors de l'affichage de cette page. Veuillez réessayer ou
             revenir à l'accueil.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/"
-              onClick={this.handleReset}
-              className="inline-flex items-center justify-center bg-sage-600 text-white px-8 py-3.5 uppercase tracking-widest text-[10px] font-bold hover:bg-sage-700 transition-colors rounded-sm shadow-sm"
-            >
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button href="/" onClick={this.handleReset}>
               Retour à l'accueil
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center border border-stone-300 text-stone-700 px-8 py-3.5 uppercase tracking-widest text-[10px] font-bold hover:border-sage-400 hover:text-sage-600 transition-colors rounded-sm"
-            >
-              Nous contacter
-            </a>
+            </Button>
+            <Button href="/contact" variant="secondary">
+              Me contacter
+            </Button>
           </div>
         </div>
       </div>

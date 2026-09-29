@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import Section from '../components/ui/Section';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Instagram,
-  Linkedin,
-  Facebook,
-  Clock,
-  CalendarDays,
-} from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { useRouteMeta } from '../lib/useRouteMeta';
+import { ADDRESS, EMAIL, EMAIL_HREF, OPENING_HOURS, PHONE, PHONE_HREF } from '../lib/site';
+import Button from '../components/ui/Button';
+import Container from '../components/ui/Container';
+import { InputField, SelectField, TextareaField } from '../components/ui/Field';
+import PageHeader from '../components/ui/PageHeader';
+import SocialLinks from '../components/ui/SocialLinks';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -103,189 +97,82 @@ const Contact: React.FC = () => {
     }
   };
 
-  return (
-    <div className="bg-white">
-      {/* Header */}
-      <Section bgColor="bg-stone-50" className="text-center" py="py-24">
-        <div className="max-w-4xl mx-auto px-6">
-          <span className="text-sage-600 uppercase tracking-widest text-xs font-bold mb-4 block">
-            Contact
+  const details = [
+    { label: 'Téléphone', value: <a href={PHONE_HREF}>{PHONE}</a> },
+    { label: 'Email', value: <a href={EMAIL_HREF}>{EMAIL}</a> },
+    {
+      label: 'Localisation',
+      value: (
+        <>
+          {ADDRESS}
+          <span className="block text-sm text-stone-500">
+            Intervention dans tout le Golfe du Morbihan
           </span>
-          <h1 className="font-serif text-4xl md:text-5xl text-stone-800 mb-6">
-            <span className="block text-sm md:text-base text-sage-600 font-sans uppercase tracking-widest mb-3">
-              Architecte d'intérieur à Baden &amp; Vannes
-            </span>
+        </>
+      ),
+    },
+    { label: 'Horaires', value: OPENING_HOURS },
+  ];
+
+  return (
+    <>
+      <PageHeader
+        title={
+          <>
+            <span className="eyebrow mb-6">Architecte d'intérieur à Baden &amp; Vannes</span>
             Parlons de votre projet
-          </h1>
-          <p className="text-stone-600 font-light max-w-2xl mx-auto leading-relaxed">
-            Une question, une envie de changement ou un projet précis ? N'hésitez pas à m'écrire. Je
-            serai ravie d'échanger avec vous sur vos besoins en architecture et décoration.
-          </p>
-        </div>
-      </Section>
+          </>
+        }
+        intro="Une question, une envie de changement ou un projet précis ? N'hésitez pas à m'écrire. Je serai ravie d'échanger avec vous sur vos besoins en architecture et décoration."
+      />
 
-      <Section className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Informations de contact (Gauche) */}
-          <div className="lg:col-span-5 space-y-12">
+      <section className="bg-canvas pb-20 md:pb-32">
+        <Container className="grid gap-16 lg:grid-cols-12 lg:gap-12">
+          <aside className="space-y-12 lg:col-span-4">
             <div>
-              <h2 className="font-serif text-2xl text-stone-800 mb-6">Coordonnées</h2>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-sage-50 flex items-center justify-center text-sage-600 flex-shrink-0 mr-4">
-                    <Phone className="w-5 h-5" />
+              <h2 className="sr-only">Coordonnées</h2>
+              <dl className="space-y-6">
+                {details.map((item) => (
+                  <div key={item.label} className="border-t border-line pt-5">
+                    <dt className="text-xs uppercase tracking-[0.16em] text-stone-500">
+                      {item.label}
+                    </dt>
+                    <dd className="mt-2 text-base text-stone-900 [&_a:hover]:text-sage-700 [&_a]:transition-colors">
+                      {item.value}
+                    </dd>
                   </div>
-                  <div>
-                    <span className="block text-xs uppercase tracking-widest text-stone-500 mb-1">
-                      Téléphone
-                    </span>
-                    <a
-                      href="tel:0689408566"
-                      className="text-stone-800 hover:text-sage-600 transition-colors font-medium"
-                    >
-                      06 89 40 85 66
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-sage-50 flex items-center justify-center text-sage-600 flex-shrink-0 mr-4">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase tracking-widest text-stone-500 mb-1">
-                      Email
-                    </span>
-                    <a
-                      href="mailto:maisonmikasa@gmail.com"
-                      className="text-stone-800 hover:text-sage-600 transition-colors font-medium"
-                    >
-                      maisonmikasa@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-sage-50 flex items-center justify-center text-sage-600 flex-shrink-0 mr-4">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase tracking-widest text-stone-500 mb-1">
-                      Localisation
-                    </span>
-                    <p className="text-stone-800">
-                      56870 Baden, Morbihan
-                      <br />
-                      <span className="text-sm text-stone-500 font-light">
-                        Intervention dans tout le Golfe du Morbihan
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-sage-50 flex items-center justify-center text-sage-600 flex-shrink-0 mr-4">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase tracking-widest text-stone-500 mb-1">
-                      Horaires
-                    </span>
-                    <p className="text-stone-800 text-sm">Lundi - Vendredi : 9h00 - 18h00</p>
-                  </div>
-                </div>
-              </div>
+                ))}
+              </dl>
+              <SocialLinks className="mt-8" />
             </div>
 
-            {/* CTA Rendez-vous */}
-            <div className="bg-sage-50 border border-sage-100 rounded-sm p-6 space-y-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600 flex-shrink-0">
-                  <CalendarDays className="w-4 h-4" />
-                </div>
-                <h3 className="font-serif text-lg text-stone-800">Prendre rendez-vous</h3>
-              </div>
-              <p className="text-stone-500 font-light text-sm leading-relaxed">
+            <div className="bg-sand p-8">
+              <h2 className="text-2xl">Prendre rendez-vous</h2>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone-600">
                 Vous préférez choisir directement un créneau ? Réservez un appel découverte de 20
                 minutes, gratuit et sans engagement.
               </p>
-              <Link
-                to="/rendez-vous"
-                className="inline-flex items-center bg-sage-600 text-white px-6 py-3 uppercase tracking-widest text-[10px] font-bold hover:bg-sage-700 transition-colors rounded-sm shadow-sm"
-              >
-                <CalendarDays className="w-3 h-3 mr-2" />
+              <Button to="/rendez-vous" variant="link" className="mt-6">
                 Voir les créneaux disponibles
-              </Link>
+              </Button>
             </div>
+          </aside>
 
-            <div>
-              <h2 className="font-serif text-2xl text-stone-800 mb-6">Réseaux Sociaux</h2>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.instagram.com/maisonmikasa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visiter la page Instagram de Maison Mikasa"
-                  className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                >
-                  <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
-                <a
-                  href="https://www.facebook.com/maisonmikasa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visiter la page Facebook de Maison Mikasa"
-                  className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                >
-                  <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/laurine-fourcherot/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visiter la page LinkedIn de Maison Mikasa"
-                  className="w-12 h-12 border border-gray-200 rounded-sm flex items-center justify-center text-stone-600 hover:text-sage-600 hover:border-sage-200 transition-all group shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                >
-                  <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Formulaire (Droite) */}
-          <div className="lg:col-span-7 bg-stone-50 p-8 md:p-12 rounded-sm shadow-sm">
-            <h2 className="font-serif text-2xl text-stone-800 mb-8">Envoyez-nous un message</h2>
+          <div className="bg-surface p-8 md:p-12 lg:col-span-7 lg:col-start-6">
+            <h2 className="type-subtitle">Envoyez-moi un message</h2>
 
             {formStatus === 'success' ? (
-              <div className="flex flex-col items-center justify-center text-center py-16 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-sage-100 flex items-center justify-center mb-2">
-                  <svg
-                    className="w-8 h-8 text-sage-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <h3 className="font-serif text-2xl text-stone-800">Message envoyé !</h3>
-                <p className="text-stone-600 font-light max-w-sm">
+              <div className="py-16" role="status">
+                <p className="type-subtitle text-sage-700">Message envoyé.</p>
+                <p className="mt-4 max-w-sm leading-relaxed text-stone-600">
                   Merci pour votre message. Je vous répondrai dans les plus brefs délais.
                 </p>
-                <button
-                  onClick={() => setFormStatus('idle')}
-                  className="mt-4 text-xs uppercase tracking-widest text-sage-600 hover:text-sage-700 border-b border-sage-300 pb-0.5 transition-colors"
-                >
+                <Button variant="link" className="mt-8" onClick={() => setFormStatus('idle')}>
                   Envoyer un autre message
-                </button>
+                </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="mt-10 space-y-8">
                 <input
                   type="text"
                   name="_gotcha"
@@ -302,158 +189,95 @@ const Contact: React.FC = () => {
                     opacity: 0,
                   }}
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="name"
-                      className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                    >
-                      Nom & Prénom
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                      placeholder="Votre nom"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="phone"
-                      className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                    >
-                      Téléphone
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                      placeholder="Votre numéro"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                  <InputField
+                    label="Nom & Prénom"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm shadow-sm"
-                    placeholder="votre@email.com"
+                    autoComplete="name"
+                    placeholder="Votre nom"
+                  />
+                  <InputField
+                    label="Téléphone"
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    autoComplete="tel"
+                    placeholder="Votre numéro"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="projectType"
-                    className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                  >
-                    Type de projet
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="projectType"
-                      name="projectType"
-                      value={formData.projectType}
-                      onChange={handleChange}
-                      className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm appearance-none shadow-sm"
-                    >
-                      <option value="" disabled>
-                        Sélectionnez une option
-                      </option>
-                      <option value="Le Rendez-vous Conseil">Le Rendez-vous Conseil</option>
-                      <option value="Rénovation Résidence Principale">
-                        Rénovation Résidence Principale
-                      </option>
-                      <option value="Rénovation Résidence Secondaire">
-                        Rénovation Résidence Secondaire
-                      </option>
-                      <option value="Dossier Mairie - Déclaration">
-                        Dossier Mairie - Déclaration
-                      </option>
-                      <option value="Autre">Autre demande</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
-                      <svg
-                        className="w-4 h-4 text-stone-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                <InputField
+                  label="Email"
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  autoComplete="email"
+                  placeholder="votre@email.com"
+                />
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-xs uppercase tracking-widest text-stone-600 font-bold"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    minLength={10}
-                    rows={5}
-                    className="w-full bg-white border border-gray-200 px-4 py-3 text-stone-800 focus:outline-none focus:border-sage-400 focus:ring-1 focus:ring-sage-400 transition-colors rounded-sm resize-none shadow-sm"
-                    placeholder="Racontez-moi votre projet..."
-                  ></textarea>
-                </div>
+                <SelectField
+                  label="Type de projet"
+                  id="projectType"
+                  name="projectType"
+                  value={formData.projectType}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Sélectionnez une option
+                  </option>
+                  <option value="Le Rendez-vous Conseil">Le Rendez-vous Conseil</option>
+                  <option value="Rénovation Résidence Principale">
+                    Rénovation Résidence Principale
+                  </option>
+                  <option value="Rénovation Résidence Secondaire">
+                    Rénovation Résidence Secondaire
+                  </option>
+                  <option value="Dossier Mairie - Déclaration">Dossier Mairie - Déclaration</option>
+                  <option value="Autre">Autre demande</option>
+                </SelectField>
+
+                <TextareaField
+                  label="Message"
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  minLength={10}
+                  rows={5}
+                  placeholder="Racontez-moi votre projet..."
+                />
 
                 {formStatus === 'error' && (
-                  <p className="text-sm text-red-600 font-light">
-                    Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.
+                  <p className="text-sm text-error" role="alert">
+                    Une erreur est survenue. Veuillez réessayer ou me contacter par téléphone.
                   </p>
                 )}
 
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    disabled={formStatus === 'submitting'}
-                    className="inline-flex items-center justify-center w-full md:w-auto bg-sage-600 text-white px-10 py-4 uppercase tracking-widest text-xs font-bold transition-all duration-300 rounded-sm shadow-md hover:bg-sage-700 hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
-                  >
-                    {formStatus === 'submitting' ? (
-                      'Envoi en cours…'
-                    ) : (
-                      <>
-                        Envoyer ma demande <Send className="w-4 h-4 ml-2" />
-                      </>
-                    )}
-                  </button>
-                </div>
+                <Button
+                  type="submit"
+                  disabled={formStatus === 'submitting'}
+                  arrow={formStatus !== 'submitting'}
+                  className="w-full md:w-auto"
+                >
+                  {formStatus === 'submitting' ? 'Envoi en cours…' : 'Envoyer ma demande'}
+                </Button>
               </form>
             )}
           </div>
-        </div>
-      </Section>
-    </div>
+        </Container>
+      </section>
+    </>
   );
 };
 
