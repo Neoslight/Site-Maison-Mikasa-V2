@@ -120,7 +120,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 />
               </Link>
               <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                <ul className="w-56 border border-line bg-canvas py-3">
+                <ul className="w-56 rounded-soft border border-line bg-canvas py-3">
                   {PROJECT_CATEGORIES.map((item) => (
                     <li key={item.to}>
                       <Link

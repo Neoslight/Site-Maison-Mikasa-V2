@@ -71,7 +71,7 @@ const getMeetingFromSearch = (search: string): MeetingId | null => {
 
 const CalSkeleton: React.FC = () => (
   <div
-    className="flex w-full animate-pulse items-center justify-center border border-line bg-surface"
+    className="flex w-full animate-pulse items-center justify-center rounded-soft border border-line bg-surface"
     style={{ height: '700px' }}
   >
     <p className="text-sm text-stone-400">Chargement du calendrier…</p>
@@ -88,7 +88,7 @@ const MeetingCard: React.FC<{
     onClick={onSelect}
     aria-pressed={active}
     className={cn(
-      'group flex flex-col border bg-surface p-8 text-left transition-colors duration-300 md:p-10',
+      'group flex flex-col rounded-soft border bg-surface p-8 text-left transition-colors duration-300 md:p-10',
       active ? 'border-sage-600 ring-1 ring-sage-600' : 'border-line hover:border-stone-400'
     )}
   >
@@ -211,7 +211,7 @@ const RendezVous: React.FC = () => {
               </Suspense>
             ) : (
               /* Fallback si aucun lien Cal.com n'est configuré */
-              <div className="border border-line bg-surface p-10 text-center md:p-16">
+              <div className="rounded-soft border border-line bg-surface p-10 text-center md:p-16">
                 <h2 className="type-subtitle">Réservation en ligne bientôt disponible</h2>
                 <p className="mx-auto mt-4 max-w-md leading-relaxed text-stone-600">
                   Le calendrier en ligne est en cours de configuration. En attendant, contactez-moi

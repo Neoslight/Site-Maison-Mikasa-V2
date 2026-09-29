@@ -6,8 +6,8 @@ import Img from '../ui/Img';
 /** Hero éditorial : titre sur fond crème, puis grande photo panoramique. */
 const Introduction: React.FC = () => (
   <section id="intro" className="bg-canvas">
-    <Container className="grid gap-8 pb-12 pt-10 md:pb-16 md:pt-20 lg:grid-cols-12 lg:items-end lg:gap-12">
-      <h1 className="lg:col-span-8">
+    <Container className="flex flex-col items-center pb-12 pt-12 text-center md:pb-16 md:pt-20">
+      <h1 className="max-w-4xl">
         <span className="eyebrow mb-6">
           Architecte d'intérieur — Vannes, Baden &amp; Golfe du Morbihan
         </span>
@@ -17,8 +17,8 @@ const Introduction: React.FC = () => (
         </span>
       </h1>
 
-      <div className="lg:col-span-4 lg:pb-2">
-        <p className="text-base leading-relaxed text-stone-600">
+      <div className="mt-8 max-w-xl">
+        <p className="text-base leading-relaxed text-stone-600 md:text-lg">
           Parce qu'un lieu de vie harmonieux améliore considérablement le quotidien. En alliant
           l'exigence du fonctionnel à l'élégance de l'esthétique, je conçois des espaces durables,
           pensés pour évoluer avec vous.
@@ -29,8 +29,8 @@ const Introduction: React.FC = () => (
       </div>
     </Container>
 
-    <div className="mx-auto max-w-[1600px] md:px-10">
-      <div className="aspect-[4/3] overflow-hidden bg-sand md:aspect-[21/9]">
+    <div className="mx-auto max-w-[1600px] px-4 md:px-10">
+      <div className="aspect-[4/3] overflow-hidden rounded-soft bg-sand md:aspect-[21/9] md:rounded-panel">
         <Img
           src="/homepage-photo-accueil.webp"
           alt="Maison Mikasa - Architecture d'intérieur"

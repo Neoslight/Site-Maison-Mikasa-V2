@@ -44,7 +44,7 @@ const About: React.FC = () => {
       <Section spacing="none" className="pb-20 md:pb-32">
         <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <div className="aspect-[4/5] overflow-hidden bg-sand lg:sticky lg:top-28">
+            <div className="rounded-arch aspect-[4/5] overflow-hidden bg-sand lg:sticky lg:top-28">
               <Img
                 src="photo-profil.webp"
                 alt="Laurine Fourcherot - Architecte d'intérieur à Baden, Morbihan"

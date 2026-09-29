@@ -71,7 +71,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden select-none cursor-ew-resize group"
+      className="relative isolate w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-soft select-none cursor-ew-resize group"
       onMouseDown={(e) => {
         setIsDragging(true);
         handleMove(e.clientX);
@@ -116,10 +116,10 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       </div>
 
       {/* Labels */}
-      <div className="absolute top-4 left-4 bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
+      <div className="absolute top-4 left-4 rounded-full bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
         Avant
       </div>
-      <div className="absolute top-4 right-4 bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
+      <div className="absolute top-4 right-4 rounded-full bg-canvas text-stone-900 text-xs uppercase tracking-[0.16em] px-3 py-1.5 pointer-events-none">
         Après
       </div>
     </div>

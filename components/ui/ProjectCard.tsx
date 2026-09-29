@@ -24,7 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   <Link to={`/realisations/${project.id}`} className={cn('group block', className)}>
     <div
       className={cn(
-        'overflow-hidden bg-sand',
+        'isolate overflow-hidden rounded-soft bg-sand',
         featured ? 'aspect-[4/5] md:aspect-[16/9]' : 'aspect-[4/5]'
       )}
     >

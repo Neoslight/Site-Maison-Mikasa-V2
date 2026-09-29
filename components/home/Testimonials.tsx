@@ -7,7 +7,7 @@ import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 
 const navButton =
-  'flex h-11 w-11 items-center justify-center border border-stone-900/20 text-stone-700 transition-colors duration-300 hover:border-stone-900 hover:text-stone-900';
+  'flex h-11 w-11 items-center justify-center rounded-full border border-stone-900/20 text-stone-700 transition-colors duration-300 hover:border-stone-900 hover:text-stone-900';
 
 /**
  * Une citation à la fois. Toutes les citations sont empilées dans la même cellule

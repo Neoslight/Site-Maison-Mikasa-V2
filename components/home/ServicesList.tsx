@@ -41,6 +41,7 @@ const ServicesList: React.FC = () => (
         <SectionHeading
           eyebrow="Prestations"
           title="Un accompagnement à la mesure de votre projet"
+          align="center"
           action={
             <Button to="/prestations" variant="link">
               Détail des prestations

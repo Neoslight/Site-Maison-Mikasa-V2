@@ -17,6 +17,7 @@ const FeaturedProjects: React.FC = () => {
           <SectionHeading
             eyebrow="Réalisations"
             title="Des lieux de vie, pensés un par un"
+            align="center"
             action={
               <Button to="/realisations" variant="link">
                 Toutes les réalisations

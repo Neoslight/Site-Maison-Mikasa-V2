@@ -146,7 +146,7 @@ const Contact: React.FC = () => {
               <SocialLinks className="mt-8" />
             </div>
 
-            <div className="bg-sand p-8">
+            <div className="rounded-soft bg-sand p-8">
               <h2 className="text-2xl">Prendre rendez-vous</h2>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone-600">
                 Vous préférez choisir directement un créneau ? Réservez un appel découverte de 20
@@ -158,7 +158,7 @@ const Contact: React.FC = () => {
             </div>
           </aside>
 
-          <div className="bg-surface p-8 md:p-12 lg:col-span-7 lg:col-start-6">
+          <div className="rounded-soft bg-surface p-8 md:rounded-panel md:p-12 lg:col-span-7 lg:col-start-6">
             <h2 className="type-subtitle">Envoyez-moi un message</h2>
 
             {formStatus === 'success' ? (

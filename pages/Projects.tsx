@@ -71,7 +71,7 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
         className="sticky top-20 z-30 border-y border-line bg-canvas"
       >
         <Container className="overflow-x-auto">
-          <ul className="flex min-w-max gap-8">
+          <ul className="flex min-w-max gap-2 py-3">
             {FILTERS.map((item) => {
               const active = item.type === initialType;
               return (
@@ -80,11 +80,10 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
                     to={item.path}
                     aria-current={active ? 'page' : undefined}
                     className={cn(
-                      'relative block py-4 text-sm transition-colors duration-300',
-                      'after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-stone-900 after:transition-transform after:duration-300',
+                      'block rounded-full px-4 py-2 text-sm transition-colors duration-300',
                       active
-                        ? 'text-stone-900 after:scale-x-100'
-                        : 'text-stone-500 after:scale-x-0 hover:text-stone-900'
+                        ? 'bg-sand text-stone-900'
+                        : 'text-stone-500 hover:bg-sand/60 hover:text-stone-900'
                     )}
                   >
                     {item.label}

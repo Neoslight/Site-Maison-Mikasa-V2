@@ -401,8 +401,8 @@ const ProjectDetails: React.FC = () => {
           </div>
         </Container>
 
-        <div className="mx-auto max-w-[1600px] md:px-10">
-          <div className="aspect-[4/5] overflow-hidden bg-sand sm:aspect-[3/2] lg:aspect-[16/9]">
+        <div className="mx-auto max-w-[1600px] px-4 md:px-10">
+          <div className="aspect-[4/5] overflow-hidden rounded-soft bg-sand sm:aspect-[3/2] md:rounded-panel lg:aspect-[16/9]">
             <Img
               src={project.coverImage}
               alt={project.coverImageAlt ?? project.title}
@@ -468,7 +468,7 @@ const ProjectDetails: React.FC = () => {
                   role="button"
                   aria-label={`Agrandir la vue ${index + 1}`}
                   className={cn(
-                    'group cursor-zoom-in overflow-hidden bg-sand',
+                    'group isolate cursor-zoom-in overflow-hidden rounded-soft bg-sand',
                     wide ? 'aspect-[3/2] md:col-span-2 md:aspect-[16/9]' : 'aspect-[4/3]'
                   )}
                 >

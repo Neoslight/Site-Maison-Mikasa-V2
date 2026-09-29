@@ -26,7 +26,7 @@ const Approach: React.FC = () => (
     <Container>
       <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <div className="aspect-[4/5] overflow-hidden bg-sand">
+          <div className="rounded-arch mx-auto aspect-[4/5] max-w-md overflow-hidden bg-sand lg:max-w-none">
             <Img
               src="photo-profil.webp"
               alt="Laurine Fourcherot, architecte d'intérieur à Baden"
