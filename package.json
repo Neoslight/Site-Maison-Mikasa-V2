@@ -31,7 +31,6 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.2",
-    "react-router-hash-link": "^2.4.3",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
@@ -39,7 +38,6 @@
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^22.14.0",
     "@types/react-dom": "^19.2.3",
-    "@types/react-router-hash-link": "^2.4.9",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.27",
     "eslint": "^9.0.0",

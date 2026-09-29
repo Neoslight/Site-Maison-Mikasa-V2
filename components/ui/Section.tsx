@@ -19,10 +19,6 @@ const spacings: Record<SectionSpacing, string> = {
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   tone?: SectionTone;
   spacing?: SectionSpacing;
-  /** @deprecated transition refonte — supprimé une fois toutes les pages migrées */
-  bgColor?: string;
-  /** @deprecated transition refonte */
-  py?: string;
 }
 
 /** Bloc vertical de page : fond + rythme vertical. Le contenu gère sa largeur via <Container>. */
@@ -30,11 +26,7 @@ const Section: React.FC<SectionProps> = ({
   tone = 'canvas',
   spacing = 'default',
   className,
-  bgColor,
-  py,
   ...rest
-}) => (
-  <section className={cn(bgColor ?? tones[tone], py ?? spacings[spacing], className)} {...rest} />
-);
+}) => <section className={cn(tones[tone], spacings[spacing], className)} {...rest} />;
 
 export default Section;

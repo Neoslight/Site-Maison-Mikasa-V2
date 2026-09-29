@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Button from '../ui/Button';
 import Container from '../ui/Container';
@@ -52,7 +52,7 @@ const ServicesList: React.FC = () => (
       <ol className="border-t border-line">
         {services.map((service, index) => (
           <li key={service.anchor} className="border-b border-line">
-            <HashLink
+            <Link
               to={`/prestations#${service.anchor}`}
               className="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 gap-y-2 py-8 md:grid-cols-12 md:gap-x-8 md:py-10"
             >
@@ -72,7 +72,7 @@ const ServicesList: React.FC = () => (
               <span className="col-start-2 text-sm text-stone-500 md:col-span-2 md:col-start-auto md:text-right">
                 {service.price}
               </span>
-            </HashLink>
+            </Link>
           </li>
         ))}
       </ol>

@@ -76,7 +76,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [isMenuOpen]);
 
   const projectsActive = pathname.startsWith('/realisations');
-  const showCta = !PAGES_WITHOUT_CTA.includes(pathname);
+  // Normalise un éventuel slash final (/contact/) pour rester identique au rendu SSR
+  const showCta = !PAGES_WITHOUT_CTA.includes(pathname.replace(/\/+$/, '') || '/');
 
   return (
     <div className="flex min-h-screen flex-col bg-canvas">

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -50,15 +49,14 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   if ('to' in rest && rest.to !== undefined) {
     const { to, ...anchorProps } = rest;
-    const LinkComponent = to.includes('#') ? HashLink : Link;
     return (
-      <LinkComponent
+      <Link
         to={to}
         className={cn(classes, showArrow && 'group')}
         {...(anchorProps as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {content}
-      </LinkComponent>
+      </Link>
     );
   }
 
