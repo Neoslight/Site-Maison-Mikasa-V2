@@ -1,53 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { cn } from '../../lib/utils';
 
-interface SectionProps {
-  children: React.ReactNode;
-  className?: string;
-  id?: string;
+type SectionTone = 'canvas' | 'surface' | 'sand';
+type SectionSpacing = 'default' | 'tight' | 'none';
+
+const tones: Record<SectionTone, string> = {
+  canvas: 'bg-canvas',
+  surface: 'bg-surface',
+  sand: 'bg-sand',
+};
+
+const spacings: Record<SectionSpacing, string> = {
+  default: 'py-20 md:py-32',
+  tight: 'py-12 md:py-20',
+  none: '',
+};
+
+interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  tone?: SectionTone;
+  spacing?: SectionSpacing;
+  /** @deprecated transition refonte — supprimé une fois toutes les pages migrées */
   bgColor?: string;
+  /** @deprecated transition refonte */
   py?: string;
 }
 
+/** Bloc vertical de page : fond + rythme vertical. Le contenu gère sa largeur via <Container>. */
 const Section: React.FC<SectionProps> = ({
-  children,
-  className = '',
-  id,
-  bgColor = 'bg-white',
-  py = 'py-16 md:py-24',
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Unobserve once visible — the fade-in plays once and stays
-          observer.unobserve(entry.target);
-        }
-      });
-    });
-
-    const currentElement = domRef.current;
-    if (currentElement) {
-      observer.observe(currentElement);
-    }
-
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement);
-      }
-    };
-  }, []);
-
-  return (
-    <section id={id} className={`${bgColor} ${py}`}>
-      <div ref={domRef} className={`fade-in-section ${isVisible ? 'is-visible' : ''} ${className}`}>
-        {children}
-      </div>
-    </section>
-  );
-};
+  tone = 'canvas',
+  spacing = 'default',
+  className,
+  bgColor,
+  py,
+  ...rest
+}) => (
+  <section className={cn(bgColor ?? tones[tone], py ?? spacings[spacing], className)} {...rest} />
+);
 
 export default Section;

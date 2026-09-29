@@ -29,6 +29,12 @@
 }
 
 @theme {
+  /* Surfaces — fond crème chaud, blanc pour les cartes, sable pour les sections teintées */
+  --color-canvas: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-sand: #eeeae2;
+  --color-line: #e3ddd2;
+
   /* Sage color palette (brand) */
   --color-sage-50: #f4f7f4;
   --color-sage-100: #e3ebe3;
@@ -41,115 +47,149 @@
   --color-sage-800: #334233;
   --color-sage-900: #2a362a;
 
-  /* Stone overrides (specific shades only) */
+  /* Stone — échelle chaude complète en hex (évite le mélange avec l'oklch par défaut) */
   --color-stone-50: #fafaf9;
   --color-stone-100: #f5f5f4;
   --color-stone-200: #e7e5e4;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-600: #57534e;
+  --color-stone-700: #44403c;
   --color-stone-800: #292524;
   --color-stone-900: #1c1917;
+  --color-stone-950: #0c0a09;
 
   /* Typography */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Montserrat', sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Global smooth scrolling + anchor offset for sticky header */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 120px;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Header fixe h-20 (80px) + respiration */
+    scroll-padding-top: 104px;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-stone-700);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--color-stone-900);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-sage-200);
+    color: var(--color-stone-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage-600);
+    outline-offset: 3px;
+  }
 }
 
-/* Fade-in animation for Section component */
-.fade-in-section {
+/* Échelle typographique — un seul style par rôle sur tout le site.
+   Préfixe type-* (et non text-*) pour ne pas entrer en conflit avec tailwind-merge. */
+@utility type-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2.625rem;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  @media (width >= 48rem) {
+    font-size: 3.75rem;
+  }
+  @media (width >= 80rem) {
+    font-size: 4.5rem;
+  }
+}
+
+@utility type-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  @media (width >= 48rem) {
+    font-size: 2.75rem;
+  }
+}
+
+@utility type-subtitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.375rem;
+  line-height: 1.3;
+  @media (width >= 48rem) {
+    font-size: 1.625rem;
+  }
+}
+
+@utility type-lead {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  font-weight: 300;
+  @media (width >= 48rem) {
+    font-size: 1.25rem;
+  }
+}
+
+@utility eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-sage-600);
+}
+
+/* Apparition au scroll — une seule animation pour tout le site.
+   Le contenu n'est masqué que si JS tourne (classe .js posée dans index.html),
+   donc le HTML prérendu reste lisible sans JS et le markup SSR/client est identique. */
+.js .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(12px);
   transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
-  will-change: opacity, transform;
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
 }
-.fade-in-section.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
-/* Prevents background scrolling when lightbox is open */
-.lightbox-open {
-  overflow: hidden;
-}
-
-/* Hero text reveal animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  to {
+  .js .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
   }
-}
-
-.hero-item {
-  animation: fadeInUp 0.8s ease-out both;
-}
-
-/* Indicateur scroll hero */
-@keyframes scrollLine {
-  0% {
-    transform: translateY(-100%);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-  100% {
-    transform: translateY(100%);
-  }
-}
-.animate-scroll-line {
-  animation: scrollLine 1.5s ease-in-out infinite;
-}
-
-/* Transition page au changement de route */
-@keyframes pageFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.page-transition-enter {
-  animation: pageFadeIn 0.35s ease-out both;
-}
-
-/* Témoignages — animation d'entrée carousel mobile */
-@keyframes testimonialFade {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.animate-testimonial-enter {
-  animation: testimonialFade 0.4s ease-out both;
-}
-
-/* Bouton scroll-to-top */
-.scroll-to-top-btn {
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-}
-.scroll-to-top-btn.hidden-btn {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(8px);
-}
-.scroll-to-top-btn.visible-btn {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
 }

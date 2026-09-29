@@ -6,11 +6,7 @@ interface StaggerRevealProps {
   baseDelay?: number;
 }
 
-const StaggerReveal: React.FC<StaggerRevealProps> = ({
-  children,
-  className,
-  baseDelay = 120,
-}) => {
+const StaggerReveal: React.FC<StaggerRevealProps> = ({ children, className, baseDelay = 120 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 

@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Active les animations d'apparition uniquement si JS tourne (voir .reveal dans index.css) -->
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
     <title>Architecte d'intérieur Vannes &amp; Golfe du Morbihan | Maison Mikasa</title>
     <meta
       name="description"
@@ -32,7 +36,7 @@
     <meta name="twitter:image" content="https://www.maisonmikasa.fr/og/home.jpg" />
 
     <!-- Theme + canonical -->
-    <meta name="theme-color" content="#4a654a" />
+    <meta name="theme-color" content="#f7f5f0" />
     <link rel="canonical" href="https://www.maisonmikasa.fr/" />
 
     <!-- Favicon -->
@@ -61,7 +65,7 @@
       crossorigin
     />
   </head>
-  <body class="bg-white text-stone-800 antialiased font-sans">
+  <body class="bg-canvas text-stone-700 antialiased font-sans">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
