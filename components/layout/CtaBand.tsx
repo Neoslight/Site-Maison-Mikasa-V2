@@ -14,8 +14,8 @@ const CtaBand: React.FC = () => (
         </h2>
         <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-stone-600">
           Un premier appel découverte de 20 minutes, gratuit et sans engagement. Pour aller plus
-          loin, le rendez-vous conseil se tient chez vous (2 h, 320 €, déduit si nous poursuivons
-          ensemble).
+          loin, le rendez-vous conseil se tient chez vous (2 h, 320 €, déduits si vous nous confiez
+          ensuite la conception complète).
         </p>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
           <Button to="/rendez-vous">Prendre rendez-vous</Button>

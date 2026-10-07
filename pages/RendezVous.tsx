@@ -51,7 +51,7 @@ const MEETINGS: Meeting[] = [
     title: 'Le Rendez-vous Conseil',
     duration: '2 h · chez vous',
     price: '320 €',
-    priceNote: 'Déduit si nous poursuivons ensemble',
+    priceNote: "Déduit d'une conception complète",
     description:
       'Une immersion sur place pour analyser le potentiel du lieu, suivie d’un book de recommandations envoyé sous 48h.',
     bullets: [
