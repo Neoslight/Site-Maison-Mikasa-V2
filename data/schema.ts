@@ -1,5 +1,4 @@
 import { GOOGLE_BUSINESS } from '../lib/site';
-import { testimonialsData } from './testimonials';
 
 export const SITE_URL = 'https://www.maisonmikasa.fr';
 export const BUSINESS_ID = `${SITE_URL}/#business`;
@@ -73,14 +72,9 @@ export const LOCAL_BUSINESS_SCHEMA = {
     'https://www.linkedin.com/in/laurine-fourcherot/',
     ...(GOOGLE_BUSINESS.profileUrl ? [GOOGLE_BUSINESS.profileUrl] : []),
   ],
-  // Sourced from real reviews on the Google Business Profile (data/testimonials.ts).
-  // No reviewRating: individual star ratings aren't tracked in the source content,
-  // and fabricating one would misrepresent the review.
-  review: testimonialsData.map((t) => ({
-    '@type': 'Review',
-    author: { '@type': 'Person', name: t.author },
-    reviewBody: t.text,
-  })),
+  // No `review` / `aggregateRating`: the testimonials come from the Google Business
+  // Profile, and Google ignores self-serving LocalBusiness reviews (and flags several
+  // reviews without aggregateRating as invalid). The profile is linked via hasMap/sameAs.
 };
 
 export const WEBSITE_SCHEMA = {
