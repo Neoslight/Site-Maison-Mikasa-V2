@@ -206,7 +206,7 @@ export const locationsData: LocationPage[] = [
     city: 'Arradon',
     metaTitle: "Architecte d'intérieur à Arradon",
     metaDescription:
-      "Laurine Fourcherot, architecte d'intérieur à Arradon (56) : villas en bord de mer, extensions, vue sur le Golfe. Conception sur-mesure et suivi de chantier.",
+      "Laurine Fourcherot, architecte d'intérieur à Arradon (56) : villas en bord de mer, extensions, vue sur le Golfe. Conception sur mesure, suivi de chantier.",
     h1: "Architecte d'intérieur à Arradon",
     intro:
       "Presqu'île résidentielle du Golfe, Arradon accueille des villas contemporaines comme des maisons plus anciennes, souvent tournées vers l'eau. À une vingtaine de minutes de Baden, j'y accompagne des propriétaires qui souhaitent ouvrir leur intérieur sur le paysage, agrandir un séjour ou repenser une extension existante.",

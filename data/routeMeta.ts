@@ -27,59 +27,61 @@ const staticRouteMeta: Record<string, RouteMeta> = {
   '/': {
     title: "Architecte d'intérieur Vannes & Golfe du Morbihan | Maison Mikasa",
     description:
-      "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden, Vannes et dans tout le Golfe du Morbihan (Auray, Arradon...). Conception sur-mesure et suivi de chantier.",
+      "Laurine Fourcherot, architecte d'intérieur à Baden : conception sur-mesure, rénovation et suivi de chantier à Vannes, Auray et dans le Golfe du Morbihan.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/`,
   },
   '/a-propos': {
-    title: withSuffix('À propos'),
+    title: withSuffix("Laurine Fourcherot, architecte d'intérieur à Baden"),
     description:
-      "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden (56), Golfe du Morbihan.",
+      "Laurine Fourcherot, architecte d'intérieur et décoratrice à Baden : sa méthode, ses engagements et sa façon d'imaginer vos intérieurs dans le Golfe.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/a-propos`,
   },
   '/prestations': {
-    title: withSuffix('Prestations'),
+    title: withSuffix("Prestations et tarifs d'architecte d'intérieur"),
     description:
-      "Conseil, conception et suivi de chantier pour vos projets d'aménagement intérieur dans le Golfe du Morbihan.",
+      'Rendez-vous conseil à domicile (320 €), conception sur-mesure, suivi de chantier, dossier mairie dès 350 € : les prestations de Maison Mikasa en Morbihan.',
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/prestations`,
   },
   '/realisations': {
-    title: withSuffix('Réalisations'),
+    title: withSuffix("Réalisations en architecture d'intérieur, Morbihan"),
     description:
-      "Découvrez les réalisations d'architecture et décoration d'intérieur de Maison Mikasa.",
+      "Maisons, appartements et locaux professionnels rénovés à Vannes, Baden, l'Île-aux-Moines et dans le Golfe du Morbihan : photos et détails des projets.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/realisations`,
   },
   '/realisations/maison': {
-    title: withSuffix('Réalisations Maisons'),
+    title: withSuffix('Rénovation de maisons dans le Golfe du Morbihan'),
     description:
-      'Rénovations complètes et aménagements de maisons par Maison Mikasa dans le Golfe du Morbihan.',
+      "Maisons de famille et maisons de pêcheur rénovées ou aménagées à Baden, l'Île-aux-Moines et l'Île-d'Arz : découvrez les projets de Maison Mikasa.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/realisations/maison`,
   },
   '/realisations/appartement': {
-    title: withSuffix('Réalisations Appartements'),
+    title: withSuffix("Rénovation d'appartements à Vannes"),
     description:
-      "Rénovations et réaménagements d'appartements en Bretagne — portfolio Maison Mikasa.",
+      'Appartements rénovés sur le port et en centre-ville de Vannes : réagencement, rangements sur mesure et décoration. Découvrez les projets de Maison Mikasa.',
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/realisations/appartement`,
   },
   '/realisations/professionnel': {
-    title: withSuffix('Réalisations Professionnelles'),
-    description: 'Aménagements de locaux professionnels et tertiaires conçus par Maison Mikasa.',
+    title: withSuffix('Aménagement de locaux professionnels en Morbihan'),
+    description:
+      'Aménagement de commerces et locaux professionnels en Morbihan, comme une cave et bar à vins à Plumelec : un lieu fonctionnel, chaleureux et à votre image.',
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/realisations/professionnel`,
   },
   '/contact': {
-    title: withSuffix('Contact'),
-    description: "Contactez Maison Mikasa pour votre projet d'architecture d'intérieur.",
+    title: withSuffix("Contact architecte d'intérieur à Baden et Vannes"),
+    description:
+      "Un projet de rénovation ou d'aménagement ? Contactez Laurine Fourcherot, architecte d'intérieur à Baden, au 06 89 40 85 66 ou par message.",
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/contact`,
   },
   '/rendez-vous': {
-    title: withSuffix('Prendre Rendez-vous'),
+    title: withSuffix('Prendre rendez-vous'),
     description:
       "Réservez un appel découverte gratuit de 20 minutes ou une visite conseil à domicile avec Maison Mikasa, architecte d'intérieur.",
     ogImage: DEFAULT_OG_IMAGE,
@@ -87,7 +89,8 @@ const staticRouteMeta: Record<string, RouteMeta> = {
   },
   '/mentions-legales': {
     title: withSuffix('Mentions légales'),
-    description: 'Mentions légales et informations éditeur du site Maison Mikasa.',
+    description:
+      'Mentions légales de maisonmikasa.fr : éditeur, hébergement, propriété intellectuelle, données personnelles et cookies. Maison Mikasa, Baden (56).',
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/mentions-legales`,
   },
@@ -103,7 +106,7 @@ function projectRouteMeta(projectId: string): RouteMeta | null {
     : `${SITE_URL}/og/${project.id}.jpg`;
 
   return {
-    title: withSuffix(project.title),
+    title: withSuffix(project.metaTitle ?? project.title),
     description: truncateDescription(project.metaDescription ?? project.description ?? ''),
     ogImage,
     canonical: `${SITE_URL}${path}`,

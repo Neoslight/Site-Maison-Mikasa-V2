@@ -4,6 +4,8 @@ export interface Project {
   id: string;
   hidden?: boolean;
   title: string;
+  /** SEO title (place + type of work), without the " | Maison Mikasa" suffix. Falls back to `title`. */
+  metaTitle?: string;
   projectType: ProjectType;
   category: string;
   location: string;

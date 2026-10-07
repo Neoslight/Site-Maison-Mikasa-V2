@@ -5,6 +5,7 @@ export const projectsData: Project[] = [
   {
     id: 'app-1',
     title: 'Appartement sur le Port',
+    metaTitle: "Rénovation d'appartement sur le port de Vannes",
     projectType: 'Appartement',
     category: 'Rénovation complète',
     location: 'Vannes - Le Port',
@@ -42,7 +43,7 @@ export const projectsData: Project[] = [
       { before: '/tassigny/tassigny-avant-5.webp', after: '/tassigny/tassigny-apres-5.webp' },
     ],
     metaDescription:
-      "Rénovation complète d'un T4 sur le port de Vannes (56) : pièce de vie traversante, suite parentale et parquet massif. Par Maison Mikasa, architecte d'intérieur.",
+      "Rénovation complète d'un T4 sur le port de Vannes : pièce de vie traversante, suite parentale et parquet massif. Par Maison Mikasa, architecte d'intérieur.",
     description:
       "Rénovation complète et ameublement d'un T4 sur le port de Vannes pour un couple de retraités. L'objectif était de transformer un intérieur daté en un lieu de vie chaleureux, fonctionnel et baigné de lumière.",
     challenge:
@@ -53,6 +54,7 @@ export const projectsData: Project[] = [
   {
     id: 'app-2',
     title: 'Appartement de caractère',
+    metaTitle: "Rénovation d'appartement sous les toits à Vannes",
     projectType: 'Appartement',
     category: 'Rénovation complète',
     location: 'Vannes - Centre-Ville',
@@ -90,7 +92,7 @@ export const projectsData: Project[] = [
       { before: '/marchais/marchais-avant-7.webp', after: '/marchais/marchais-apres-7.webp' },
     ],
     metaDescription:
-      "Rénovation d'un appartement sous les toits en centre-ville de Vannes (56) : nouvel escalier, îlot dînatoire et bureau sur mesure. Maison Mikasa, architecte d'intérieur.",
+      "Appartement sous les toits rénové en centre-ville de Vannes : nouvel escalier, îlot dînatoire et bureau sur mesure. Maison Mikasa, architecte d'intérieur.",
     description:
       "Rénovation, optimisation et ameublement d'un appartement sous les toits en centre-ville pour un jeune couple. L'objectif : repenser l'accès à la mezzanine, maximiser les rangements dans ce volume atypique et créer un espace de vie lumineux et convivial.",
     challenge:
@@ -127,6 +129,7 @@ export const projectsData: Project[] = [
   {
     id: 'mai-1',
     title: 'Maison de Famille',
+    metaTitle: "Aménagement d'une maison de famille à Baden",
     projectType: 'Maison',
     category: 'Aménagement et décoration',
     location: 'Baden',
@@ -161,7 +164,7 @@ export const projectsData: Project[] = [
       { before: '/tabarly/tabarly-avant-8.webp', after: '/tabarly/tabarly-apres-8.webp' },
     ],
     metaDescription:
-      "Aménagement de l'entrée et de l'espace nuit d'une maison de famille à Baden (56) : rangements sur mesure et décoration apaisante. Maison Mikasa, architecte d'intérieur.",
+      "Entrée et espace nuit d'une maison de famille à Baden (56) : rangements sur mesure et décoration apaisante. Maison Mikasa, architecte d'intérieur.",
     description:
       "Repenser l'entrée et l'espace nuit d'une maison familiale pour allier esthétisme et fonctionnalité.",
     challenge:
@@ -192,6 +195,7 @@ export const projectsData: Project[] = [
   {
     id: 'mai-3',
     title: 'Maison de Pêcheur',
+    metaTitle: "Rénovation de combles à l'Île-aux-Moines",
     projectType: 'Maison',
     category: 'Rénovation partielle',
     location: 'Île-aux-Moines',
@@ -222,6 +226,7 @@ export const projectsData: Project[] = [
   {
     id: 'mai-4',
     title: 'Maison Bretonne',
+    metaTitle: "Rénovation d'une maison bretonne à l'Île-d'Arz",
     projectType: 'Maison',
     category: 'Rénovation complète',
     location: "Île-d'Arz",
@@ -369,6 +374,7 @@ export const projectsData: Project[] = [
   {
     id: 'pro-1',
     title: 'Cave & Bar à Vin',
+    metaTitle: "Aménagement d'une cave et bar à vins à Plumelec",
     projectType: 'Professionnel',
     category: 'Rénovation complète',
     location: 'Plumelec',
