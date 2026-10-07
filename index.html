@@ -49,7 +49,9 @@
     <!-- Self-hosted fonts (public/fonts/, declared in index.css) — no more
          render-blocking request to fonts.googleapis.com. Preload only the
          two faces used above the fold: Montserrat (body) and Playfair
-         Display (headings). -->
+         Display (headings). The italic is not preloaded: it competes with
+         the LCP image, and the metric-matched fallbacks in index.css already
+         prevent the layout shift when it swaps in. -->
     <link
       rel="preload"
       href="/fonts/montserrat-variable.woff2"

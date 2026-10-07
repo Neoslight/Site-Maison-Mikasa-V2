@@ -28,6 +28,39 @@
   src: url('/fonts/playfair-display-italic-variable.woff2') format('woff2');
 }
 
+/* Metric-matched fallbacks: system fonts resized to the web fonts' width and
+   line metrics, so the swap no longer reflows text (CLS). Values measured
+   from the woff2 files against Arial / Times New Roman, weighted by the
+   homepage's French text (wght 300 for Montserrat, 400 for Playfair). */
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 110.67%;
+  ascent-override: 87.46%;
+  descent-override: 22.68%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Playfair Display Fallback';
+  font-style: normal;
+  src: local('Times New Roman'), local('TimesNewRomanPSMT');
+  size-adjust: 111.54%;
+  ascent-override: 97.01%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Playfair Display Fallback';
+  font-style: italic;
+  src: local('Times New Roman Italic'), local('TimesNewRomanPS-ItalicMT');
+  size-adjust: 105.06%;
+  ascent-override: 102.99%;
+  descent-override: 23.89%;
+  line-gap-override: 0%;
+}
+
 @theme {
   /* Surfaces — fond crème chaud, blanc pour les cartes, sable pour les sections teintées */
   --color-canvas: #f7f5f0;
@@ -63,8 +96,8 @@
   --color-stone-950: #0c0a09;
 
   /* Typography */
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Playfair Display', 'Playfair Display Fallback', serif;
+  --font-sans: 'Montserrat', 'Montserrat Fallback', sans-serif;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
