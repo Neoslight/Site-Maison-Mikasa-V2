@@ -13,8 +13,9 @@ const CtaBand: React.FC = () => (
           Un intérieur à repenser&nbsp;? <span className="italic text-sage-700">Parlons-en.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-stone-600">
-          Premier échange gratuit et sans engagement, par téléphone ou directement chez vous lors
-          d'un rendez-vous conseil.
+          Un premier appel découverte de 20 minutes, gratuit et sans engagement. Pour aller plus
+          loin, le rendez-vous conseil se tient chez vous (2 h, 320 €, déduit si nous poursuivons
+          ensemble).
         </p>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
           <Button to="/rendez-vous">Prendre rendez-vous</Button>

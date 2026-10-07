@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { locationsData } from '../../data/locations';
 import { WEBSITE_SCHEMA } from '../../data/schema';
-import { ADDRESS, EMAIL, EMAIL_HREF, PHONE, PHONE_HREF } from '../../lib/site';
+import { ADDRESS, EMAIL, EMAIL_HREF, GOOGLE_BUSINESS, PHONE, PHONE_HREF } from '../../lib/site';
 import JsonLd from '../seo/JsonLd';
 import Button from '../ui/Button';
 import Container from '../ui/Container';
@@ -302,6 +302,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </a>
               </li>
               <li>{ADDRESS}</li>
+              {GOOGLE_BUSINESS.profileUrl && (
+                <li>
+                  <a
+                    href={GOOGLE_BUSINESS.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-stone-900"
+                  >
+                    Nos avis Google
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </Container>

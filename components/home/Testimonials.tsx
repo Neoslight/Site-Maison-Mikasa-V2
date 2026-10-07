@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { testimonialsData } from '../../data/testimonials';
+import { GOOGLE_BUSINESS } from '../../lib/site';
 import { cn } from '../../lib/utils';
 import Container from '../ui/Container';
 import Reveal from '../ui/Reveal';
@@ -67,6 +68,21 @@ const Testimonials: React.FC = () => {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
+
+          {GOOGLE_BUSINESS.profileUrl && (
+            <p className="mt-10 text-sm text-stone-500">
+              <a
+                href={GOOGLE_BUSINESS.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 transition-colors hover:text-stone-900"
+              >
+                {GOOGLE_BUSINESS.rating && GOOGLE_BUSINESS.reviewCount
+                  ? `Noté ${String(GOOGLE_BUSINESS.rating).replace('.', ',')}/5 sur Google · ${GOOGLE_BUSINESS.reviewCount} avis`
+                  : 'Voir tous les avis sur Google'}
+              </a>
+            </p>
+          )}
         </Reveal>
       </Container>
     </Section>

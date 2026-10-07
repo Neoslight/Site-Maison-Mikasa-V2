@@ -1,3 +1,4 @@
+import { GOOGLE_BUSINESS } from '../lib/site';
 import { testimonialsData } from './testimonials';
 
 export const SITE_URL = 'https://www.maisonmikasa.fr';
@@ -65,10 +66,12 @@ export const LOCAL_BUSINESS_SCHEMA = {
   },
   image: `${SITE_URL}/og/home.jpg`,
   logo: `${SITE_URL}/favicon.svg`,
+  ...(GOOGLE_BUSINESS.profileUrl ? { hasMap: GOOGLE_BUSINESS.profileUrl } : {}),
   sameAs: [
     'https://www.facebook.com/maisonmikasa/',
     'https://www.instagram.com/maisonmikasa/',
     'https://www.linkedin.com/in/laurine-fourcherot/',
+    ...(GOOGLE_BUSINESS.profileUrl ? [GOOGLE_BUSINESS.profileUrl] : []),
   ],
   // Sourced from real reviews on the Google Business Profile (data/testimonials.ts).
   // No reviewRating: individual star ratings aren't tracked in the source content,

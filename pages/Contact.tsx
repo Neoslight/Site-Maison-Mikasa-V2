@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useRouteMeta } from '../lib/useRouteMeta';
-import { ADDRESS, EMAIL, EMAIL_HREF, OPENING_HOURS, PHONE, PHONE_HREF } from '../lib/site';
+import {
+  ADDRESS,
+  EMAIL,
+  EMAIL_HREF,
+  GOOGLE_BUSINESS,
+  OPENING_HOURS,
+  PHONE,
+  PHONE_HREF,
+} from '../lib/site';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import { InputField, SelectField, TextareaField } from '../components/ui/Field';
@@ -112,6 +120,30 @@ const Contact: React.FC = () => {
       ),
     },
     { label: 'Horaires', value: OPENING_HOURS },
+    ...(GOOGLE_BUSINESS.profileUrl
+      ? [
+          {
+            label: 'Avis clients',
+            value: (
+              <>
+                <a href={GOOGLE_BUSINESS.profileUrl} target="_blank" rel="noopener noreferrer">
+                  Voir les avis Google
+                </a>
+                {GOOGLE_BUSINESS.reviewUrl && (
+                  <a
+                    href={GOOGLE_BUSINESS.reviewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-stone-500"
+                  >
+                    Laisser un avis
+                  </a>
+                )}
+              </>
+            ),
+          },
+        ]
+      : []),
   ];
 
   return (
