@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Active les animations d'apparition uniquement si JS tourne (voir .reveal dans index.css) -->
+    <!-- Active les animations d'apparition uniquement si JS tourne (voir .reveal dans index.css).
+         Autorisé par son empreinte sha256 dans la CSP de vercel.json : toute modification du
+         script, espaces compris, impose de recalculer cette empreinte. -->
     <script>
       document.documentElement.classList.add('js');
     </script>
