@@ -3,7 +3,7 @@ import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { locationsData } from '../../data/locations';
-import { WEBSITE_SCHEMA } from '../../data/schema';
+import { siteGraph } from '../../data/schema';
 import { ADDRESS, EMAIL, EMAIL_HREF, GOOGLE_BUSINESS, PHONE, PHONE_HREF } from '../../lib/site';
 import JsonLd from '../seo/JsonLd';
 import Button from '../ui/Button';
@@ -81,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex min-h-screen flex-col bg-canvas">
-      <JsonLd schema={WEBSITE_SCHEMA} />
+      <JsonLd schema={siteGraph(pathname)} />
 
       <a
         href="#contenu"

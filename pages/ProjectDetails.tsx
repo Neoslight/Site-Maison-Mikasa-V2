@@ -15,6 +15,7 @@ import Img from '../components/ui/Img';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import { getLocationForProjectLocation } from '../data/locations';
 import JsonLd from '../components/seo/JsonLd';
+import { BUSINESS_REF, PERSON_REF } from '../data/schema';
 
 const ProjectDetails: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -44,35 +45,13 @@ const ProjectDetails: React.FC = () => {
           },
         },
         ...(project.year ? { dateCreated: project.year } : {}),
-        ...(project.surface ? { spatialCoverage: project.surface } : {}),
-        ...(project.duration ? { temporal: project.duration } : {}),
         image: ogImage,
-        author: {
-          '@type': 'Person',
-          name: 'Laurine Fourcherot',
-          jobTitle: "Architecte d'intérieur",
-          url: BASE_URL,
-        },
+        author: PERSON_REF,
+        publisher: BUSINESS_REF,
         url: projectUrl,
       }
     : null;
 
-  const breadcrumbSchema = project
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Accueil', item: BASE_URL },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Réalisations',
-            item: `${BASE_URL}/realisations`,
-          },
-          { '@type': 'ListItem', position: 3, name: project.title, item: projectUrl },
-        ],
-      }
-    : null;
   const nearbyLocation = project ? getLocationForProjectLocation(project.location) : undefined;
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -272,7 +251,6 @@ const ProjectDetails: React.FC = () => {
   return (
     <>
       {creativeWorkSchema && <JsonLd schema={creativeWorkSchema} />}
-      {breadcrumbSchema && <JsonLd schema={breadcrumbSchema} />}
 
       {/* Visionneuse — rendue via Portal sur document.body */}
       {lightboxOpen &&

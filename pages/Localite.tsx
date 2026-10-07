@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useRouteMeta } from '../lib/useRouteMeta';
 import { locationsData } from '../data/locations';
 import { projectsData } from '../data/projects';
-import { faqPageSchema, SITE_URL } from '../data/schema';
+import { faqPageSchema } from '../data/schema';
 import JsonLd from '../components/seo/JsonLd';
 import Container from '../components/ui/Container';
 import PageHeader from '../components/ui/PageHeader';
@@ -34,25 +34,10 @@ const Localite: React.FC<LocaliteProps> = ({ slug }) => {
     .map((id) => projectsData.find((p) => p.id === id))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE_URL },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: location.h1,
-        item: `${SITE_URL}${location.path}`,
-      },
-    ],
-  };
-
   const editorial = [location.archi, location.deco];
 
   return (
     <>
-      <JsonLd schema={breadcrumbSchema} />
       <JsonLd schema={faqPageSchema(location.faq)} />
 
       <PageHeader
