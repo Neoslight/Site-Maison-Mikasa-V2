@@ -12,6 +12,20 @@ const Cal = React.lazy(() => import('@calcom/embed-react'));
 
 type MeetingId = 'appel' | 'conseil';
 
+// Palette du site (index.css) appliquée à l'agenda, quel que soit le thème du compte Cal.com
+const CAL_COLORS = {
+  'cal-brand': '#4a654a', // sage-600
+  'cal-brand-emphasis': '#3d523d', // sage-700
+  'cal-brand-text': '#ffffff',
+  'cal-text': '#44403c', // stone-700
+  'cal-text-emphasis': '#1c1917', // stone-900
+  'cal-text-subtle': '#78716c', // stone-500
+  'cal-border': '#e3ddd2', // line
+  'cal-border-subtle': '#e3ddd2',
+  'cal-bg-subtle': '#eeeae2', // sand
+  'cal-bg-emphasis': '#eeeae2', // jours disponibles
+};
+
 const isConfigured = (link?: string): boolean =>
   Boolean(link) && link !== 'your_calcom_username/your_event_slug';
 
@@ -159,6 +173,8 @@ const RendezVous: React.FC = () => {
       cal('ui', {
         hideEventTypeDetails: false,
         layout: 'month_view',
+        theme: 'light',
+        cssVarsPerTheme: { light: CAL_COLORS, dark: CAL_COLORS },
       });
     })();
     return () => {
@@ -206,7 +222,7 @@ const RendezVous: React.FC = () => {
                   namespace={active.namespace}
                   calLink={active.calLink as string}
                   style={{ width: '100%', height: '700px', overflow: 'scroll' }}
-                  config={{ layout: 'month_view' }}
+                  config={{ layout: 'month_view', theme: 'light' }}
                 />
               </Suspense>
             ) : (
