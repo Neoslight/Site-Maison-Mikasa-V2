@@ -4,6 +4,7 @@ import { serviceSchema } from '../data/schema';
 import JsonLd from '../components/seo/JsonLd';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
+import OfferRow, { type Offer } from '../components/ui/OfferRow';
 import PageHeader from '../components/ui/PageHeader';
 import Reveal from '../components/ui/Reveal';
 import Section from '../components/ui/Section';
@@ -33,20 +34,6 @@ const SERVICE_SCHEMAS = [
     price: 350,
   }),
 ];
-
-interface Offer {
-  /** Ancre utilisée par les liens de l'accueil (/prestations#…) et le paramètre ?service= du contact. */
-  id: string;
-  title: string;
-  tagline: string;
-  description: string;
-  missionsLabel?: string;
-  missions: { label: string; desc: string }[];
-  priceLabel: string;
-  price: string;
-  note?: string;
-  cta: string;
-}
 
 const OFFERS: Offer[] = [
   {
@@ -173,44 +160,6 @@ const STEPS = [
   { title: 'Finalisation', desc: 'Mise en place de la décoration et livraison.' },
 ];
 
-const OfferRow: React.FC<{ offer: Offer; index: number }> = ({ offer, index }) => (
-  <article
-    id={offer.id}
-    className="grid gap-10 border-t border-line py-16 md:py-20 lg:grid-cols-12 lg:gap-16"
-  >
-    <Reveal className="lg:col-span-5">
-      <span className="text-sm tabular-nums text-stone-400">
-        {String(index + 1).padStart(2, '0')}
-      </span>
-      <h2 className="type-title mt-4">{offer.title}</h2>
-      <p className="mt-4 font-serif text-lg italic text-sage-700">{offer.tagline}</p>
-
-      <dl className="mt-10 flex items-baseline justify-between border-y border-line py-5">
-        <dt className="text-xs uppercase tracking-[0.16em] text-stone-500">{offer.priceLabel}</dt>
-        <dd className="font-serif text-2xl text-stone-900">{offer.price}</dd>
-      </dl>
-      {offer.note && <p className="mt-4 text-sm leading-relaxed text-stone-500">{offer.note}</p>}
-
-      <Button to={`/contact?service=${offer.id}`} className="mt-8">
-        {offer.cta}
-      </Button>
-    </Reveal>
-
-    <Reveal className="lg:col-span-6 lg:col-start-7" delay={120}>
-      <p className="text-base leading-relaxed text-stone-600 md:text-lg">{offer.description}</p>
-      {offer.missionsLabel && <p className="eyebrow mt-10 text-stone-500">{offer.missionsLabel}</p>}
-      <ul className={offer.missionsLabel ? 'mt-4' : 'mt-10'}>
-        {offer.missions.map((mission) => (
-          <li key={mission.label} className="border-t border-line py-5 first:border-t-0 md:py-6">
-            <h3 className="font-sans text-base font-medium text-stone-900">{mission.label}</h3>
-            <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-stone-600">{mission.desc}</p>
-          </li>
-        ))}
-      </ul>
-    </Reveal>
-  </article>
-);
-
 const Services: React.FC = () => {
   useRouteMeta();
 
@@ -231,6 +180,19 @@ const Services: React.FC = () => {
           {OFFERS.map((offer, index) => (
             <OfferRow key={offer.id} offer={offer} index={index} />
           ))}
+
+          <Reveal className="mt-4 flex flex-col gap-6 rounded-soft bg-sand p-8 md:flex-row md:items-center md:justify-between md:p-10">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl">Vous êtes un professionnel&nbsp;?</h2>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone-600">
+                Restaurant, boutique, hébergement, institut ou cabinet : une offre dédiée, pensée
+                pour votre activité, votre clientèle et votre date d'ouverture.
+              </p>
+            </div>
+            <Button to="/professionnels" variant="link" className="shrink-0">
+              Découvrir l'offre professionnels
+            </Button>
+          </Reveal>
         </Container>
       </section>
 

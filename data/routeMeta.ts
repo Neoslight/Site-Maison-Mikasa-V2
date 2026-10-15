@@ -45,6 +45,13 @@ const staticRouteMeta: Record<string, RouteMeta> = {
     ogImage: DEFAULT_OG_IMAGE,
     canonical: `${SITE_URL}/prestations`,
   },
+  '/professionnels': {
+    title: withSuffix("Architecte d'intérieur pour professionnels, Morbihan"),
+    description:
+      'Aménagement de restaurants, bars, boutiques, hôtels, gîtes, instituts et cabinets dans le Morbihan : Diagnostic Pro, conception, suivi de chantier. Devis.',
+    ogImage: `${SITE_URL}/og/pro-1.jpg`,
+    canonical: `${SITE_URL}/professionnels`,
+  },
   '/realisations': {
     title: withSuffix("Réalisations en architecture d'intérieur, Morbihan"),
     description:

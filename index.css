@@ -239,3 +239,17 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Impression (plaquette de /professionnels) : tout le contenu animé est visible,
+   fonds conservés, pas de pied de page ni de menu. */
+@media print {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

@@ -8,6 +8,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Services from './pages/Services';
+import Professionnels from './pages/Professionnels';
 import Localite from './pages/Localite';
 import Contact from './pages/Contact';
 import RendezVous from './pages/RendezVous';
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/prestations" element={<Services />} />
+          <Route path="/professionnels" element={<Professionnels />} />
           <Route path="/realisations" element={<Projects initialType="Tous" />} />
           <Route path="/realisations/maison" element={<Projects initialType="Maison" />} />
           <Route

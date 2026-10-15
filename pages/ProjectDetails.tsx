@@ -407,14 +407,21 @@ const ProjectDetails: React.FC = () => {
             </Reveal>
           ))}
 
-          {nearbyLocation && (
+          {(nearbyLocation || project.projectType === 'Professionnel') && (
             <div className="border-t border-line pt-10 md:grid md:grid-cols-12 md:gap-8">
-              <div className="md:col-span-7 md:col-start-6">
-                <Button to={nearbyLocation.path} variant="link">
-                  Voir nos réalisations{' '}
-                  {nearbyLocation.city === 'Golfe du Morbihan' ? 'dans le' : 'à'}{' '}
-                  {nearbyLocation.city}
-                </Button>
+              <div className="flex flex-col items-start gap-5 md:col-span-7 md:col-start-6">
+                {project.projectType === 'Professionnel' && (
+                  <Button to="/professionnels" variant="link">
+                    Aménager votre commerce ou votre établissement
+                  </Button>
+                )}
+                {nearbyLocation && (
+                  <Button to={nearbyLocation.path} variant="link">
+                    Voir nos réalisations{' '}
+                    {nearbyLocation.city === 'Golfe du Morbihan' ? 'dans le' : 'à'}{' '}
+                    {nearbyLocation.city}
+                  </Button>
+                )}
               </div>
             </div>
           )}

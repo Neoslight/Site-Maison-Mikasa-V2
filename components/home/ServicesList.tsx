@@ -7,7 +7,7 @@ import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 
-const services = [
+const services: { anchor: string; to?: string; title: string; text: string; price: string }[] = [
   {
     anchor: 'conseil',
     title: 'Rendez-vous Conseil',
@@ -32,6 +32,13 @@ const services = [
     text: 'Déclaration préalable de travaux, plans et insertion.',
     price: 'Dès 350 €',
   },
+  {
+    anchor: 'professionnels',
+    to: '/professionnels',
+    title: 'Professionnels',
+    text: 'Commerces, restaurants, hébergements, instituts et cabinets.',
+    price: 'Sur devis',
+  },
 ];
 
 const ServicesList: React.FC = () => (
@@ -54,7 +61,7 @@ const ServicesList: React.FC = () => (
         {services.map((service, index) => (
           <li key={service.anchor} className="border-b border-line">
             <Link
-              to={`/prestations#${service.anchor}`}
+              to={service.to ?? `/prestations#${service.anchor}`}
               className="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 gap-y-2 py-8 md:grid-cols-12 md:gap-x-8 md:py-10"
             >
               <span className="text-sm tabular-nums text-stone-400 md:col-span-1">

@@ -116,6 +116,7 @@ function injectMeta(template: string, meta: RouteMeta, options: InjectOptions = 
 const SITEMAP_PRIORITY: Record<string, { priority: string; changefreq: string }> = {
   '/': { priority: '1.0', changefreq: 'monthly' },
   '/prestations': { priority: '0.9', changefreq: 'monthly' },
+  '/professionnels': { priority: '0.9', changefreq: 'monthly' },
   '/realisations': { priority: '0.9', changefreq: 'weekly' },
   '/realisations/maison': { priority: '0.7', changefreq: 'weekly' },
   '/realisations/appartement': { priority: '0.7', changefreq: 'weekly' },

@@ -101,6 +101,7 @@ const PERSON_NODE = {
 const STATIC_CRUMBS: Record<string, { name: string; path: string }[]> = {
   '/a-propos': [{ name: 'À propos', path: '/a-propos' }],
   '/prestations': [{ name: 'Prestations', path: '/prestations' }],
+  '/professionnels': [{ name: 'Professionnels', path: '/professionnels' }],
   '/realisations': [{ name: 'Réalisations', path: '/realisations' }],
   '/realisations/maison': [
     { name: 'Réalisations', path: '/realisations' },
@@ -168,9 +169,11 @@ interface ServiceSchemaInput {
   name: string;
   description: string;
   price?: number;
+  /** Offres réservées aux professionnels : audience BusinessAudience, prix exprimé HT. */
+  forBusiness?: boolean;
 }
 
-export function serviceSchema({ name, description, price }: ServiceSchemaInput) {
+export function serviceSchema({ name, description, price, forBusiness }: ServiceSchemaInput) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -179,12 +182,23 @@ export function serviceSchema({ name, description, price }: ServiceSchemaInput) 
     description,
     provider: BUSINESS_REF,
     areaServed: { '@type': 'Place', name: 'Golfe du Morbihan' },
+    ...(forBusiness ? { audience: { '@type': 'BusinessAudience' } } : {}),
     ...(price
       ? {
           offers: {
             '@type': 'Offer',
             price,
             priceCurrency: 'EUR',
+            ...(forBusiness
+              ? {
+                  priceSpecification: {
+                    '@type': 'PriceSpecification',
+                    price,
+                    priceCurrency: 'EUR',
+                    valueAddedTaxIncluded: false,
+                  },
+                }
+              : {}),
           },
         }
       : {}),

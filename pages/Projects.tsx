@@ -62,7 +62,22 @@ const Projects: React.FC<ProjectsPageProps> = ({ initialType = 'Tous' }) => {
       <PageHeader
         eyebrow="Réalisations"
         title={current.title}
-        intro="Une sélection de projets d'architecture et de décoration d'intérieur. Chaque lieu raconte une histoire unique, la vôtre."
+        intro={
+          initialType === 'Professionnel' ? (
+            <>
+              Commerces, bars, restaurants, hébergements : des lieux pensés pour accueillir vos
+              clients et faciliter le travail de vos équipes.{' '}
+              <Link
+                to="/professionnels"
+                className="text-stone-900 underline decoration-stone-900/25 underline-offset-4 hover:decoration-stone-900"
+              >
+                Découvrir l'offre professionnels
+              </Link>
+            </>
+          ) : (
+            "Une sélection de projets d'architecture et de décoration d'intérieur. Chaque lieu raconte une histoire unique, la vôtre."
+          )
+        }
       />
 
       {/* Filtres — de vraies routes, indexables */}

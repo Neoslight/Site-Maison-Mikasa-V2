@@ -23,12 +23,13 @@ const PROJECT_CATEGORIES = [
 
 const NAV_ITEMS = [
   { to: '/prestations', label: 'Prestations' },
+  { to: '/professionnels', label: 'Professionnels' },
   { to: '/a-propos', label: 'À propos' },
   { to: '/contact', label: 'Contact' },
 ];
 
 /** Pages qui portent déjà leur propre appel à l'action de prise de contact. */
-const PAGES_WITHOUT_CTA = ['/contact', '/rendez-vous'];
+const PAGES_WITHOUT_CTA = ['/contact', '/rendez-vous', '/professionnels'];
 
 const navLinkClass = (isActive: boolean) =>
   cn(
@@ -92,7 +93,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <header
         className={cn(
-          'sticky top-0 z-50 h-20 border-b bg-canvas transition-colors duration-300',
+          'sticky top-0 z-50 h-20 border-b bg-canvas transition-colors duration-300 print:hidden',
           scrolled || isMenuOpen ? 'border-line' : 'border-transparent'
         )}
       >
@@ -106,7 +107,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </span>
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden items-center gap-9 lg:flex">
+          <nav aria-label="Navigation principale" className="hidden items-center gap-9 xl:flex">
             <div className="group relative">
               <Link
                 to="/realisations"
@@ -160,7 +161,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <button
             type="button"
-            className="-mr-2 p-2 text-stone-900 lg:hidden"
+            className="-mr-2 p-2 text-stone-900 xl:hidden"
             onClick={() => setIsMenuOpen((open) => !open)}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
@@ -179,7 +180,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           id="mobile-navigation"
           inert={!isMenuOpen}
           className={cn(
-            'fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-canvas transition-opacity duration-300 lg:hidden',
+            'fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-canvas transition-opacity duration-300 xl:hidden',
             isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
           )}
         >
@@ -244,7 +245,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {showCta && <CtaBand />}
 
-      <footer className="border-t border-line bg-canvas">
+      <footer className="border-t border-line bg-canvas print:hidden">
         <Container className="grid gap-12 py-16 md:grid-cols-12 md:py-20">
           <div className="md:col-span-4">
             <Link to="/" className="font-serif text-2xl text-sage-700">

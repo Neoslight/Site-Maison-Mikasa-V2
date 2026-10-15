@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useRouteMeta } from '../lib/useRouteMeta';
+import { useHydrated } from '../lib/useHydrated';
+import { submitToFormspree } from '../lib/formspree';
 import {
   ADDRESS,
   EMAIL,
@@ -31,6 +33,8 @@ const getServiceFromSearch = (search: string): string => {
       return 'Rénovation Résidence Secondaire';
     case 'mairie':
       return 'Dossier Mairie - Déclaration';
+    case 'pro':
+      return 'Projet professionnel';
     default:
       return '';
   }
@@ -41,14 +45,19 @@ const Contact: React.FC = () => {
   const location = useLocation();
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
 
-  const [formData, setFormData] = useState(() => ({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    projectType: getServiceFromSearch(location.search),
+    projectType: '',
     message: '',
     _gotcha: '',
-  }));
+  });
+
+  // Pré-remplissage via ?service=, appliqué après l'hydratation (voir useHydrated)
+  const hydrated = useHydrated();
+  const projectType =
+    formData.projectType || (hydrated ? getServiceFromSearch(location.search) : '');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -61,46 +70,17 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setFormStatus('submitting');
 
-    const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
-    if (!formspreeId || formspreeId === 'your_formspree_id_here') {
-      if (import.meta.env.DEV) {
-        console.info('[Contact] Formspree not configured. Form data:', formData);
-        setFormStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          projectType: '',
-          message: '',
-          _gotcha: '',
-        });
-      } else {
-        setFormStatus('error');
-      }
-      return;
-    }
-
-    try {
-      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(formData),
+    if (await submitToFormspree({ ...formData, projectType })) {
+      setFormStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        message: '',
+        _gotcha: '',
       });
-
-      if (response.ok) {
-        setFormStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          projectType: '',
-          message: '',
-          _gotcha: '',
-        });
-      } else {
-        setFormStatus('error');
-      }
-    } catch {
+    } else {
       setFormStatus('error');
     }
   };
@@ -261,7 +241,7 @@ const Contact: React.FC = () => {
                   label="Type de projet"
                   id="projectType"
                   name="projectType"
-                  value={formData.projectType}
+                  value={projectType}
                   onChange={handleChange}
                 >
                   <option value="" disabled>
@@ -275,8 +255,24 @@ const Contact: React.FC = () => {
                     Rénovation Résidence Secondaire
                   </option>
                   <option value="Dossier Mairie - Déclaration">Dossier Mairie - Déclaration</option>
+                  <option value="Projet professionnel">
+                    Projet professionnel (commerce, restaurant, hébergement…)
+                  </option>
                   <option value="Autre">Autre demande</option>
                 </SelectField>
+
+                {projectType === 'Projet professionnel' && (
+                  <p className="-mt-4 text-sm leading-relaxed text-stone-500">
+                    Pour un devis plus précis (surface, date d'ouverture, budget), utilisez le{' '}
+                    <Link
+                      to="/professionnels#devis"
+                      className="text-stone-900 underline underline-offset-4 hover:text-sage-700"
+                    >
+                      formulaire dédié aux professionnels
+                    </Link>
+                    .
+                  </p>
+                )}
 
                 <TextareaField
                   label="Message"
