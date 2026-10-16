@@ -101,7 +101,10 @@ const PERSON_NODE = {
 const STATIC_CRUMBS: Record<string, { name: string; path: string }[]> = {
   '/a-propos': [{ name: 'À propos', path: '/a-propos' }],
   '/prestations': [{ name: 'Prestations', path: '/prestations' }],
-  '/professionnels': [{ name: 'Professionnels', path: '/professionnels' }],
+  '/professionnels': [
+    { name: 'Prestations', path: '/prestations' },
+    { name: 'Professionnels', path: '/professionnels' },
+  ],
   '/realisations': [{ name: 'Réalisations', path: '/realisations' }],
   '/realisations/maison': [
     { name: 'Réalisations', path: '/realisations' },

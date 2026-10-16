@@ -9,6 +9,7 @@ import PageHeader from '../components/ui/PageHeader';
 import Reveal from '../components/ui/Reveal';
 import Section from '../components/ui/Section';
 import SectionHeading from '../components/ui/SectionHeading';
+import ServicesTabs from '../components/ui/ServicesTabs';
 
 const SERVICE_SCHEMAS = [
   serviceSchema({
@@ -170,6 +171,7 @@ const Services: React.FC = () => {
       ))}
 
       <PageHeader
+        before={<ServicesTabs />}
         eyebrow="Prestations"
         title="Mes prestations d'architecte d'intérieur dans le Golfe du Morbihan"
         intro="De l'analyse de potentiel au suivi complet de vos travaux, j'imagine des espaces fluides où l'esthétique se met au service de votre bien-être pour simplifier votre quotidien et valoriser durablement votre patrimoine."

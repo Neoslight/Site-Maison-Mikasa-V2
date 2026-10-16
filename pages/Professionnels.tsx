@@ -24,6 +24,7 @@ import ProjectCard from '../components/ui/ProjectCard';
 import Reveal from '../components/ui/Reveal';
 import Section from '../components/ui/Section';
 import SectionHeading from '../components/ui/SectionHeading';
+import ServicesTabs from '../components/ui/ServicesTabs';
 
 const OFFER_PRICES: Record<string, number> = {
   diagnostic: PRO_DIAGNOSTIC_PRICE,
@@ -53,6 +54,7 @@ const Professionnels: React.FC = () => {
       <JsonLd schema={faqPageSchema(PRO_FAQ)} />
 
       <PageHeader
+        before={<ServicesTabs />}
         eyebrow="Professionnels"
         title="Architecte d'intérieur pour les professionnels dans le Morbihan"
         intro="Restaurant, bar, boutique, hôtel, gîte, institut ou cabinet : je conçois et j'aménage des lieux qui attirent vos clients, facilitent le travail de vos équipes et ouvrent à la date prévue, à Vannes, Auray et dans tout le Golfe du Morbihan."

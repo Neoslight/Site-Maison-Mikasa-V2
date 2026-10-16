@@ -3,6 +3,7 @@ import { Link, NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { locationsData } from '../../data/locations';
+import { SERVICE_CATEGORIES } from '../../data/navigation';
 import { siteGraph } from '../../data/schema';
 import { ADDRESS, EMAIL, EMAIL_HREF, GOOGLE_BUSINESS, PHONE, PHONE_HREF } from '../../lib/site';
 import JsonLd from '../seo/JsonLd';
@@ -22,10 +23,15 @@ const PROJECT_CATEGORIES = [
 ];
 
 const NAV_ITEMS = [
-  { to: '/prestations', label: 'Prestations' },
-  { to: '/professionnels', label: 'Professionnels' },
   { to: '/a-propos', label: 'À propos' },
   { to: '/contact', label: 'Contact' },
+];
+
+const FOOTER_ITEMS = [
+  { to: '/realisations', label: 'Réalisations' },
+  { to: '/prestations', label: 'Prestations particuliers' },
+  { to: '/professionnels', label: 'Prestations professionnels' },
+  ...NAV_ITEMS,
 ];
 
 /** Pages qui portent déjà leur propre appel à l'action de prise de contact. */
@@ -39,6 +45,81 @@ const navLinkClass = (isActive: boolean) =>
       ? 'text-stone-900 after:scale-x-100'
       : 'text-stone-600 after:scale-x-0 hover:text-stone-900 hover:after:scale-x-100'
   );
+
+interface NavDropdownProps {
+  to: string;
+  label: string;
+  active: boolean;
+  items: { to: string; label: string }[];
+  /** Lien de pied de menu (« Tous les projets »…). */
+  footer?: { to: string; label: string };
+}
+
+/** Entrée du menu principal avec sous-menu au survol / focus. */
+const NavDropdown: React.FC<NavDropdownProps> = ({ to, label, active, items, footer }) => (
+  <div className="group relative">
+    <Link
+      to={to}
+      className={cn(navLinkClass(active), 'inline-flex items-center gap-1')}
+      aria-haspopup="true"
+    >
+      {label}
+      <ChevronDown
+        className="h-3.5 w-3.5 transition-transform duration-300 group-focus-within:rotate-180 group-hover:rotate-180"
+        aria-hidden="true"
+      />
+    </Link>
+    <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+      <ul className="w-56 rounded-soft border border-line bg-canvas py-3">
+        {items.map((item) => (
+          <li key={item.to}>
+            <Link
+              to={item.to}
+              className="block px-6 py-2.5 text-sm text-stone-600 transition-colors hover:text-stone-900"
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+        {footer && (
+          <li className="mx-6 mt-2 border-t border-line pt-2">
+            <Link
+              to={footer.to}
+              className="block py-2.5 text-sm text-sage-700 transition-colors hover:text-sage-800"
+            >
+              {footer.label}
+            </Link>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+);
+
+interface MobileNavGroupProps {
+  to: string;
+  label: string;
+  items: { to: string; label: string }[];
+  onNavigate: () => void;
+}
+
+/** Entrée du menu mobile suivie de ses sous-rubriques. */
+const MobileNavGroup: React.FC<MobileNavGroupProps> = ({ to, label, items, onNavigate }) => (
+  <li>
+    <Link to={to} onClick={onNavigate} className="block py-2 font-serif text-3xl text-stone-900">
+      {label}
+    </Link>
+    <ul className="mb-3 mt-1 flex flex-wrap gap-x-5 gap-y-1">
+      {items.map((item) => (
+        <li key={item.to}>
+          <Link to={item.to} onClick={onNavigate} className="block py-1 text-sm text-stone-500">
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </li>
+);
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,6 +158,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [isMenuOpen]);
 
   const projectsActive = pathname.startsWith('/realisations');
+  const servicesActive = SERVICE_CATEGORIES.some((item) => pathname.startsWith(item.to));
   // Normalise un éventuel slash final (/contact/) pour rester identique au rendu SSR
   const showCta = !PAGES_WITHOUT_CTA.includes(pathname.replace(/\/+$/, '') || '/');
 
@@ -108,41 +190,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Link>
 
           <nav aria-label="Navigation principale" className="hidden items-center gap-9 xl:flex">
-            <div className="group relative">
-              <Link
-                to="/realisations"
-                className={cn(navLinkClass(projectsActive), 'inline-flex items-center gap-1')}
-                aria-haspopup="true"
-              >
-                Réalisations
-                <ChevronDown
-                  className="h-3.5 w-3.5 transition-transform duration-300 group-focus-within:rotate-180 group-hover:rotate-180"
-                  aria-hidden="true"
-                />
-              </Link>
-              <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                <ul className="w-56 rounded-soft border border-line bg-canvas py-3">
-                  {PROJECT_CATEGORIES.map((item) => (
-                    <li key={item.to}>
-                      <Link
-                        to={item.to}
-                        className="block px-6 py-2.5 text-sm text-stone-600 transition-colors hover:text-stone-900"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                  <li className="mx-6 mt-2 border-t border-line pt-2">
-                    <Link
-                      to="/realisations"
-                      className="block py-2.5 text-sm text-sage-700 transition-colors hover:text-sage-800"
-                    >
-                      Tous les projets
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <NavDropdown
+              to="/realisations"
+              label="Réalisations"
+              active={projectsActive}
+              items={PROJECT_CATEGORIES}
+              footer={{ to: '/realisations', label: 'Tous les projets' }}
+            />
+
+            <NavDropdown
+              to="/prestations"
+              label="Prestations"
+              active={servicesActive}
+              items={SERVICE_CATEGORIES}
+            />
 
             {NAV_ITEMS.map((item) => (
               <RouterNavLink
@@ -187,28 +248,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Container className="flex min-h-full flex-col py-10">
             <nav aria-label="Navigation mobile">
               <ul className="space-y-1">
-                <li>
-                  <Link
-                    to="/realisations"
-                    onClick={closeMenu}
-                    className="block py-2 font-serif text-3xl text-stone-900"
-                  >
-                    Réalisations
-                  </Link>
-                  <ul className="mb-3 mt-1 flex flex-wrap gap-x-5 gap-y-1">
-                    {PROJECT_CATEGORIES.map((item) => (
-                      <li key={item.to}>
-                        <Link
-                          to={item.to}
-                          onClick={closeMenu}
-                          className="block py-1 text-sm text-stone-500"
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
+                <MobileNavGroup
+                  to="/realisations"
+                  label="Réalisations"
+                  items={PROJECT_CATEGORIES}
+                  onNavigate={closeMenu}
+                />
+                <MobileNavGroup
+                  to="/prestations"
+                  label="Prestations"
+                  items={SERVICE_CATEGORIES}
+                  onNavigate={closeMenu}
+                />
                 {NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <Link
@@ -261,7 +312,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <nav aria-label="Plan du site" className="md:col-span-2">
             <p className="eyebrow mb-5 text-stone-500">Le studio</p>
             <ul className="space-y-3 text-sm">
-              {[{ to: '/realisations', label: 'Réalisations' }, ...NAV_ITEMS].map((item) => (
+              {FOOTER_ITEMS.map((item) => (
                 <li key={item.to}>
                   <Link to={item.to} className="text-stone-700 hover:text-stone-900">
                     {item.label}
